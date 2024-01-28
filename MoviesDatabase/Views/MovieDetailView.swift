@@ -7,32 +7,36 @@
 
 import SwiftUI
 
-struct SeriesDetailView: View {
-    var series: Series = Series()
+struct MovieDetailView: View {
+    var movie: Movie = Movie()
+    
+    let width = UIScreen.screenWidth / 4
+    let height = UIScreen.screenHeight / 5
     
     var body: some View {
         ScrollView {
             VStack {
-                let url = URL(string: series.primaryImage.url)
+                let url = URL(string: movie.getMoviePoster())
                 AsyncImage(url: url) { image in
                     image
                         .resizable()
                         .scaledToFit()
                         .padding()
                 } placeholder: {
-                    Image(systemName: "globe")
+                    Image("tmdb.jpg")
                         .resizable()
-                        .scaledToFit()
+                        .frame(width: min(width, height), height: min(width, height))
+                        .padding()
                 }
 
             }
         }
-        .navigationTitle("\(series.titleText.text)")
+        .navigationTitle("\(movie.title)")
     }
 }
 
-struct SeriesDetailView_Previews: PreviewProvider {
+struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesDetailView()
+        MovieDetailView()
     }
 }
