@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct MovieRowView: View {
     var movie: Movie = Movie()
@@ -17,21 +18,34 @@ struct MovieRowView: View {
         HStack {
             let url = URL(string: movie.getMoviePoster())
             AsyncImage(url: url) { image in
-                image
-                    .resizable()
-                    .frame(width: width, height: height)
-                    .padding()
+                ZStack(alignment: .bottomTrailing) {
+                    image
+                        .resizable()
+                        .frame(width: width, height: height)
+                        .cornerRadius(20)
+                    
+                    CircularProcessBarView(progress: movie.voteAverage / 10)
+//                        .offset(x: width / 7, y: width / 7)
+                }
+                
             } placeholder: {
                 Image("tmdb")
                     .resizable()
                     .frame(width: min(width, height), height: min(width, height))
-                    .padding()
             }
-            VStack {
+            VStack(alignment: .leading) {
                 Text("\(movie.title)")
-                    .font(.title2)
-                Text("\(movie.voteAverage)")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                
+                Text("\(movie.getReleaseDate())")
                     .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.bottom)
+                
+                Text("\(movie.overview)")
+                    .lineLimit(2)
+                    .truncationMode(.tail)
             }
             
             Spacer()

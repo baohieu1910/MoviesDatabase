@@ -14,6 +14,7 @@ struct Movie: Codable, Identifiable, Hashable {
     var id: Int
     var originalLanguage: String
     var title: String
+    var releaseDate: String
     var overview: String
     var voteAverage: Double
     var voteCount: Int
@@ -24,6 +25,7 @@ struct Movie: Codable, Identifiable, Hashable {
         case genreIds = "genre_ids"
         case id
         case originalLanguage = "original_language"
+        case releaseDate = "release_date"
         case title
         case overview
         case voteAverage = "vote_average"
@@ -43,9 +45,14 @@ struct Movie: Codable, Identifiable, Hashable {
         id = 278
         originalLanguage = "en"
         title = "The Shawshank Redemption"
+        releaseDate = "1994-09-23"
         overview = "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope."
         voteAverage = 8.711
         voteCount = 25436
+    }
+    
+    func getMovieBackground() -> String {
+        return Constants.baseImageUrl + Constants.largeImageSize + self.backdropPath
     }
     
     func getMoviePoster() -> String {
@@ -54,6 +61,17 @@ struct Movie: Codable, Identifiable, Hashable {
     
     func getMovieLogo() -> String {
         return Constants.baseImageUrl + Constants.logoSize + self.posterPath
+    }
+    
+    func getReleaseDate() -> String {
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let dateToDisplay = dateFormatter.date(from: releaseDate) {
+            dateFormatter.dateFormat = "MMMM dd, yyyy"
+            return dateFormatter.string(from: dateToDisplay)
+        }
+        return "N/A"
     }
 }
 
