@@ -16,8 +16,8 @@ class APIService {
         
     }
 
-    func getTopRatedMovie(completion: @escaping([Movie]) -> ()) {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1")! as URL,
+    func getTopRatedMovie(page: Int, completion: @escaping([Movie]) -> ()) {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=\(page)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         
@@ -54,8 +54,8 @@ class APIService {
         dataTask.resume()
     }
     
-    func getPopularMovie(completion: @escaping([Movie]) -> ()) {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1")! as URL,
+    func getPopularMovie(page: Int, completion: @escaping([Movie]) -> ()) {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=\(page)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
 
@@ -92,8 +92,8 @@ class APIService {
         dataTask.resume()
     }
     
-    func getNowPlayingMovies(completion: @escaping([Movie]) -> ()) {
-        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1")! as URL,
+    func getNowPlayingMovies(page: Int, completion: @escaping([Movie]) -> ()) {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=\(page)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
 
@@ -130,6 +130,43 @@ class APIService {
         dataTask.resume()
     }
     
+    func getCastList(id: Int, completion: @escaping([Cast]) -> ()) {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/\(id)/credits?language=en-US")! as URL,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
 
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = Constants.headers
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            do {
+                if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary["cast"], options: [])
+                    let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode([Cast].self, from: jsonString.data(using: .utf8)!)
+                        DispatchQueue.main.async {
+                            completion(result)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                    
+                }
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+        }
+        dataTask.resume()
+    }
+    
     
 }

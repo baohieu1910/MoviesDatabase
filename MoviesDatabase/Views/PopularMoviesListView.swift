@@ -19,13 +19,23 @@ struct PopularMoviesListView: View {
                         MovieRowView(movie: movie)
                     }
                 }
+//                VStack {
+//                    Button {
+//                        viewModel.getPopularMovie()
+//                    } label: {
+//                        Text("Load More")
+//                    }
+//                }
+                
             }
             .onAppear() {
                 viewModel.getPopularMovie()
             }
+//            .listStyle(.sidebar)
             .navigationTitle("Popular Movies")
             .navigationDestination(for: Movie.self) { movie in
                 MovieDetailView(movie: movie)
+                    .environmentObject(CastListViewModel())
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -38,6 +48,8 @@ struct PopularMoviesListView: View {
                     }
                 }
             }
+            
+            
         }
     }
 }

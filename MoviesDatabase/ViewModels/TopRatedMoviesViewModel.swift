@@ -9,10 +9,13 @@ import Foundation
 
 class TopRatedMoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = [Movie]()
+    @Published var page: Int = 1
     var apiService: APIService = APIService()
     
     func getTopSeries() {
-        apiService.getTopRatedMovie { movies in
+        apiService.getTopRatedMovie(page: page) { movies in
+//            self.movies += movies
+//            self.page += 1
             self.movies = movies
         }
     }

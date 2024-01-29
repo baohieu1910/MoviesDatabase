@@ -19,6 +19,13 @@ struct TopRatedMoviesListView: View {
                         MovieRowView(movie: movie)
                     }
                 }
+//                VStack {
+//                    Button {
+//                        viewModel.getTopSeries()
+//                    } label: {
+//                        Text("Load More")
+//                    }
+//                }
             }
             .onAppear() {
                 viewModel.getTopSeries()
@@ -26,6 +33,7 @@ struct TopRatedMoviesListView: View {
             .navigationTitle("Top \(viewModel.movies.count) Rated Movies")
             .navigationDestination(for: Movie.self) { movie in
                 MovieDetailView(movie: movie)
+                    .environmentObject(CastListViewModel())
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -38,6 +46,8 @@ struct TopRatedMoviesListView: View {
                     }
                 }
             }
+            
+            
         }
     }
 }

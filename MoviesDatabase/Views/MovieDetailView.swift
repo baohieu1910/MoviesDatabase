@@ -25,6 +25,8 @@ extension UIImage {
 }
 
 struct MovieDetailView: View {
+    @EnvironmentObject var viewModel: CastListViewModel
+    
     var movie: Movie = Movie()
     
     let width = UIScreen.screenWidth / 4
@@ -33,6 +35,7 @@ struct MovieDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
+                // MARK: Movie Poster
                 ZStack(alignment: .leading) {
                     let backgroundUrl = URL(string: movie.getMovieBackground())
                     AsyncImage(url: backgroundUrl) { image in
@@ -46,7 +49,7 @@ struct MovieDetailView: View {
                                 .opacity(1)
                         }
                     } placeholder: {
-                        Image("tmdb.jpg")
+                        Image("tmdb")
                             .resizable()
                             .frame(width: min(width, height), height: min(width, height))
                             .padding()
@@ -62,12 +65,13 @@ struct MovieDetailView: View {
                         
                         
                     } placeholder: {
-                        Image("tmdb.jpg")
+                        Image("tmdb")
                             .resizable()
                             .frame(width: min(width, height), height: min(width, height))
                             .padding()
                     }
                 }
+                // MARK: Movie title
                 VStack {
                     VStack {
                         Text("\(movie.title)")
@@ -101,18 +105,56 @@ struct MovieDetailView: View {
                         Text("Overview")
                             .font(.title3)
                             .fontWeight(.bold)
+                        
                         Text("\(movie.overview)")
                     }
                 }
                 .padding()
             }
+            
+            // MARK: Cast
+            VStack(alignment: .leading) {
+                Text("Top Billed Cast")
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(viewModel.casts) { cast in
+                            CastCardView(cast: cast)
+                                
+                        }
+                    }
+                }
+            }
+            .padding()
+            
+            
+            VStack(alignment: .leading) {
+                Text("Original Title")
+                
+                Text("Status")
+                
+                Text("Original Language")
+                
+                Text("Budget")
+                
+                Text("Revenue")
+            }
+            .padding()
+            
         }
-        .navigationTitle("\(movie.title)")
+        .onAppear {
+            viewModel.getCastList(id: movie.id)
+        }
+        
+        
     }
 }
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MovieDetailView()
+            .environmentObject(CastListViewModel())
     }
 }

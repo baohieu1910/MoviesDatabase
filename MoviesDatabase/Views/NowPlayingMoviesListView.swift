@@ -26,6 +26,7 @@ struct NowPlayingMoviesListView: View {
             .navigationTitle("Now Playing Movies")
             .navigationDestination(for: Movie.self) { movie in
                 MovieDetailView(movie: movie)
+                    .environmentObject(CastListViewModel())
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

@@ -39,16 +39,16 @@ struct Movie: Codable, Identifiable, Hashable {
     }
     
     init() {
-        backdropPath = "/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg"
-        posterPath = "/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg"
-        genreIds = [18, 80]
-        id = 278
+        backdropPath = "/jXJxMcVoEuXzym3vFnjqDW4ifo6.jpg"
+        posterPath = "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg"
+        genreIds = [28, 12, 14]
+        id = 572802
         originalLanguage = "en"
-        title = "The Shawshank Redemption"
-        releaseDate = "1994-09-23"
-        overview = "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope."
-        voteAverage = 8.711
-        voteCount = 25436
+        title = "Aquaman and the Lost Kingdom"
+        releaseDate = "2023-12-20"
+        overview = "Black Manta, still driven by the need to avenge his father's death and wielding the power of the mythic Black Trident, will stop at nothing to take Aquaman down once and for all. To defeat him, Aquaman must turn to his imprisoned brother Orm, the former King of Atlantis, to forge an unlikely alliance in order to save the world from irreversible destruction."
+        voteAverage = 6.904
+        voteCount = 925
     }
     
     func getMovieBackground() -> String {
