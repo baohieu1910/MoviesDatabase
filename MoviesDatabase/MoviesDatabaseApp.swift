@@ -12,7 +12,7 @@ struct MoviesDatabaseApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(TopRatedMovieViewModel())
+                .environmentObject(TopRatedMoviesViewModel())
         }
     }
 }

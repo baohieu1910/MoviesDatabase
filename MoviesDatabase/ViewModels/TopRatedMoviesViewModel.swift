@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TopRatedMovieViewModel: ObservableObject {
+class TopRatedMoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = [Movie]()
     var apiService: APIService = APIService()
     

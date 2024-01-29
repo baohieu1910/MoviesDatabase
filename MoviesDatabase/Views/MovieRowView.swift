@@ -22,7 +22,7 @@ struct MovieRowView: View {
                     .frame(width: width, height: height)
                     .padding()
             } placeholder: {
-                Image("tmdb.jpg")
+                Image("tmdb")
                     .resizable()
                     .frame(width: min(width, height), height: min(width, height))
                     .padding()
