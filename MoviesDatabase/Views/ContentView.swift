@@ -14,17 +14,21 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView(selection: $selectedSideMenuTab) {
+                HomeView(presentSideMenu: $presentSideMenu)
+                    .environmentObject(TrendingMovieViewModel())
+                    .tag(0)
+                
                 PopularMoviesListView(presentSideMenu: $presentSideMenu)
                     .environmentObject(PopularMoviesViewModel())
-                    .tag(0)
+                    .tag(1)
                 
                 TopRatedMoviesListView(presentSideMenu: $presentSideMenu)
                     .environmentObject(TopRatedMoviesViewModel())
-                    .tag(1)
+                    .tag(2)
                 
                 NowPlayingMoviesListView(presentSideMenu: $presentSideMenu)
                     .environmentObject(NowPlayingMoviesViewModel())
-                    .tag(2)
+                    .tag(3)
             }
             
             SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))

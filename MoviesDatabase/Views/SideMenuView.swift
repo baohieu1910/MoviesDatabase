@@ -1,5 +1,5 @@
 //
-//  SideMenu.swift
+//  SideMenuView.swift
 //  MoviesDatabase
 //
 //  Created by Hieu Le on 1/29/24.
@@ -35,12 +35,15 @@ struct SideMenu: View {
 }
 
 enum SideMenuRowType: Int, CaseIterable {
-    case popular = 0
+    case home = 0
+    case popular
     case topRated
     case nowPlaying
     
     var title: String{
         switch self {
+        case .home:
+            return "Home"
         case .popular:
             return "Popular"
         case .topRated:

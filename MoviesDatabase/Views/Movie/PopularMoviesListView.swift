@@ -1,36 +1,37 @@
 //
-//  TopRatedMoviesListView.swift
+//  PopularMoviesListView.swift
 //  MoviesDatabase
 //
-//  Created by Hieu Le on 1/28/24.
+//  Created by Hieu Le on 1/29/24.
 //
 
 import SwiftUI
 
-struct TopRatedMoviesListView: View {
+struct PopularMoviesListView: View {
     @Binding var presentSideMenu: Bool
-    @EnvironmentObject var viewModel: TopRatedMoviesViewModel
+    @EnvironmentObject var viewModel: PopularMoviesViewModel
     
     var body: some View {
         NavigationStack {
-            List {
+            ScrollView {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink(value: movie) {
                         MovieRowView(movie: movie)
+                            .foregroundColor(.black)
+                            .padding([.bottom, .horizontal])
                     }
                 }
 //                VStack {
 //                    Button {
-//                        viewModel.getTopSeries()
+//                        viewModel.getPopularMovie()
 //                    } label: {
 //                        Text("Load More")
 //                    }
 //                }
+                
             }
-            .onAppear() {
-                viewModel.getTopSeries()
-            }
-            .navigationTitle("Top \(viewModel.movies.count) Rated Movies")
+//            .listStyle(.sidebar)
+            .navigationTitle("Popular Movies")
             .navigationDestination(for: Movie.self) { movie in
                 MovieDetailView(movie: movie)
                     .environmentObject(CastListViewModel())
@@ -46,15 +47,16 @@ struct TopRatedMoviesListView: View {
                     }
                 }
             }
-            
-            
+        }
+        .onAppear() {
+            viewModel.getPopularMovie()
         }
     }
 }
 
-struct TopRatedMovieListView_Previews: PreviewProvider {
+struct PopularMoviesView_Previews: PreviewProvider {
     static var previews: some View {
-        TopRatedMoviesListView(presentSideMenu: Binding.constant(false))
-            .environmentObject(TopRatedMoviesViewModel())
+        PopularMoviesListView(presentSideMenu: Binding.constant(false))
+            .environmentObject(PopularMoviesViewModel())
     }
 }

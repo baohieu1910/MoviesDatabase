@@ -11,9 +11,6 @@ import UIKit
 struct MovieRowView: View {
     var movie: Movie = Movie()
     
-    let width = UIScreen.screenWidth / 4
-    let height = UIScreen.screenHeight / 6
-    
     var body: some View {
         HStack {
             let url = URL(string: movie.getMoviePoster())
@@ -21,17 +18,16 @@ struct MovieRowView: View {
                 ZStack(alignment: .bottomTrailing) {
                     image
                         .resizable()
-                        .frame(width: width, height: height)
+                        .frame(width: 100, height: 150)
                         .cornerRadius(20)
                     
                     CircularProcessBarView(progress: movie.voteAverage / 10)
-//                        .offset(x: width / 7, y: width / 7)
                 }
                 
             } placeholder: {
                 Image("tmdb")
                     .resizable()
-                    .frame(width: min(width, height), height: min(width, height))
+                    .frame(width: 100, height: 100)
             }
             VStack(alignment: .leading) {
                 Text("\(movie.title)")
@@ -47,9 +43,13 @@ struct MovieRowView: View {
                     .lineLimit(2)
                     .truncationMode(.tail)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()
         }
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(radius: 2)
     }
 }
 

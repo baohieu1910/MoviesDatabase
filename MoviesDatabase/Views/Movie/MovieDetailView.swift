@@ -29,9 +29,6 @@ struct MovieDetailView: View {
     
     var movie: Movie = Movie()
     
-    let width = UIScreen.screenWidth / 4
-    let height = UIScreen.screenHeight / 5
-    
     var body: some View {
         ScrollView {
             VStack {
@@ -43,7 +40,7 @@ struct MovieDetailView: View {
                             image
                                 .resizable()
                                 .scaledToFit()
-                                .cornerRadius(10)
+                                .cornerRadius(5)
                             
                             LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .trailing, endPoint: .leading)
                                 .opacity(1)
@@ -51,7 +48,7 @@ struct MovieDetailView: View {
                     } placeholder: {
                         Image("tmdb")
                             .resizable()
-                            .frame(width: min(width, height), height: min(width, height))
+                            .frame(width: 150, height: 150)
                             .padding()
                     }
                     
@@ -59,15 +56,15 @@ struct MovieDetailView: View {
                     AsyncImage(url: posterUrl) { image in
                         image
                             .resizable()
-                            .frame(width: width, height: height)
-                            .cornerRadius(20)
-                            .padding()
+                            .frame(width: 100, height: 150)
+                            .cornerRadius(10)
+                            .padding(.horizontal)
                         
                         
                     } placeholder: {
                         Image("tmdb")
                             .resizable()
-                            .frame(width: min(width, height), height: min(width, height))
+                            .frame(width: 150, height: 150)
                             .padding()
                     }
                 }
@@ -127,6 +124,7 @@ struct MovieDetailView: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             
             
@@ -141,6 +139,7 @@ struct MovieDetailView: View {
                 
                 Text("Revenue")
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
             
         }

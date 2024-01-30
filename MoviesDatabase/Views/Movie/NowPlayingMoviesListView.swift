@@ -1,5 +1,5 @@
 //
-//  PopularMoviesListView.swift
+//  NowPlayingMoviesListView.swift
 //  MoviesDatabase
 //
 //  Created by Hieu Le on 1/29/24.
@@ -7,32 +7,22 @@
 
 import SwiftUI
 
-struct PopularMoviesListView: View {
+struct NowPlayingMoviesListView: View {
     @Binding var presentSideMenu: Bool
-    @EnvironmentObject var viewModel: PopularMoviesViewModel
+    @EnvironmentObject var viewModel: NowPlayingMoviesViewModel
     
     var body: some View {
         NavigationStack {
-            List {
+            ScrollView {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink(value: movie) {
                         MovieRowView(movie: movie)
+                            .foregroundColor(.black)
+                            .padding([.bottom, .horizontal])
                     }
                 }
-//                VStack {
-//                    Button {
-//                        viewModel.getPopularMovie()
-//                    } label: {
-//                        Text("Load More")
-//                    }
-//                }
-                
             }
-            .onAppear() {
-                viewModel.getPopularMovie()
-            }
-//            .listStyle(.sidebar)
-            .navigationTitle("Popular Movies")
+            .navigationTitle("Now Playing Movies")
             .navigationDestination(for: Movie.self) { movie in
                 MovieDetailView(movie: movie)
                     .environmentObject(CastListViewModel())
@@ -48,15 +38,16 @@ struct PopularMoviesListView: View {
                     }
                 }
             }
-            
-            
+        }
+        .onAppear() {
+            viewModel.getNowPlayingMovies()
         }
     }
 }
 
-struct PopularMoviesView_Previews: PreviewProvider {
+struct NowPlayingMoviesListView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularMoviesListView(presentSideMenu: Binding.constant(false))
-            .environmentObject(PopularMoviesViewModel())
+        NowPlayingMoviesListView(presentSideMenu: Binding.constant(false))
+            .environmentObject(NowPlayingMoviesViewModel())
     }
 }

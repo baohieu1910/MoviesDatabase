@@ -9,7 +9,6 @@ import Foundation
 
 class CastListViewModel: ObservableObject {
     @Published var casts: [Cast] = [Cast]()
-    
     var apiService: APIService = APIService()
     
     func getCastList(id: Int) {

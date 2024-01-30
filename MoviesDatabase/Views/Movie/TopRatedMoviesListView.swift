@@ -1,29 +1,35 @@
 //
-//  NowPlayingMoviesListView.swift
+//  TopRatedMoviesListView.swift
 //  MoviesDatabase
 //
-//  Created by Hieu Le on 1/29/24.
+//  Created by Hieu Le on 1/28/24.
 //
 
 import SwiftUI
 
-struct NowPlayingMoviesListView: View {
+struct TopRatedMoviesListView: View {
     @Binding var presentSideMenu: Bool
-    @EnvironmentObject var viewModel: NowPlayingMoviesViewModel
+    @EnvironmentObject var viewModel: TopRatedMoviesViewModel
     
     var body: some View {
         NavigationStack {
-            List {
+            ScrollView {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink(value: movie) {
                         MovieRowView(movie: movie)
+                            .foregroundColor(.black)
+                            .padding([.bottom, .horizontal])
                     }
                 }
+//                VStack {
+//                    Button {
+//                        viewModel.getTopSeries()
+//                    } label: {
+//                        Text("Load More")
+//                    }
+//                }
             }
-            .onAppear() {
-                viewModel.getNowPlayingMovies()
-            }
-            .navigationTitle("Now Playing Movies")
+            .navigationTitle("Top Rated Movies")
             .navigationDestination(for: Movie.self) { movie in
                 MovieDetailView(movie: movie)
                     .environmentObject(CastListViewModel())
@@ -39,13 +45,18 @@ struct NowPlayingMoviesListView: View {
                     }
                 }
             }
+            
+            
+        }
+        .onAppear() {
+            viewModel.getTopSeries()
         }
     }
 }
 
-struct NowPlayingMoviesListView_Previews: PreviewProvider {
+struct TopRatedMovieListView_Previews: PreviewProvider {
     static var previews: some View {
-        NowPlayingMoviesListView(presentSideMenu: Binding.constant(false))
-            .environmentObject(NowPlayingMoviesViewModel())
+        TopRatedMoviesListView(presentSideMenu: Binding.constant(false))
+            .environmentObject(TopRatedMoviesViewModel())
     }
 }

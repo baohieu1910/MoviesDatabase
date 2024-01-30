@@ -19,17 +19,16 @@ struct CastCardView: View {
             AsyncImage(url: url) { image in
                 image
                     .resizable()
-                    .frame(width: 180, height: 200)
+                    .frame(width: 135, height: 160)
                 
             } placeholder: {
                 Image("noImage")
                     .resizable()
-                    .frame(width: 180, height: 200)
+                    .frame(width: 135, height: 160)
             }
             
             VStack(alignment: .leading) {
                 Text("\(cast.name)")
-                    .font(.title2)
                     .fontWeight(.bold)
                     .lineLimit(1)
                     .padding(.horizontal)
@@ -39,12 +38,12 @@ struct CastCardView: View {
                     .lineLimit(1)
                     .padding(.horizontal)
             }
-            .frame(width: 180, height: 60)
+            .frame(width: 135, height: 60)
         }
         .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .shadow(radius: 2)
-        .padding()
+        .padding(.vertical)
     }
 }
 
