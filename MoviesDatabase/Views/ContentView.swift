@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView(selection: $selectedSideMenuTab) {
-                HomeView(presentSideMenu: $presentSideMenu)
+                MainView(presentSideMenu: $presentSideMenu)
                     .environmentObject(TrendingMovieViewModel())
                     .tag(0)
                 
@@ -31,7 +31,7 @@ struct ContentView: View {
                     .tag(3)
             }
             
-            SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))
+            SideMenuContainerView(isShowing: $presentSideMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))
         }
             
                 
