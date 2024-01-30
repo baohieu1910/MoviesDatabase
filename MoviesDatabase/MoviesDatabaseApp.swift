@@ -9,11 +9,9 @@ import SwiftUI
 
 @main
 struct MoviesDatabaseApp: App {
-    private let moviesVM = TopRatedMoviesViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(moviesVM)
         }
     }
 }

@@ -1,34 +1,65 @@
-//  SideMenuView
+//
+//  SideMenuView.swift
 //  MoviesDatabase
 //
-//  Created by Hung Le on 1/30/24.
+//  Created by Hieu Le on 1/29/24.
 //
 
 import SwiftUI
 
-struct SideMenuView: View {
-    @Environment(\.presentationMode) private var presentationMode
+struct SideMenu: View {
+    @Binding var isShowing: Bool
+    var content: AnyView
+    var edgeTransition: AnyTransition = .move(edge: .leading)
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            if (isShowing) {
+                Color.black
+                    .opacity(0.3)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isShowing.toggle()
+                    }
+                content
+                    .transition(edgeTransition)
+                    .background(
+                        Color.clear
+                    )
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .ignoresSafeArea()
+        .animation(.easeInOut, value: isShowing)
+    }
+}
 
-    // Private variable
-    @StateObject private var vm: SideMenuVM = SideMenuVM()
-    @State private var fullScreen: SideMenuVM.Fullscreen?
+enum SideMenuRowType: Int, CaseIterable {
+    case home = 0
+    case popular
+    case topRated
+    case nowPlaying
+    
+    var title: String{
+        switch self {
+        case .home:
+            return "Home"
+        case .popular:
+            return "Popular"
+        case .topRated:
+            return "Top Rated"
+        case .nowPlaying:
+            return "Now Playing"
+        }
+    }
+}
+    
+struct SideMenuView: View {
+    
     @Binding var selectedSideMenuTab: Int
     @Binding var presentSideMenu: Bool
     
     var body: some View {
-        contentView
-            .onReceive(vm.$fullScreen) { identifier in
-                self.fullScreen = identifier
-            }
-            .fullScreenCover(item: $fullScreen) { identifier in
-                // Add your full-screen cover view here if needed
-            }
-    }
-}
-
-// MARK: - Private functions
-private extension SideMenuView {
-    @ViewBuilder var contentView: some View {
         HStack {
             ZStack{
                 Rectangle()
@@ -38,7 +69,7 @@ private extension SideMenuView {
                 
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(SideMenuRowType.allCases, id: \.self){ row in
-                        rowView(isSelected: selectedSideMenuTab == row.rawValue, title: row.title) {
+                        RowView(isSelected: selectedSideMenuTab == row.rawValue, title: row.title) {
                             selectedSideMenuTab = row.rawValue
                             presentSideMenu.toggle()
                         }
@@ -59,7 +90,7 @@ private extension SideMenuView {
         .background(.clear)
     }
     
-    func rowView(isSelected: Bool, title: String, hideDivider: Bool = false, action: @escaping (()->())) -> some View{
+    func RowView(isSelected: Bool, title: String, hideDivider: Bool = false, action: @escaping (()->())) -> some View{
         Button{
             action()
         } label: {
@@ -82,10 +113,3 @@ private extension SideMenuView {
         )
     }
 }
-
-// MARK: - SideMenuView's Preview
-//struct SideMenuView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SideMenuView()
-//    }
-//}
