@@ -12,10 +12,13 @@ struct TopRatedMoviesListView: View {
     @EnvironmentObject var viewModel: TopRatedMoviesViewModel
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 ForEach(viewModel.movies) { movie in
-                    NavigationLink(value: movie) {
+                    NavigationLink {
+                        MovieDetailView(movie: movie)
+                            .environmentObject(CastListViewModel())
+                    } label: {
                         MovieRowView(movie: movie)
                             .foregroundColor(.black)
                             .padding([.bottom, .horizontal])
@@ -29,11 +32,8 @@ struct TopRatedMoviesListView: View {
 //                    }
 //                }
             }
+            .background(.white)
             .navigationTitle("Top Rated Movies")
-            .navigationDestination(for: Movie.self) { movie in
-                MovieDetailView(movie: movie)
-                    .environmentObject(CastListViewModel())
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button{
@@ -49,6 +49,8 @@ struct TopRatedMoviesListView: View {
             
         }
         .onAppear() {
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
             viewModel.getTopSeries()
         }
     }

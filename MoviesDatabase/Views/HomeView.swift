@@ -12,7 +12,7 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: TrendingMovieViewModel
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
 //                VStack(alignment: .leading) {
 //                    Text("Welcome.")
@@ -29,11 +29,15 @@ struct HomeView: View {
                     Text("Trending")
                         .font(.title2)
                         .fontWeight(.bold)
+                        .foregroundColor(.white)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(viewModel.moviesToday) { movie in
-                                NavigationLink(value: movie) {
+                                NavigationLink {
+                                    MovieDetailView(movie: movie)
+                                        .environmentObject(CastListViewModel())
+                                } label: {
                                     MovieCardView(movie: movie)
                                 }
                             }
@@ -43,11 +47,8 @@ struct HomeView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             }
+            .background(.white)
             .foregroundColor(.black)
-            .navigationDestination(for: Movie.self) { movie in
-                MovieDetailView(movie: movie)
-                    .environmentObject(CastListViewModel())
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button{
@@ -61,6 +62,8 @@ struct HomeView: View {
             }
         }
         .onAppear {
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
             viewModel.getMoviesToday()
         }
         

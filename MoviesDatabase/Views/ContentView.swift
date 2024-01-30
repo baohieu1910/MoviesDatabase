@@ -33,8 +33,7 @@ struct ContentView: View {
             
             SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))
         }
-            
-                
+        .background(.white)
     }
 }
 

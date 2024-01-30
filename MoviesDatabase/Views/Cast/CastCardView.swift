@@ -38,6 +38,7 @@ struct CastCardView: View {
                     .lineLimit(1)
                     .padding(.horizontal)
             }
+            .foregroundColor(.black)
             .frame(width: 135, height: 60)
         }
         .background(.white)

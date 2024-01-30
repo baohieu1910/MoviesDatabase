@@ -12,7 +12,6 @@ struct MoviesDatabaseApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(TopRatedMoviesViewModel())
         }
     }
 }

@@ -7,15 +7,19 @@
 
 import SwiftUI
 
+
 struct PopularMoviesListView: View {
     @Binding var presentSideMenu: Bool
     @EnvironmentObject var viewModel: PopularMoviesViewModel
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
                 ForEach(viewModel.movies) { movie in
-                    NavigationLink(value: movie) {
+                    NavigationLink {
+                        MovieDetailView(movie: movie)
+                            .environmentObject(CastListViewModel())
+                    } label: {
                         MovieRowView(movie: movie)
                             .foregroundColor(.black)
                             .padding([.bottom, .horizontal])
@@ -30,12 +34,8 @@ struct PopularMoviesListView: View {
 //                }
                 
             }
-//            .listStyle(.sidebar)
+            .background(.white)
             .navigationTitle("Popular Movies")
-            .navigationDestination(for: Movie.self) { movie in
-                MovieDetailView(movie: movie)
-                    .environmentObject(CastListViewModel())
-            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button{
@@ -47,8 +47,14 @@ struct PopularMoviesListView: View {
                     }
                 }
             }
+            
+            
+            
         }
         .onAppear() {
+            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
+//            UINavigationBar.appearance().scrollEdgeAppearance = .white
             viewModel.getPopularMovie()
         }
     }

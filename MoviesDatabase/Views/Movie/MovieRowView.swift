@@ -43,6 +43,7 @@ struct MovieRowView: View {
                     .lineLimit(2)
                     .truncationMode(.tail)
             }
+            .foregroundColor(.black)
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()

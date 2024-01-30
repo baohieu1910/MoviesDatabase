@@ -36,6 +36,7 @@ struct MovieCardView: View {
                 Text("\(movie.title)")
                     .fontWeight(.bold)
                     .lineLimit(1)
+                    .foregroundColor(.black)
                 
                 
                 Text("\(movie.getReleaseDate())")
@@ -46,7 +47,7 @@ struct MovieCardView: View {
             }
         }
         .frame(width: 140, height: 260)
-        .padding()
+        .padding([.vertical, .trailing])
     }
 }
 

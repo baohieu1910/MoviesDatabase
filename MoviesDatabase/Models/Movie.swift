@@ -36,10 +36,12 @@ struct Movie: Codable, Identifiable, Hashable {
         static let baseImageUrl = "https://image.tmdb.org/t/p/"
         static let logoSize = "w45"
         static let largeImageSize = "w500"
+        static let backGroundImageSize = "w1920_and_h800_multi_faces"
+
     }
     
     init() {
-        backdropPath = "/jXJxMcVoEuXzym3vFnjqDW4ifo6.jpg"
+        backdropPath = "/cnqwv5Uz3UW5f086IWbQKr3ksJr.jpg"
         posterPath = "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg"
         genreIds = [28, 12, 14]
         id = 572802
@@ -52,7 +54,7 @@ struct Movie: Codable, Identifiable, Hashable {
     }
     
     func getMovieBackground() -> String {
-        return Constants.baseImageUrl + Constants.largeImageSize + self.backdropPath
+        return Constants.baseImageUrl + Constants.backGroundImageSize + self.backdropPath
     }
     
     func getMoviePoster() -> String {
