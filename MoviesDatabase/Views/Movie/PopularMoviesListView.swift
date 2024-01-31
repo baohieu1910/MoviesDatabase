@@ -34,7 +34,6 @@ struct PopularMoviesListView: View {
 //                }
                 
             }
-            .background(.white)
             .navigationTitle("Popular Movies")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -47,13 +46,8 @@ struct PopularMoviesListView: View {
                     }
                 }
             }
-            
-            
-            
         }
-        .onAppear() {
-            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
+        .onAppear {
 //            UINavigationBar.appearance().scrollEdgeAppearance = .white
             viewModel.getPopularMovie()
         }

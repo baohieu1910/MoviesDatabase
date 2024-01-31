@@ -32,7 +32,6 @@ struct TopRatedMoviesListView: View {
 //                    }
 //                }
             }
-            .background(.white)
             .navigationTitle("Top Rated Movies")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -49,8 +48,6 @@ struct TopRatedMoviesListView: View {
             
         }
         .onAppear() {
-            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
             viewModel.getTopSeries()
         }
     }

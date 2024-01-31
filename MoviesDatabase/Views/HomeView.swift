@@ -29,7 +29,6 @@ struct HomeView: View {
                     Text("Trending")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
@@ -45,10 +44,9 @@ struct HomeView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(.black)
                 .padding()
             }
-            .background(.white)
-            .foregroundColor(.black)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button{
@@ -62,8 +60,6 @@ struct HomeView: View {
             }
         }
         .onAppear {
-            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
             viewModel.getMoviesToday()
         }
         

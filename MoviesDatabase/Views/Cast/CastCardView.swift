@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CastCardView: View {
-    var cast: Cast = Cast()
+    var cast: Cast
     
     let width = UIScreen.screenWidth / 4
     let height = UIScreen.screenHeight / 5
@@ -50,7 +50,7 @@ struct CastCardView: View {
 
 struct CastCardView_Previews: PreviewProvider {
     static var previews: some View {
-        CastCardView()
+        CastCardView(cast: Cast())
             .environmentObject(CastListViewModel())
     }
 }

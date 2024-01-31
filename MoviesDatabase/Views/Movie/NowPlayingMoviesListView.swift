@@ -25,7 +25,6 @@ struct NowPlayingMoviesListView: View {
                     }
                 }
             }
-            .background(.white)
             .navigationTitle("Now Playing Movies")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -40,8 +39,6 @@ struct NowPlayingMoviesListView: View {
             }
         }
         .onAppear() {
-            UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.black]
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
             viewModel.getNowPlayingMovies()
         }
     }

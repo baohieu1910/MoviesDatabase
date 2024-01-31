@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct MovieRowView: View {
-    var movie: Movie = Movie()
+    var movie: Movie
     
     var body: some View {
         HStack {
@@ -56,6 +56,6 @@ struct MovieRowView: View {
 
 struct MovieRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieRowView()
+        MovieRowView(movie: Movie())
     }
 }
