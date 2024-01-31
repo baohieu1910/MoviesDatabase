@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CircularProcessBarView: View {
-    var progress: CGFloat = 60 / 100
+    var progress: CGFloat
     
     var body: some View {
         ZStack {
@@ -48,7 +48,7 @@ struct CircularProcessBarView: View {
 
 struct CircularProcessBarView_Previews: PreviewProvider {
     static var previews: some View {
-        CircularProcessBarView()
+        CircularProcessBarView(progress: CGFloat(60 / 100))
             .colorScheme(.dark)
     }
 }

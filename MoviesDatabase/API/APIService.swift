@@ -245,7 +245,7 @@ class APIService {
         dataTask.resume()
     }
     
-    func getcastDetail(id: Int, completion: @escaping(People) -> ()) {
+    func getCastDetail(id: Int, completion: @escaping(People) -> ()) {
         let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/person/\(id)?language=en-US")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)

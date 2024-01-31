@@ -35,16 +35,6 @@ struct People: Codable, Identifiable, Hashable {
     
     }
     
-    init() {
-        id = 117642
-        name = "Jason Momoa"
-        knownFor = "Acting"
-        biography = "Joseph Jason Namakaeha Momoa (born August 1, 1979) is an American actor and filmmaker. He made his acting debut as Jason Ioane on the syndicated action drama series Baywatch: Hawaii (1999–2001), which was followed by his portrayal of Ronon Dex on the Syfy science fiction series Stargate Atlantis (2005–2009), Khal Drogo in the first two seasons of the HBO fantasy drama series Game of Thrones (2011–2012), Declan Harp on the Discovery Channel historical drama series Frontier (2016–2018), and Baba Voss on the Apple TV+ science fiction series See (2019–present). Momoa was featured as the lead of the two lattermost series.\n\nSince 2016, Momoa portrays Arthur Curry / Aquaman in the DC Extended Universe (DCEU), headlining the eponymous 2018 film and its 2023 sequel. Momoa also played Duncan Idaho in the 2021 film adaptation of the science fiction novel Dune.\n\nDescription above from the Wikipedia article Jason Momoa, licensed under CC-BY-SA, full list of contributors on Wikipedia."
-        birthday = "1979-08-01"
-        placeOfBirth = "Honolulu, Hawaii, USA"
-        profilePath = "/6dEFBpZH8C8OijsynkSajQT99Pb.jpg"
-    }
-    
     func getPeopleImage() -> String {
         if let profilePath = self.profilePath {
             return Constants.baseImageUrl + Constants.largeImageSize + profilePath

@@ -27,13 +27,6 @@ struct Cast: Codable, Identifiable, Hashable {
         static let noProfileImage = "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg"
     }
     
-    init() {
-        id = 117642
-        name = "Jason Momoa"
-        profilePath = "/6dEFBpZH8C8OijsynkSajQT99Pb.jpg"
-        character = "Arthur Curry / Aquaman"
-    }
-    
     func getCastImage() -> String {
         if let profilePath = self.profilePath {
             return Constants.baseImageUrl + Constants.largeImageSize + profilePath

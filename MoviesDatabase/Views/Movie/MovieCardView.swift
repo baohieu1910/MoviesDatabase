@@ -10,7 +10,6 @@ import SwiftUI
 struct MovieCardView: View {
     var movie: Movie
     
-    
     var body: some View {
         VStack {
             let url = URL(string: movie.getMoviePoster())
@@ -53,6 +52,6 @@ struct MovieCardView: View {
 
 struct MovieCardView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieCardView(movie: Movie())
+        MovieCardView(movie: ExampleData.movie)
     }
 }

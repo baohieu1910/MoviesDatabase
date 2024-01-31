@@ -14,31 +14,27 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView(selection: $selectedSideMenuTab) {
-                HomeView(presentSideMenu: $presentSideMenu)
-                    .environmentObject(TrendingMovieViewModel())
+                HomeView(presentSideMenu: $presentSideMenu, viewModel: TrendingMovieViewModel())
                     .tag(0)
                 
-                PopularMoviesListView(presentSideMenu: $presentSideMenu)
-                    .environmentObject(PopularMoviesViewModel())
+                PopularMoviesListView(presentSideMenu: $presentSideMenu, viewModel: PopularMoviesViewModel())
                     .tag(1)
                 
-                TopRatedMoviesListView(presentSideMenu: $presentSideMenu)
-                    .environmentObject(TopRatedMoviesViewModel())
+                TopRatedMoviesListView(presentSideMenu: $presentSideMenu, viewModel: TopRatedMoviesViewModel())
                     .tag(2)
                 
-                NowPlayingMoviesListView(presentSideMenu: $presentSideMenu)
-                    .environmentObject(NowPlayingMoviesViewModel())
+                NowPlayingMoviesListView(presentSideMenu: $presentSideMenu, viewModel: NowPlayingMoviesViewModel())
                     .tag(3)
             }
             
             SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))
         }
-        .background(.white)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environment(\.colorScheme, .light)
     }
 }

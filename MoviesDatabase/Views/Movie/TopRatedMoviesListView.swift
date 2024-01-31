@@ -9,15 +9,14 @@ import SwiftUI
 
 struct TopRatedMoviesListView: View {
     @Binding var presentSideMenu: Bool
-    @EnvironmentObject var viewModel: TopRatedMoviesViewModel
+    @ObservedObject var viewModel: TopRatedMoviesViewModel
     
     var body: some View {
         NavigationView {
             ScrollView {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink {
-                        MovieDetailView(movie: movie)
-                            .environmentObject(CastListViewModel())
+                        MovieDetailView(viewModel: CastListViewModel(), movie: movie)
                     } label: {
                         MovieRowView(movie: movie)
                             .foregroundColor(.black)
@@ -55,7 +54,6 @@ struct TopRatedMoviesListView: View {
 
 struct TopRatedMovieListView_Previews: PreviewProvider {
     static var previews: some View {
-        TopRatedMoviesListView(presentSideMenu: Binding.constant(false))
-            .environmentObject(TopRatedMoviesViewModel())
+        TopRatedMoviesListView(presentSideMenu: Binding.constant(false), viewModel: TopRatedMoviesViewModel())
     }
 }

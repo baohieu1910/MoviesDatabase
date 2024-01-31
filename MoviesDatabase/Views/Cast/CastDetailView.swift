@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CastDetailView: View {
-    @EnvironmentObject var viewModel: PeopleViewModel
+    @ObservedObject var viewModel: PeopleViewModel
     var cast: Cast
     
     var body: some View {
@@ -91,7 +91,6 @@ struct CastDetailView: View {
 
 struct CastDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CastDetailView(cast: Cast())
-            .environmentObject(PeopleViewModel())
+        CastDetailView(viewModel: PeopleViewModel(), cast: ExampleData.cast)
     }
 }

@@ -56,6 +56,6 @@ struct MovieRowView: View {
 
 struct MovieRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieRowView(movie: Movie())
+        MovieRowView(movie: ExampleData.movie)
     }
 }

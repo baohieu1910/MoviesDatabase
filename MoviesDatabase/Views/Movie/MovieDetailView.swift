@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct MovieDetailView: View {
-    @EnvironmentObject var viewModel: CastListViewModel
+    @ObservedObject var viewModel: CastListViewModel
     @State var averageColor: Color = .black
     var movie: Movie
     
@@ -111,8 +111,7 @@ struct MovieDetailView: View {
                     HStack {
                         ForEach(viewModel.casts) { cast in
                             NavigationLink {
-                                CastDetailView(cast: cast)
-                                    .environmentObject(PeopleViewModel())
+                                CastDetailView(viewModel: PeopleViewModel(), cast: cast)
                             } label: {
                                 CastCardView(cast: cast)
                             }
@@ -128,13 +127,6 @@ struct MovieDetailView: View {
             }
             .foregroundColor(.black)
             
-        }
-        .toolbar {
-            Button {
-                
-            } label: {
-                Text("Add")
-            }
         }
 //            VStack(alignment: .leading) {
 //                Text("Original Title")
@@ -156,7 +148,6 @@ struct MovieDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(movie: Movie())
-            .environmentObject(CastListViewModel())
+        MovieDetailView(viewModel: CastListViewModel(), movie: ExampleData.movie)
     }
 }

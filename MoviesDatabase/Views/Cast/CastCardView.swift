@@ -50,7 +50,6 @@ struct CastCardView: View {
 
 struct CastCardView_Previews: PreviewProvider {
     static var previews: some View {
-        CastCardView(cast: Cast())
-            .environmentObject(CastListViewModel())
+        CastCardView(cast: ExampleData.cast)
     }
 }

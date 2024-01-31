@@ -8,11 +8,15 @@
 import Foundation
 
 class PeopleViewModel: ObservableObject {
-    @Published var people: People = People()
+    @Published var people: People = ExampleData.people
     var apiService: APIService = APIService()
     
+    init() {
+        
+    }
+    
     func getPeopleDetail(id: Int) {
-        apiService.getcastDetail(id: id) { people in
+        apiService.getCastDetail(id: id) { people in
             self.people = people
         }
     }
