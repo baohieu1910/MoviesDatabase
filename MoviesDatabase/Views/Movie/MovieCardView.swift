@@ -11,9 +11,10 @@ struct MovieCardView: View {
     var movie: Movie
     
     var body: some View {
-        VStack {
-            let url = URL(string: movie.getMoviePoster())
-            AsyncImage(url: url) { image in
+        
+        let url = URL(string: movie.getMoviePoster())
+        AsyncImage(url: url) { image in
+            VStack {
                 ZStack {
                     image
                         .resizable()
@@ -23,30 +24,29 @@ struct MovieCardView: View {
                     CircularProcessBarView(progress: movie.voteAverage / 10)
                         .offset(x: -50, y: 100)
                 }
-            } placeholder: {
-                Image("tmdb")
-                    .resizable()
-                    .frame(width: 140, height: 140)
+                
+                Spacer()
+                
+                VStack {
+                    Text("\(movie.title)")
+                        .fontWeight(.bold)
+                        .lineLimit(1)
+                        .foregroundColor(.black)
+                    
+                    
+                    Text("\(movie.getReleaseDate())")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .lineLimit(1)
+                    
+                }
             }
-            
-            Spacer()
-            
-            VStack {
-                Text("\(movie.title)")
-                    .fontWeight(.bold)
-                    .lineLimit(1)
-                    .foregroundColor(.black)
-                
-                
-                Text("\(movie.getReleaseDate())")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .lineLimit(1)
-                
-            }
+            .frame(width: 140, height: 260)
+            .padding([.vertical, .trailing])
+        } placeholder: {
+            ProgressView()
         }
-        .frame(width: 140, height: 260)
-        .padding([.vertical, .trailing])
+            
     }
 }
 

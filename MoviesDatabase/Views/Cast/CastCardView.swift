@@ -14,37 +14,40 @@ struct CastCardView: View {
     let height = UIScreen.screenHeight / 5
     
     var body: some View {
-        VStack {
-            let url = URL(string: cast.getCastImage())
-            AsyncImage(url: url) { image in
+        let url = URL(string: cast.getCastImage())
+        AsyncImage(url: url) { image in
+            
+            VStack {
                 image
                     .resizable()
-                    .frame(width: 135, height: 160)
+                    .scaledToFill()
+                    .frame(width: 135, height: 160, alignment: .center)
+                    .clipped()
                 
-            } placeholder: {
-                Image("noImage")
-                    .resizable()
-                    .frame(width: 135, height: 160)
+                
+                VStack(alignment: .leading) {
+                    Text("\(cast.name)")
+                        .fontWeight(.bold)
+                        .lineLimit(1)
+                        .padding(.horizontal)
+                    
+                    Text("\(cast.character)")
+                        .font(.footnote)
+                        .lineLimit(1)
+                        .padding(.horizontal)
+                }
+                .foregroundColor(.black)
+                .frame(width: 135, height: 60)
             }
+            .background(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .shadow(radius: 2)
+            .padding(.vertical)
             
-            VStack(alignment: .leading) {
-                Text("\(cast.name)")
-                    .fontWeight(.bold)
-                    .lineLimit(1)
-                    .padding(.horizontal)
-                            
-                Text("\(cast.character)")
-                    .font(.footnote)
-                    .lineLimit(1)
-                    .padding(.horizontal)
-            }
-            .foregroundColor(.black)
-            .frame(width: 135, height: 60)
+        } placeholder: {
+            ProgressView()
         }
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(radius: 2)
-        .padding(.vertical)
+            
     }
 }
 

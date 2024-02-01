@@ -12,45 +12,45 @@ struct MovieRowView: View {
     var movie: Movie
     
     var body: some View {
-        HStack {
-            let url = URL(string: movie.getMoviePoster())
-            AsyncImage(url: url) { image in
-                ZStack(alignment: .bottomTrailing) {
-                    image
-                        .resizable()
-                        .frame(width: 100, height: 150)
-                        .cornerRadius(20)
-                    
-                    CircularProcessBarView(progress: movie.voteAverage / 10)
-                }
-                
-            } placeholder: {
-                Image("tmdb")
+        let url = URL(string: movie.getMoviePoster())
+        AsyncImage(url: url) { image in
+            HStack {
+            ZStack(alignment: .bottomTrailing) {
+                image
                     .resizable()
-                    .frame(width: 100, height: 100)
-            }
-            VStack(alignment: .leading) {
-                Text("\(movie.title)")
-                    .font(.title3)
-                    .fontWeight(.bold)
+                    .frame(width: 100, height: 150)
+                    .cornerRadius(20)
                 
-                Text("\(movie.getReleaseDate())")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                    .padding(.bottom)
-                
-                Text("\(movie.overview)")
-                    .lineLimit(2)
-                    .truncationMode(.tail)
+                CircularProcessBarView(progress: movie.voteAverage / 10)
             }
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity, alignment: .leading)
+                
+                VStack(alignment: .leading) {
+                    Text("\(movie.title)")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                    
+                    Text("\(movie.getReleaseDate())")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                        .padding(.bottom)
+                    
+                    Text("\(movie.overview)")
+                        .lineLimit(2)
+                        .truncationMode(.tail)
+                }
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+            }
+            .background(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .shadow(radius: 2)
             
-            Spacer()
+        } placeholder: {
+            ProgressView()
         }
-        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-        .shadow(radius: 2)
+            
     }
 }
 

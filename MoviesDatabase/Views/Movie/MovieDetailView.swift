@@ -34,10 +34,7 @@ struct MovieDetailView: View {
                                     .opacity(1)
                             }
                         } placeholder: {
-                            Image("tmdb")
-                                .resizable()
-                                .frame(width: 150, height: 150)
-                                .padding()
+                            ProgressView()
                         }
                         
                         let posterUrl = URL(string: movie.getMoviePoster())
@@ -51,10 +48,7 @@ struct MovieDetailView: View {
                             }
                             
                         } placeholder: {
-                            Image("tmdb")
-                                .resizable()
-                                .frame(width: 150, height: 150)
-                                .padding()
+                            ProgressView()
                         }
                     }
                     // MARK: Movie title

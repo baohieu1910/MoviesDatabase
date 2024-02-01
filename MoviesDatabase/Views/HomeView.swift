@@ -69,10 +69,7 @@ struct HomeView: View {
                             
                             
                         } placeholder: {
-                            Image("tmdb")
-                                .resizable()
-                                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
-
+                            ProgressView()
                         }
                         
                         let secondUrl = URL(string: BackgroundImage.secondHomeImage)
@@ -121,9 +118,7 @@ struct HomeView: View {
                             
                             
                         } placeholder: {
-                            Image("tmdb")
-                                .resizable()
-                                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
+                            ProgressView()
                         }
                     }
                     

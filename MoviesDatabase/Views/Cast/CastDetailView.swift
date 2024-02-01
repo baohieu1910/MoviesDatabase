@@ -13,32 +13,35 @@ struct CastDetailView: View {
     
     var body: some View {
         ScrollView {
+            // MARK: Image and name
             VStack {
                 let url = URL(string: viewModel.people.getPeopleImage())
                 AsyncImage(url: url) { image in
                     image
                         .resizable()
-                        .frame(width: 200, height: 240)
+                        .scaledToFill()
+                        .frame(width: 200, height: 200, alignment: .center)
+                        .clipped()
                         .cornerRadius(10)
                     
                 } placeholder: {
-                    Image("noImage")
-                        .resizable()
-                        .frame(width: 200, height: 200)
+                    ProgressView()
                 }
                 
                 Text("\(viewModel.people.name)")
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                
             }
             .padding()
             
             Divider()
                 .frame(height: 3)
             
+            // MARK: Personal Info
             VStack(alignment: .leading) {
                 Text("Personal Info")
-                    .font(.title3)
+                    .font(.title2)
                     .fontWeight(.bold)
                     .padding(.bottom)
                 
@@ -66,6 +69,7 @@ struct CastDetailView: View {
                 }
                 .padding(.bottom)
                 
+                // MARK: Biography
                 VStack(alignment: .leading) {
                     Text("Biography")
                         .font(.title2)
