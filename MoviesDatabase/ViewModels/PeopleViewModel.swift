@@ -8,7 +8,7 @@
 import Foundation
 
 class PeopleViewModel: ObservableObject {
-    @Published var people: People = ExampleData.people
+    @Published var people: People?
     var apiService: APIService = APIService()
     
     init() {

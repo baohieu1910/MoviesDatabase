@@ -35,4 +35,20 @@ struct ExampleData {
                            character: "Arthur Curry / Aquaman"
     )
     
+    static let movieDetail = MovieDetail(backdropPath: "/jXJxMcVoEuXzym3vFnjqDW4ifo6.jpg",
+                                         budget: 205000000,
+                                         genres: [],
+                                         id: 572802,
+                                         originalLanguage: "en",
+                                         originalTitle: "Aquaman and the Lost Kingdom",
+                                         overview: "Black Manta, still driven by the need to avenge his father's death and wielding the power of the mythic Black Trident, will stop at nothing to take Aquaman down once and for all. To defeat him, Aquaman must turn to his imprisoned brother Orm, the former King of Atlantis, to forge an unlikely alliance in order to save the world from irreversible destruction.",
+                                         posterPath: "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
+                                         releaseDate: "2023-12-20",
+                                         revenue: 412442014,
+                                         runtime: 124,
+                                         status: "Released",
+                                         tagline: "The tide is turning.",
+                                         title: "Aquaman and the Lost Kingdom",
+                                         voteAverage: 6.995,
+                                         voteCount: 1180)
 }

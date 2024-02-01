@@ -15,7 +15,7 @@ struct CastDetailView: View {
         ScrollView {
             // MARK: Image and name
             VStack {
-                let url = URL(string: viewModel.people.getPeopleImage())
+                let url = URL(string: viewModel.people?.getPeopleImage() ?? "")
                 AsyncImage(url: url) { image in
                     image
                         .resizable()
@@ -28,10 +28,9 @@ struct CastDetailView: View {
                     ProgressView()
                 }
                 
-                Text("\(viewModel.people.name)")
+                Text("\(viewModel.people?.name ?? "N/A")")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                
             }
             .padding()
             
@@ -50,21 +49,21 @@ struct CastDetailView: View {
                         Text("Known For")
                             .fontWeight(.bold)
                         
-                        Text("\(viewModel.people.knownFor ?? "-")")
+                        Text("\(viewModel.people?.knownFor ?? "-")")
                     }.padding(.bottom)
                     
                     VStack(alignment: .leading) {
                         Text("Birthday")
                             .fontWeight(.bold)
                         
-                        Text("\(viewModel.people.birthday ?? "-")")
+                        Text("\(viewModel.people?.birthday ?? "-")")
                     }.padding(.bottom)
                     
                     VStack(alignment: .leading) {
                         Text("Place of birth")
                             .fontWeight(.bold)
                         
-                        Text("\(viewModel.people.placeOfBirth ?? "-")")
+                        Text("\(viewModel.people?.placeOfBirth ?? "-")")
                     }.padding(.bottom)
                 }
                 .padding(.bottom)
@@ -75,7 +74,7 @@ struct CastDetailView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                     
-                    Text("\(((viewModel.people.biography == "" || viewModel.people.biography == nil) ? ("We dont't have a biography for \(viewModel.people.name)") : viewModel.people.biography) ?? "")")
+                    Text("\((viewModel.people?.biography ?? "" == "" ? ("We dont't have a biography for \(viewModel.people?.name ?? "N/A")") : viewModel.people?.biography ?? "-"))")
                     
                 }
             }

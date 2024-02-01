@@ -22,103 +22,80 @@ struct HomeView: View {
                 VStack {
                     // MARK: Background Image
                     VStack(spacing: 0) {
-                        let firstUrl = URL(string: BackgroundImage.firstHomeImage)
-                        AsyncImage(url: firstUrl) { image in
-                            ZStack {
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
-                                    .clipped()
+                        
+                        ZStack {
+                            BackgroundImage.getFirstHomeImage()
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
+                                .clipped()
+                            
+                            Color("DarkBlue")
+                                .opacity(0.8)
+                            
+                            VStack(alignment: .leading) {
+                                Text("Welcome.")
+                                    .font(.system(size: 40))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
                                 
-                                Color("DarkBlue")
-                                    .opacity(0.8)
+                                Text("Millions of movies, TV shows and people to discover. Explore now.")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.white)
                                 
-                                VStack(alignment: .leading) {
-                                    Text("Welcome.")
-                                        .font(.system(size: 40))
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                    
-                                    Text("Millions of movies, TV shows and people to discover. Explore now.")
-                                        .font(.system(size: 30))
-                                        .foregroundColor(.white)
-                                    
-                                    ZStack(alignment: .trailing) {
-                                        TextField("    Search...", text: $searchKey)
-                                            .frame(height: 50)
-                                            .background(.white)
-                                            .cornerRadius(90)
-                                            
-//                                        Button {
-//                                            // Search
-//                                        } label: {
-//                                            LinearGradient(colors: [.mint, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
-//                                                .mask {
-//                                                    RoundedRectangle(cornerRadius: 90).stroke(lineWidth: 2)
-//                                                        .frame(width: 160, height: 40, alignment: .trailing)
-//                                                }
-//                                        }
-                                    }
-                                    
-                                    
+                                ZStack(alignment: .trailing) {
+                                    TextField("    Search...", text: $searchKey)
+                                        .frame(height: 50)
+                                        .background(.white)
+                                        .cornerRadius(90)
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
+                                
+                                
                             }
-                            
-                            
-                        } placeholder: {
-                            ProgressView()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
                         }
                         
-                        let secondUrl = URL(string: BackgroundImage.secondHomeImage)
-                        AsyncImage(url: secondUrl) { image in
-                            ZStack {
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
-                                    .clipped()
+                        ZStack {
+                            BackgroundImage.getSecondHomeImage()
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
+                                .clipped()
+                            
+                            Color.black
+                                .opacity(0.7)
+                            
+                            VStack(alignment: .leading) {
+                                LinearGradient(colors: [.mint, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    .mask {
+                                        Text("That's a Wrap 2023")
+                                            .font(.system(size: 50))
+                                            .fontWeight(.bold)
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
                                 
-                                Color.black
-                                    .opacity(0.7)
+                                Text("The best (and worst) of the year from TMDB.")
+                                    .font(.system(size: 20))
                                 
-                                VStack(alignment: .leading) {
-                                    LinearGradient(colors: [.mint, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
-                                        .mask {
-                                            Text("That's a Wrap 2023")
-                                                .font(.system(size: 50))
-                                                .fontWeight(.bold)
-                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                Button {
+                                    
+                                } label : {
+                                    ZStack {
+                                        HStack {
+                                            Text("Check it out")
+                                                .font(.system(size: 15))
+                                            Image(systemName: "arrow.right")
                                         }
-                                    
-                                    Text("The best (and worst) of the year from TMDB.")
-                                        .font(.system(size: 20))
-                                    
-                                    Button {
                                         
-                                    } label : {
-                                        ZStack {
-                                            HStack {
-                                                Text("Check it out")
-                                                    .font(.system(size: 15))
-                                                Image(systemName: "arrow.right")
-                                            }
-                                            
-                                            RoundedRectangle(cornerRadius: 90).stroke(lineWidth: 2)
-                                                .frame(width: 160, height: 40)
-                                        }
+                                        RoundedRectangle(cornerRadius: 90).stroke(lineWidth: 2)
+                                            .frame(width: 160, height: 40)
                                     }
                                 }
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
                             }
-                            
-                            
-                        } placeholder: {
-                            ProgressView()
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
                         }
                     }
                     
@@ -142,7 +119,7 @@ struct HomeView: View {
                             HStack(spacing: 10) {
                                 ForEach(type == "Today" ? viewModel.moviesToday : viewModel.moviesThisWeek) { movie in
                                     NavigationLink {
-                                        MovieDetailView(viewModel: CastListViewModel(), movie: movie)
+                                        MovieDetailView(castVM: CastListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
                                     } label: {
                                         MovieCardView(movie: movie)
                                     }

@@ -3,4 +3,70 @@
    uuid = "EBBC4F83-4613-40B0-A312-E5B669252B18"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3FB5A430-8EEB-4E05-AD3E-6F1333FAE3C8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoviesDatabase/ViewModels/MovieDetailViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "getMovieDetail(id:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3FB5A430-8EEB-4E05-AD3E-6F1333FAE3C8 - 3d3f9445897f1ba0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoviesDatabase.MovieDetailViewModel.getMovieDetail(id: Swift.Int) -&gt; ()"
+                  moduleName = "MoviesDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hieule/Desktop/BaoHieu/Swift/Code/MoviesDatabase/MoviesDatabase/ViewModels/MovieDetailViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "3FB5A430-8EEB-4E05-AD3E-6F1333FAE3C8 - de8546b0ece8f2c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (MoviesDatabase.MovieDetail) -&gt; () in MoviesDatabase.MovieDetailViewModel.getMovieDetail(id: Swift.Int) -&gt; ()"
+                  moduleName = "MoviesDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hieule/Desktop/BaoHieu/Swift/Code/MoviesDatabase/MoviesDatabase/ViewModels/MovieDetailViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "456">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A09E770F-8CF9-41FD-9B17-701ED5775355"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoviesDatabase/Views/Movie/MovieDetailView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

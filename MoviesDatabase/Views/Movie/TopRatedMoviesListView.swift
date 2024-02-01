@@ -16,7 +16,7 @@ struct TopRatedMoviesListView: View {
             ScrollView {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink {
-                        MovieDetailView(viewModel: CastListViewModel(), movie: movie)
+                        MovieDetailView(castVM: CastListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
                     } label: {
                         MovieRowView(movie: movie)
                             .foregroundColor(.black)

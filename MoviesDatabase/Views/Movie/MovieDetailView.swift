@@ -9,132 +9,211 @@ import SwiftUI
 import UIKit
 
 struct MovieDetailView: View {
-    @ObservedObject var viewModel: CastListViewModel
+    @ObservedObject var castVM: CastListViewModel
+    @ObservedObject var movieVM: MovieDetailViewModel
+    
     @State var averageColor: Color = .black
     var movie: Movie
+    
     
     var body: some View {
         ScrollView {
             VStack {
                 VStack {
-                    // MARK: Movie Poster
-                    ZStack(alignment: .leading) {
-                        let backgroundUrl = URL(string: movie.getMovieBackground())
-                        AsyncImage(url: backgroundUrl) { image in
-                            ZStack {
-                                image
-                                    .resizable()
-                                    .scaledToFit()
-                                    .cornerRadius(5)
-                                    .onAppear {
-                                        averageColor = Color( image.averageColor ?? UIColor.black)
+                    VStack {
+                        // MARK: Movie Poster
+                        ZStack(alignment: .leading) {
+                            let backgroundUrl = URL(string: movieVM.movie?.getMovieBackground() ?? "")
+                            AsyncImage(url: backgroundUrl) { image in
+                                ZStack(alignment: .leading) {
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .cornerRadius(5)
+                                        .onAppear {
+                                            averageColor = Color( image.averageColor ?? UIColor.black)
+                                        }
+                                    
+                                    LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
+                                        .opacity(1)
+                                    
+                                    let posterUrl = URL(string: movieVM.movie?.getMoviePoster() ?? "")
+                                    AsyncImage(url: posterUrl) { image in
+                                        ZStack {
+                                            image
+                                                .resizable()
+                                                .frame(width: 100, height: 150)
+                                                .cornerRadius(10)
+                                                .padding(.horizontal)
+                                        }
+                                        
+                                    } placeholder: {
+                                        ProgressView()
                                     }
-                                
-                                LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
-                                    .opacity(1)
+                                }
+                            } placeholder: {
+                                ProgressView()
                             }
-                        } placeholder: {
-                            ProgressView()
                         }
+//                        .padding(.horizontal)
                         
-                        let posterUrl = URL(string: movie.getMoviePoster())
-                        AsyncImage(url: posterUrl) { image in
-                            ZStack {
-                                image
-                                    .resizable()
-                                    .frame(width: 100, height: 150)
-                                    .cornerRadius(10)
-                                    .padding(.horizontal)
+                        // MARK: Movie title
+                        VStack {
+                            VStack {
+                                Text("\(movieVM.movie?.title ?? "N/A")")
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                
                             }
                             
-                        } placeholder: {
-                            ProgressView()
+                            HStack {
+                                Spacer()
+                                HStack {
+                                    CircularProcessBarView(progress: movie.voteAverage / 10)
+                                    
+                                    Text("User Score")
+                                        .fontWeight(.bold)
+                                }
+                                Spacer()
+                                Text("|")
+                                Spacer()
+                                HStack {
+                                    Image(systemName: "play.fill")
+                                    
+                                    Text("Play Trailer")
+                                }
+                                Spacer()
+                            }
+                            
+                            VStack {
+                                HStack {
+                                    Text("\(movieVM.movie?.getReleaseDate() ?? "N/A")")
+                                    
+                                    Text(" - ")
+                                    
+                                    Text("\(movieVM.movie?.runtime ?? 0)m")
+                                }
+                                .frame(width: UIScreen.screenWidth)
+                                .padding(.vertical, 10)
+                                .background(averageColor.speechAdjustedPitch(30))
+                                
+                                
+                            }
+                            .font(.subheadline)
+                            
+                            VStack(alignment: .leading) {
+                                Text("\(movieVM.movie?.tagline ?? "")")
+                                    .italic()
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding()
+                            }
+                            
+                            VStack(alignment: .leading) {
+                                Text("Overview")
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                                
+                                Text("\(movieVM.movie?.overview ?? "-")")
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                            
                         }
                     }
-                    // MARK: Movie title
-                    VStack {
-                        VStack {
-                            Text("\(movie.title)")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                            
-                            Text("(\(movie.getReleaseDate()))")
-                                .font(.subheadline)
-                        }
-                        
+                    .padding([.bottom, .horizontal])
+                    .background(averageColor)
+                    .foregroundColor(.white)
+                }
+                
+                // MARK: Cast
+                VStack(alignment: .leading) {
+                    Text("Top Billed Cast")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            Spacer()
-                            HStack {
-                                CircularProcessBarView(progress: movie.voteAverage / 10)
+                            ForEach(castVM.casts) { cast in
+                                NavigationLink {
+                                    CastDetailView(viewModel: PeopleViewModel(), cast: cast)
+                                } label: {
+                                    CastCardView(cast: cast)
+                                }
                                 
-                                Text("User Score")
-                                    .fontWeight(.bold)
                             }
-                            Spacer()
-                            Text("|")
-                            Spacer()
-                            HStack {
-                                Image(systemName: "play.fill")
-                                
-                                Text("Play Trailer")
-                            }
-                            Spacer()
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            Text("Overview")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                            
-                            Text("\(movie.overview)")
                         }
                     }
                     .padding()
                 }
-                .background(averageColor)
-                .foregroundColor(.white)
-            }
-            
-            // MARK: Cast
-            VStack(alignment: .leading) {
-                Text("Top Billed Cast")
-                    .font(.title)
-                    .fontWeight(.bold)
+                .padding()
+                //            .frame(maxWidth: .infinity, alignment: .leading)
                 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(viewModel.casts) { cast in
-                            NavigationLink {
-                                CastDetailView(viewModel: PeopleViewModel(), cast: cast)
-                            } label: {
-                                CastCardView(cast: cast)
-                            }
-                            
-                        }
-                    }
+                // MARK: Recommendations
+                VStack(alignment: .leading) {
+                    Text("Recommendations")
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .padding(.horizontal)
+                    
+                    Text("We don't have enough data to suggest any movies based on \(movieVM.movie?.title  ?? "N/A"). You can help by rating movies you've seen.")
+                        .padding(.horizontal)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                
+                // MARK: Other Infomation
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        Text("Original Title")
+                            .fontWeight(.bold)
+                        
+                        Text("\(movieVM.movie?.originalTitle ?? "N/A")")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.bottom, .horizontal])
+                    
+                    VStack(alignment: .leading) {
+                        Text("Status")
+                            .fontWeight(.bold)
+                        
+                        Text("\(movieVM.movie?.status ?? "-")")
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.bottom, .horizontal])
+                    
+                    //                VStack {
+                    //                    Text("Original Language")
+                    //                }
+                    
+                    VStack(alignment: .leading) {
+                        Text("Budget")
+                            .fontWeight(.bold)
+                        
+                        movieVM.movie?.getBudget()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.bottom, .horizontal])
+                    
+                    VStack(alignment: .leading) {
+                        Text("Revenue")
+                            .fontWeight(.bold)
+                        
+                        movieVM.movie?.getRevenue()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.bottom, .horizontal])
+                    
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
             .onAppear {
-                viewModel.getCastList(id: movie.id)
+                castVM.getCastList(id: movie.id)
+                movieVM.getMovieDetail(id: movie.id)
             }
             .foregroundColor(.black)
-            
         }
-//            VStack(alignment: .leading) {
-//                Text("Original Title")
-//
-//                Text("Status")
-//
-//                Text("Original Language")
-//
-//                Text("Budget")
-//
-//                Text("Revenue")
-//            }
-//            .frame(maxWidth: .infinity, alignment: .leading)
-//            .padding()
     }
     
     
@@ -142,6 +221,6 @@ struct MovieDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(viewModel: CastListViewModel(), movie: ExampleData.movie)
+        MovieDetailView(castVM: CastListViewModel(), movieVM: MovieDetailViewModel(), movie: ExampleData.movie)
     }
 }
