@@ -1,5 +1,5 @@
 //
-//  AiringTodaySeriesView.swift
+//  PopularSeriesView.swift
 //  MoviesDatabase
 //
 //  Created by Hieu Le on 2/3/24.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct AiringTodaySeriesView: View {
-    @ObservedObject var viewModel: AiringTodaySeriesViewModel
+struct PopularSeriesView: View {
+    @ObservedObject var viewModel: PopularSeriesViewModel
     
     var body: some View {
         NavigationView {
@@ -24,16 +24,16 @@ struct AiringTodaySeriesView: View {
                     }
                 }
             }
-            .navigationTitle("Airing Today")
+            .navigationTitle("Popular")
         }
         .onAppear {
-            viewModel.getAiringTodaySeries()
+            viewModel.getPopularSeries()
         }
     }
 }
 
-struct AiringTodaySeriesView_Previews: PreviewProvider {
+struct PopularSeriesView_Previews: PreviewProvider {
     static var previews: some View {
-        AiringTodaySeriesView(viewModel: AiringTodaySeriesViewModel())
+        PopularSeriesView(viewModel: PopularSeriesViewModel())
     }
 }

@@ -379,7 +379,7 @@ class APIService {
             
             do {
                 if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary["results"], options: [])
                     let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
                     
                     do {
@@ -418,7 +418,7 @@ class APIService {
             
             do {
                 if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary["results"], options: [])
                     let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
                     
                     do {
@@ -457,7 +457,7 @@ class APIService {
             
             do {
                 if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary["results"], options: [])
                     let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
                     
                     do {
@@ -496,7 +496,7 @@ class APIService {
             
             do {
                 if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary["results"], options: [])
                     let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
                     
                     do {

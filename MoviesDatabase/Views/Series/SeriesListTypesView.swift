@@ -1,5 +1,5 @@
 //
-//  MoviesListTypesView.swift
+//  SeriesListTypesView.swift
 //  MoviesDatabase
 //
 //  Created by Hieu Le on 2/3/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MoviesListTypesView: View {
+struct SeriesListTypesView: View {
     @State private var type = "Popular"
-    private let types = ["Popular", "Now Playing", "Top Rated", "Upcoming"]
+    private let types = ["Popular", "Airing Today", "On The Air", "Top Rated"]
     
     var body: some View {
         VStack {
@@ -20,22 +20,20 @@ struct MoviesListTypesView: View {
             }.pickerStyle(.segmented)
             
             if type == types[0] {
-                PopularMoviesListView(viewModel: PopularMoviesViewModel())
+                PopularSeriesView(viewModel: PopularSeriesViewModel())
             } else if type == types[1] {
-                NowPlayingMoviesListView(viewModel: NowPlayingMoviesViewModel())
+                AiringTodaySeriesView(viewModel: AiringTodaySeriesViewModel())
             } else if type == types[2] {
-                TopRatedMoviesListView(viewModel: TopRatedMoviesViewModel())
+                OnTheAirSeriesView(viewModel: OnTheAirSeriesViewModel())
             } else if type == types[3] {
-                UpcomingMoviesListView(viewModel: UpcomingMoviesViewModel())
+                TopRatedSeriesView(viewModel: TopRatedSeriesViewModel())
             }
-            
         }
     }
 }
 
-struct MoviesListTypesView_Previews: PreviewProvider {
+struct SeriesListTypesView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesListTypesView()
+        SeriesListTypesView()
     }
 }
-

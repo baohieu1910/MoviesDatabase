@@ -21,7 +21,7 @@ struct ContentView: View {
                 }
             
             
-            Text("TV Series View")
+            SeriesListTypesView()
                 .tabItem {
                     Label("TV Series", systemImage: "play.tv")
                 }

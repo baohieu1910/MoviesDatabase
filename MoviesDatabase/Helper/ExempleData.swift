@@ -49,4 +49,14 @@ struct ExampleData {
                                          title: "Aquaman and the Lost Kingdom",
                                          voteAverage: 6.995,
                                          voteCount: 1180)
+    
+    static let series = Series(backdropPath: "/cnqwv5Uz3UW5f086IWbQKr3ksJr.jpg",
+                               posterPath: "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
+                               id: 572802,
+                               name: "Aquaman and the Lost Kingdom",
+                               firstAirDate: "2023-12-20",
+                               overview: "Black Manta, still driven by the need to avenge his father's death and wielding the power of the mythic Black Trident, will stop at nothing to take Aquaman down once and for all. To defeat him, Aquaman must turn to his imprisoned brother Orm, the former King of Atlantis, to forge an unlikely alliance in order to save the world from irreversible destruction.",
+                               voteAverage: 6.904,
+                               voteCount: 925
+    )
 }
