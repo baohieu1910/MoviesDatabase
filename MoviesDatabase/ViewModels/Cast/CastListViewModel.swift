@@ -11,9 +11,18 @@ class CastListViewModel: ObservableObject {
     @Published var casts: [Cast] = [Cast]()
     var apiService: APIService = APIService()
     
+}
+
+// MARK: Public functions
+extension CastListViewModel {
     func getCastList(id: Int) {
         apiService.getCastList(id: id) { casts in
             self.casts = casts
         }
     }
+}
+
+// MARK: Private functions
+private extension CastListViewModel {
+    
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @Binding var presentSideMenu: Bool
     @ObservedObject var viewModel: TrendingMovieViewModel
     @State private var searchKey: String = ""
     
@@ -132,17 +131,6 @@ struct HomeView: View {
                     .padding()
                 }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button{
-                        presentSideMenu.toggle()
-                    } label: {
-                        Image("menu")
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                    }
-                }
-            }
             .navigationBarTitle("Home")
         }
         .onAppear {
@@ -156,6 +144,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(presentSideMenu: Binding.constant(false), viewModel: TrendingMovieViewModel())
+        HomeView(viewModel: TrendingMovieViewModel())
     }
 }

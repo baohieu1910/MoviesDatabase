@@ -1,14 +1,14 @@
 //
-//  NowPlayingMoviesListView.swift
+//  AiringTodaySeriesView.swift
 //  MoviesDatabase
 //
-//  Created by Hieu Le on 1/29/24.
+//  Created by Hieu Le on 2/3/24.
 //
 
 import SwiftUI
 
-struct NowPlayingMoviesListView: View {
-    @ObservedObject var viewModel: NowPlayingMoviesViewModel
+struct AiringTodaySeriesView: View {
+    @ObservedObject var viewModel: UpcomingMoviesViewModel
     
     var body: some View {
         NavigationView {
@@ -16,23 +16,23 @@ struct NowPlayingMoviesListView: View {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink {
                         MovieDetailView(castVM: CastListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
-                    } label: {                 
+                    } label: {
                         MovieRowView(movie: movie)
                             .foregroundColor(.black)
                             .padding([.bottom, .horizontal])
                     }
                 }
             }
-            .navigationTitle("Now Playing Movies")
+            .navigationTitle("Upcoming Movies")
         }
-        .onAppear() {
-            viewModel.getNowPlayingMovies()
+        .onAppear {
+            viewModel.getUpcomingMovies()
         }
     }
 }
 
-struct NowPlayingMoviesListView_Previews: PreviewProvider {
+struct AiringTodaySeriesView_Previews: PreviewProvider {
     static var previews: some View {
-        NowPlayingMoviesListView(viewModel: NowPlayingMoviesViewModel())
+        AiringTodaySeriesView()
     }
 }

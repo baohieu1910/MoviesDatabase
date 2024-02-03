@@ -12,6 +12,11 @@ class TopRatedMoviesViewModel: ObservableObject {
     @Published var page: Int = 1
     var apiService: APIService = APIService()
     
+    
+}
+
+// MARK: Public functions
+extension TopRatedMoviesViewModel {
     func getTopSeries() {
         apiService.getTopRatedMovie(page: page) { movies in
 //            self.movies += movies
@@ -19,5 +24,9 @@ class TopRatedMoviesViewModel: ObservableObject {
             self.movies = movies
         }
     }
+}
+
+// MARK: Private functions
+private extension TopRatedMoviesViewModel {
     
 }

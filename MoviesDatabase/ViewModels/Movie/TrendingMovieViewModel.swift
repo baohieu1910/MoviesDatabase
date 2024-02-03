@@ -13,6 +13,11 @@ class TrendingMovieViewModel: ObservableObject {
     
     private var apiService: APIService = APIService()
     
+    
+}
+
+// MARK: Public functions
+extension TrendingMovieViewModel {
     func getMoviesToday() {
         apiService.getTrendingToday { movies in
             self.moviesToday = movies
@@ -24,4 +29,9 @@ class TrendingMovieViewModel: ObservableObject {
             self.moviesThisWeek = movies
         }
     }
+}
+
+// MARK: Private functions
+private extension TrendingMovieViewModel {
+    
 }

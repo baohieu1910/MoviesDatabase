@@ -1,13 +1,13 @@
 //
-//  Movie.swift
+//  Series.swift
 //  MoviesDatabase
 //
-//  Created by Hieu Le on 1/28/24.
+//  Created by Hieu Le on 2/3/24.
 //
 
 import Foundation
 
-struct Movie: Codable, Identifiable, Hashable {
+struct Series: Codable, Identifiable, Hashable {
     var backdropPath: String
     var posterPath: String
     var id: Int
@@ -59,4 +59,3 @@ struct Movie: Codable, Identifiable, Hashable {
         return "N/A"
     }
 }
-

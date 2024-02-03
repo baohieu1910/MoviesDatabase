@@ -14,11 +14,18 @@ class PeopleViewModel: ObservableObject {
     init() {
         
     }
-    
+}
+
+// MARK: Public functions
+extension PeopleViewModel {
     func getPeopleDetail(id: Int) {
         apiService.getCastDetail(id: id) { people in
             self.people = people
         }
     }
+}
+
+// MARK: Private functions
+private extension PeopleViewModel {
     
 }

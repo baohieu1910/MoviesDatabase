@@ -8,26 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var presentSideMenu = false
-    @State var selectedSideMenuTab = 0
-    
     var body: some View {
-        ZStack {
-            TabView(selection: $selectedSideMenuTab) {
-                HomeView(presentSideMenu: $presentSideMenu, viewModel: TrendingMovieViewModel())
-                    .tag(0)
-                
-                PopularMoviesListView(presentSideMenu: $presentSideMenu, viewModel: PopularMoviesViewModel())
-                    .tag(1)
-                
-                TopRatedMoviesListView(presentSideMenu: $presentSideMenu, viewModel: TopRatedMoviesViewModel())
-                    .tag(2)
-                
-                NowPlayingMoviesListView(presentSideMenu: $presentSideMenu, viewModel: NowPlayingMoviesViewModel())
-                    .tag(3)
-            }
+        TabView {
+            HomeView(viewModel: TrendingMovieViewModel())
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
             
-            SideMenu(isShowing: $presentSideMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedSideMenuTab, presentSideMenu: $presentSideMenu)))
+            MoviesListTypesView()
+                .tabItem {
+                    Label("Movies", systemImage: "film")
+                }
+            
+            
+            Text("TV Series View")
+                .tabItem {
+                    Label("TV Series", systemImage: "play.tv")
+                }
+            
+            
+            Text("Hello World")
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
         }
     }
 }

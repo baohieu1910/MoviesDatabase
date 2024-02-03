@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct TopRatedMoviesListView: View {
-    @Binding var presentSideMenu: Bool
     @ObservedObject var viewModel: TopRatedMoviesViewModel
     
     var body: some View {
@@ -23,28 +22,8 @@ struct TopRatedMoviesListView: View {
                             .padding([.bottom, .horizontal])
                     }
                 }
-//                VStack {
-//                    Button {
-//                        viewModel.getTopSeries()
-//                    } label: {
-//                        Text("Load More")
-//                    }
-//                }
             }
             .navigationTitle("Top Rated Movies")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button{
-                        presentSideMenu.toggle()
-                    } label: {
-                        Image("menu")
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                    }
-                }
-            }
-            
-            
         }
         .onAppear() {
             viewModel.getTopSeries()
@@ -54,6 +33,6 @@ struct TopRatedMoviesListView: View {
 
 struct TopRatedMovieListView_Previews: PreviewProvider {
     static var previews: some View {
-        TopRatedMoviesListView(presentSideMenu: Binding.constant(false), viewModel: TopRatedMoviesViewModel())
+        TopRatedMoviesListView(viewModel: TopRatedMoviesViewModel())
     }
 }

@@ -12,6 +12,11 @@ class NowPlayingMoviesViewModel: ObservableObject {
     @Published var page: Int = 1
     var apiService: APIService = APIService()
     
+    
+}
+
+// MARK: Public functions
+extension NowPlayingMoviesViewModel {
     func getNowPlayingMovies() {
         apiService.getNowPlayingMovies(page: page) { movies in
 //            self.movies += movies
@@ -19,4 +24,9 @@ class NowPlayingMoviesViewModel: ObservableObject {
             self.movies = movies
         }
     }
+}
+
+// MARK: Private functions
+private extension NowPlayingMoviesViewModel {
+    
 }

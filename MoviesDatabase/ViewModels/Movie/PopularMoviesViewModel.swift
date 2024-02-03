@@ -12,6 +12,11 @@ class PopularMoviesViewModel: ObservableObject {
     @Published var page: Int = 1
     var apiService: APIService = APIService()
     
+    
+}
+
+// MARK: Public functions
+extension PopularMoviesViewModel {
     func getPopularMovie() {
         apiService.getPopularMovie(page: page) { movies in
 //            self.movies += movies
@@ -19,4 +24,9 @@ class PopularMoviesViewModel: ObservableObject {
             self.movies = movies
         }
     }
+}
+
+// MARK: Private functions
+private extension PopularMoviesViewModel {
+    
 }
