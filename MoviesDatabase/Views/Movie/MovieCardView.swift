@@ -21,14 +21,14 @@ struct MovieCardView: View {
                         .frame(width: 140, height: 200)
                         .cornerRadius(5)
                     
-                    CircularProcessBarView(progress: movie.voteAverage / 10)
+                    CircularProcessBarView(progress: (movie.voteAverage ?? 0) / 10)
                         .offset(x: -50, y: 100)
                 }
                 
                 Spacer()
                 
                 VStack {
-                    Text("\(movie.title)")
+                    Text("\(movie.title ?? "N/A")")
                         .fontWeight(.bold)
                         .lineLimit(1)
                         .foregroundColor(.black)

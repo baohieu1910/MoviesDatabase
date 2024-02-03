@@ -1,45 +1,39 @@
 //
-//  MovieDetail.swift
+//  SeriesDetail.swift
 //  MoviesDatabase
 //
-//  Created by Hieu Le on 2/1/24.
+//  Created by Hieu Le on 2/3/24.
 //
 
 import Foundation
-import SwiftUI
 
-struct MovieDetail: Codable, Identifiable, Hashable {
-    
+struct SeriesDetail: Codable, Identifiable, Hashable {
     var backdropPath: String?
-    var budget: Int?
     var id: Int
     var originalLanguage: String?
-    var originalTitle: String?
+    var originalName: String?
     var overview: String?
     var posterPath: String?
     var releaseDate: String?
-    var revenue: Int?
-    var runtime: Int?
     var status: String?
     var tagline: String?
-    var title: String?
+    var type: String?
+    var name: String?
     var voteAverage: Double?
     var voteCount: Int?
     
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
-        case budget
         case id
         case originalLanguage = "original_language"
-        case originalTitle = "original_title"
+        case originalName = "original_name"
         case overview
         case posterPath = "poster_path"
-        case releaseDate = "release_date"
-        case revenue
-        case runtime
+        case releaseDate = "first_air_date"
         case status
         case tagline
-        case title
+        case type
+        case name
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
@@ -85,16 +79,4 @@ struct MovieDetail: Codable, Identifiable, Hashable {
         }
         return "N/A"
     }
-    
-    func getBudget() -> Text {
-        return Text(self.budget ?? 0, format: .currency(code: "USD").precision(.fractionLength(2)))
-    }
-    
-    func getRevenue() -> Text {
-        return Text(self.revenue ?? 0, format: .currency(code: "USD").precision(.fractionLength(2)))
-    }
-    
-    
-    
-    
 }

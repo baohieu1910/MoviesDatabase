@@ -9,9 +9,9 @@ import Foundation
 
 struct Cast: Codable, Identifiable, Hashable {
     var id: Int
-    var name: String
+    var name: String?
     var profilePath: String?
-    var character: String
+    var character: String?
     
     enum CodingKeys: String, CodingKey {
         case id

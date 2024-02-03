@@ -15,8 +15,7 @@ struct PopularSeriesView: View {
             ScrollView {
                 ForEach(viewModel.series) { series in
                     NavigationLink {
-//                        MovieDetailView(castVM: CastListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
-                        Text("Navigation")
+                        SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), series: series)
                     } label: {
                         SeriesRowView(series: series)
                             .foregroundColor(.black)
@@ -24,7 +23,7 @@ struct PopularSeriesView: View {
                     }
                 }
             }
-            .navigationTitle("Popular")
+            .navigationTitle("Popular Series")
         }
         .onAppear {
             viewModel.getPopularSeries()

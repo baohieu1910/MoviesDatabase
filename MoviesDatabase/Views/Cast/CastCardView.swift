@@ -26,12 +26,12 @@ struct CastCardView: View {
                 
                 
                 VStack(alignment: .leading) {
-                    Text("\(cast.name)")
+                    Text("\(cast.name ?? "N/A")")
                         .fontWeight(.bold)
                         .lineLimit(1)
                         .padding(.horizontal)
                     
-                    Text("\(cast.character)")
+                    Text("\(cast.character ?? "N/A")")
                         .font(.footnote)
                         .lineLimit(1)
                         .padding(.horizontal)

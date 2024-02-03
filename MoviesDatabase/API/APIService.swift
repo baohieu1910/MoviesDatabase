@@ -168,7 +168,7 @@ class APIService {
         dataTask.resume()
     }
     
-    func getCastList(id: Int, completion: @escaping([Cast]) -> ()) {
+    func getCastMovieList(id: Int, completion: @escaping([Cast]) -> ()) {
         let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/movie/\(id)/credits?language=en-US")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
@@ -516,5 +516,84 @@ class APIService {
         }
         dataTask.resume()
         
+    }
+    
+    func getSeriesDetail(id: Int, completion: @escaping(SeriesDetail) -> ()) {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/tv/\(id)?language=en-US")! as URL,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
+
+
+
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = Constants.headers
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            do {
+                if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+                    let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode(SeriesDetail.self, from: jsonString.data(using: .utf8)!)
+                        DispatchQueue.main.async {
+                            completion(result)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                    
+                }
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func getCastSeriesList(id: Int, completion: @escaping([Cast]) -> ()) {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/tv/\(id)/credits?language=en-US")! as URL,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
+
+
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = Constants.headers
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            do {
+                if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary["cast"], options: [])
+                    let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode([Cast].self, from: jsonString.data(using: .utf8)!)
+                        DispatchQueue.main.async {
+                            completion(result)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                    
+                }
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+        }
+        dataTask.resume()
     }
 }

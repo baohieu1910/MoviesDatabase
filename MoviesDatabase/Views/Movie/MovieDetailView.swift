@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct MovieDetailView: View {
-    @ObservedObject var castVM: CastListViewModel
+    @ObservedObject var castVM: CastMovieListViewModel
     @ObservedObject var movieVM: MovieDetailViewModel
     
     @State var averageColor: Color = .black
@@ -69,7 +69,7 @@ struct MovieDetailView: View {
                             HStack {
                                 Spacer()
                                 HStack {
-                                    CircularProcessBarView(progress: movie.voteAverage / 10)
+                                    CircularProcessBarView(progress: (movie.voteAverage ?? 0) / 10)
                                     
                                     Text("User Score")
                                         .fontWeight(.bold)
@@ -221,6 +221,6 @@ struct MovieDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(castVM: CastListViewModel(), movieVM: MovieDetailViewModel(), movie: ExampleData.movie)
+        MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), movie: ExampleData.movie)
     }
 }

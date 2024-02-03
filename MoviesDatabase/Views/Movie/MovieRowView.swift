@@ -21,11 +21,11 @@ struct MovieRowView: View {
                     .frame(width: 100, height: 150)
                     .cornerRadius(20)
                 
-                CircularProcessBarView(progress: movie.voteAverage / 10)
+                CircularProcessBarView(progress: (movie.voteAverage ?? 0) / 10)
             }
                 
                 VStack(alignment: .leading) {
-                    Text("\(movie.title)")
+                    Text("\(movie.title ?? "N/A")")
                         .font(.title3)
                         .fontWeight(.bold)
                     
@@ -34,7 +34,7 @@ struct MovieRowView: View {
                         .foregroundColor(.gray)
                         .padding(.bottom)
                     
-                    Text("\(movie.overview)")
+                    Text("\(movie.overview ?? "N/A")")
                         .lineLimit(2)
                         .truncationMode(.tail)
                 }

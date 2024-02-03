@@ -20,11 +20,11 @@ struct SeriesRowView: View {
                         .frame(width: 100, height: 150)
                         .cornerRadius(20)
                     
-                    CircularProcessBarView(progress: series.voteAverage / 10)
+                    CircularProcessBarView(progress: (series.voteAverage ?? 0) / 10)
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("\(series.name)")
+                    Text("\(series.name ?? "N/A")")
                         .font(.title3)
                         .fontWeight(.bold)
                     
@@ -33,7 +33,7 @@ struct SeriesRowView: View {
                         .foregroundColor(.gray)
                         .padding(.bottom)
                     
-                    Text("\(series.overview)")
+                    Text("\(series.overview ?? "N/A")")
                         .lineLimit(2)
                         .truncationMode(.tail)
                 }

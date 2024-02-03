@@ -11,17 +11,17 @@ struct Series: Codable, Identifiable, Hashable {
     var backdropPath: String?
     var posterPath: String?
     var id: Int
-    var name: String
-    var firstAirDate: String
-    var overview: String
-    var voteAverage: Double
-    var voteCount: Int
+    var name: String?
+    var releaseDate: String?
+    var overview: String?
+    var voteAverage: Double?
+    var voteCount: Int?
     
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
         case id
-        case firstAirDate = "first_air_date"
+        case releaseDate = "first_air_date"
         case name
         case overview
         case voteAverage = "vote_average"
@@ -54,9 +54,11 @@ struct Series: Codable, Identifiable, Hashable {
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        if let dateToDisplay = dateFormatter.date(from: firstAirDate) {
-            dateFormatter.dateFormat = "MMMM dd, yyyy"
-            return dateFormatter.string(from: dateToDisplay)
+        if let releaseDate = self.releaseDate {
+            if let dateToDisplay = dateFormatter.date(from: releaseDate) {
+                dateFormatter.dateFormat = "MMMM dd, yyyy"
+                return dateFormatter.string(from: dateToDisplay)
+            }
         }
         return "N/A"
     }

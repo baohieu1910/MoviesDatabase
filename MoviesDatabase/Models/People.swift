@@ -9,7 +9,7 @@ import Foundation
 
 struct People: Codable, Identifiable, Hashable {
     var id: Int
-    var name: String
+    var name: String?
     var knownFor: String?
     var biography: String?
     var birthday: String?

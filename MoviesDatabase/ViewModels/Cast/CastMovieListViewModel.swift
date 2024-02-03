@@ -1,5 +1,5 @@
 //
-//  CastListViewModel.swift
+//  CastMovieListViewModel.swift
 //  MoviesDatabase
 //
 //  Created by Hieu Le on 1/29/24.
@@ -7,22 +7,22 @@
 
 import Foundation
 
-class CastListViewModel: ObservableObject {
+class CastMovieListViewModel: ObservableObject {
     @Published var casts: [Cast] = [Cast]()
     var apiService: APIService = APIService()
     
 }
 
 // MARK: Public functions
-extension CastListViewModel {
+extension CastMovieListViewModel {
     func getCastList(id: Int) {
-        apiService.getCastList(id: id) { casts in
+        apiService.getCastMovieList(id: id) { casts in
             self.casts = casts
         }
     }
 }
 
 // MARK: Private functions
-private extension CastListViewModel {
+private extension CastMovieListViewModel {
     
 }
