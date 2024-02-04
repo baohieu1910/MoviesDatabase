@@ -8,32 +8,84 @@
 import SwiftUI
 
 struct SeriesListTypesView: View {
-    @State private var type = "Popular"
-    private let types = ["Popular", "Airing Today", "On The Air", "Top Rated"]
+    @ObservedObject var viewModel: SearchSeriesViewModel
     
     var body: some View {
-        VStack {
-            Picker("Types", selection: $type) {
-                ForEach(types, id: \.self) { type in
-                    Text("\(type)")
+        NavigationView {
+            ScrollView {
+                if viewModel.searchText == "" {
+                    VStack {
+                        VStack(alignment: .leading) {
+                            Text("Popular")
+                                .font(.title)
+                                .bold()
+                            
+                            PopularSeriesView(viewModel: PopularSeriesViewModel())
+                        }
+                        .padding()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Top Rated")
+                                .font(.title)
+                                .bold()
+                            
+                            TopRatedSeriesView(viewModel: TopRatedSeriesViewModel())
+                        }
+                        .padding()
+                        
+                        VStack(alignment: .leading) {
+                            Text("Airing Today")
+                                .font(.title)
+                                .bold()
+                            
+                            AiringTodaySeriesView(viewModel: AiringTodaySeriesViewModel())
+                        }
+                        .padding()
+                        
+                        VStack(alignment: .leading) {
+                            Text("On The Air")
+                                .font(.title)
+                                .bold()
+                            
+                            OnTheAirSeriesView(viewModel: OnTheAirSeriesViewModel())
+                        }
+                        .padding()
+                    }
+                } else {
+                    ForEach(viewModel.series) { series in
+                        NavigationLink {
+                            SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), series: series)
+                        } label: {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text("\(series.name ?? "N/A")")
+                                        .lineLimit(1)
+                                    Divider()
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "chevron.right")
+                                
+                            }
+                            .foregroundColor(.black)
+                            .padding(.horizontal)
+                        }
+                    }
                 }
-            }.pickerStyle(.segmented)
-            
-            if type == types[0] {
-                PopularSeriesView(viewModel: PopularSeriesViewModel())
-            } else if type == types[1] {
-                AiringTodaySeriesView(viewModel: AiringTodaySeriesViewModel())
-            } else if type == types[2] {
-                OnTheAirSeriesView(viewModel: OnTheAirSeriesViewModel())
-            } else if type == types[3] {
-                TopRatedSeriesView(viewModel: TopRatedSeriesViewModel())
             }
+            .navigationTitle("Series")
         }
+        .searchable(text: $viewModel.searchText)
+        .onChange(of: viewModel.searchText, perform: { newValue in
+            viewModel.getSearchSeries(name: viewModel.searchText)
+        })
     }
 }
 
 struct SeriesListTypesView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesListTypesView()
+        SeriesListTypesView(viewModel: SearchSeriesViewModel())
     }
 }

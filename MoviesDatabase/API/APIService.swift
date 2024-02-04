@@ -634,4 +634,43 @@ class APIService {
         }
         dataTask.resume()
     }
+    
+    func getSearchSeriesList(name: String, completion: @escaping([Series]) -> ()) {
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.themoviedb.org/3/search/tv?query=\(name)&include_adult=false&language=en-US&page=1")! as URL,
+                                                cachePolicy: .useProtocolCachePolicy,
+                                            timeoutInterval: 10.0)
+
+        
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = Constants.headers
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest) { (data, response, error) -> Void in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            do {
+                if let dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    let jsonData = try JSONSerialization.data(withJSONObject: dictionary["results"], options: [])
+                    let jsonString = String(data: jsonData, encoding: String.Encoding.ascii)!
+                    
+                    do {
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode([Series].self, from: jsonString.data(using: .utf8)!)
+                        DispatchQueue.main.async {
+                            completion(result)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                    
+                }
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+        }
+        dataTask.resume()
+    }
 }

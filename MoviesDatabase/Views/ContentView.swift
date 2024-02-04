@@ -15,22 +15,22 @@ struct ContentView: View {
                     Label("Home", systemImage: "house")
                 }
             
-            MoviesListTypesView()
+            MoviesListTypesView(viewModel: SearchMovieViewModel())
                 .tabItem {
                     Label("Movies", systemImage: "film")
                 }
             
             
-            SeriesListTypesView()
+            SeriesListTypesView(viewModel: SearchSeriesViewModel())
                 .tabItem {
                     Label("TV Series", systemImage: "play.tv")
                 }
             
             
-            SearchView(viewModel: SearchMovieViewModel())
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
+//            SearchView(viewModel: SearchMovieViewModel())
+//                .tabItem {
+//                    Label("Search", systemImage: "magnifyingglass")
+//                }
         }
     }
 }

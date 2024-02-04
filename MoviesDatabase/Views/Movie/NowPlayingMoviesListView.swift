@@ -11,19 +11,16 @@ struct NowPlayingMoviesListView: View {
     @ObservedObject var viewModel: NowPlayingMoviesViewModel
     
     var body: some View {
-        NavigationView {
-            ScrollView {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink {
                         MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
-                    } label: {                 
-                        MovieRowView(movie: movie)
-                            .foregroundColor(.black)
-                            .padding([.bottom, .horizontal])
+                    } label: {
+                        MovieCardView(movie: movie)
                     }
                 }
             }
-            .navigationTitle("Now Playing Movies")
         }
         .onAppear() {
             viewModel.getNowPlayingMovies()

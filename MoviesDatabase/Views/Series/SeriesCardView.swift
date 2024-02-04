@@ -1,18 +1,17 @@
 //
-//  MovieCardView.swift
+//  SeriesCardView.swift
 //  MoviesDatabase
 //
-//  Created by Hieu Le on 1/29/24.
+//  Created by Hieu Le on 2/4/24.
 //
 
 import SwiftUI
 
-struct MovieCardView: View {
-    var movie: Movie
+struct SeriesCardView: View {
+    var series: Series
     
     var body: some View {
-        
-        let url = URL(string: movie.getMoviePoster())
+        let url = URL(string: series.getMoviePoster())
         AsyncImage(url: url) { image in
             VStack {
                 ZStack {
@@ -21,20 +20,20 @@ struct MovieCardView: View {
                         .frame(width: 140, height: 200)
                         .cornerRadius(5)
                     
-                    CircularProcessBarView(progress: (movie.voteAverage ?? 0) / 10)
+                    CircularProcessBarView(progress: (series.voteAverage ?? 0) / 10)
                         .offset(x: -50, y: 100)
                 }
                 
                 Spacer()
                 
                 VStack {
-                    Text("\(movie.title ?? "N/A")")
+                    Text("\(series.name ?? "N/A")")
                         .fontWeight(.bold)
                         .lineLimit(1)
                         .foregroundColor(.black)
                     
                     
-                    Text("\(movie.getReleaseDate())")
+                    Text("\(series.getReleaseDate())")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .lineLimit(1)
@@ -50,8 +49,8 @@ struct MovieCardView: View {
     }
 }
 
-struct MovieCardView_Previews: PreviewProvider {
+struct SeriesCardView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieCardView(movie: ExampleData.movie)
+        SeriesCardView(series: ExampleData.series)
     }
 }

@@ -11,19 +11,16 @@ struct TopRatedSeriesView: View {
     @ObservedObject var viewModel: TopRatedSeriesViewModel
     
     var body: some View {
-        NavigationView {
-            ScrollView {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
                 ForEach(viewModel.series) { series in
                     NavigationLink {
                         SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), series: series)
                     } label: {
-                        SeriesRowView(series: series)
-                            .foregroundColor(.black)
-                            .padding([.bottom, .horizontal])
+                        SeriesCardView(series: series)
                     }
                 }
             }
-            .navigationTitle("Top Rated Series")
         }
         .onAppear {
             viewModel.getTopRatedSeries()
