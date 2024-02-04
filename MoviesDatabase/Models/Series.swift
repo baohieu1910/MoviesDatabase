@@ -8,7 +8,6 @@
 import Foundation
 
 struct Series: Codable, Identifiable, Hashable {
-    var backdropPath: String?
     var posterPath: String?
     var id: Int
     var name: String?
@@ -18,7 +17,6 @@ struct Series: Codable, Identifiable, Hashable {
     var voteCount: Int?
     
     enum CodingKeys: String, CodingKey {
-        case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
         case id
         case releaseDate = "first_air_date"

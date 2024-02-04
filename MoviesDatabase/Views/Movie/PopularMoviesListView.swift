@@ -7,24 +7,20 @@
 
 import SwiftUI
 
-
 struct PopularMoviesListView: View {
     @ObservedObject var viewModel: PopularMoviesViewModel
-    
+
     var body: some View {
-        NavigationView {
-            ScrollView {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink {
                         MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
                     } label: {
-                        MovieRowView(movie: movie)
-                            .foregroundColor(.black)
-                            .padding([.bottom, .horizontal])
+                        MovieCardView(movie: movie)
                     }
                 }
             }
-            .navigationTitle("Popular Movies")
         }
         .onAppear {
             viewModel.getPopularMovie()
@@ -37,3 +33,5 @@ struct PopularMoviesView_Previews: PreviewProvider {
         PopularMoviesListView(viewModel: PopularMoviesViewModel())
     }
 }
+
+

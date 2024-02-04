@@ -27,7 +27,7 @@ struct ContentView: View {
                 }
             
             
-            Text("Hello World")
+            SearchView(viewModel: SearchMovieViewModel())
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }

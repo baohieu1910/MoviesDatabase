@@ -8,8 +8,7 @@
 import Foundation
 
 struct ExampleData {
-    static let movie = Movie(backdropPath: "/cnqwv5Uz3UW5f086IWbQKr3ksJr.jpg",
-                             posterPath: "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
+    static let movie = Movie(posterPath: "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
                              id: 572802,
                              title: "Aquaman and the Lost Kingdom",
                              releaseDate: "2023-12-20",
@@ -49,8 +48,7 @@ struct ExampleData {
                                          voteAverage: 6.995,
                                          voteCount: 1180)
     
-    static let series = Series(backdropPath: "/cnqwv5Uz3UW5f086IWbQKr3ksJr.jpg",
-                               posterPath: "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
+    static let series = Series(posterPath: "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
                                id: 572802,
                                name: "Aquaman and the Lost Kingdom",
                                releaseDate: "2023-12-20",

@@ -8,7 +8,6 @@
 import Foundation
 
 struct Movie: Codable, Identifiable, Hashable {
-    var backdropPath: String?
     var posterPath: String?
     var id: Int
     var title: String?
@@ -18,7 +17,6 @@ struct Movie: Codable, Identifiable, Hashable {
     var voteCount: Int?
     
     enum CodingKeys: String, CodingKey {
-        case backdropPath = "backdrop_path"
         case posterPath = "poster_path"
         case id
         case releaseDate = "release_date"
@@ -35,13 +33,6 @@ struct Movie: Codable, Identifiable, Hashable {
         static let backGroundImageSize = "w1920_and_h800_multi_faces"
         static let noImageName = "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg"
         
-    }
-    
-    func getMovieBackground() -> String {
-        if let backdropPath = self.backdropPath {
-            return Constants.baseImageUrl + Constants.backGroundImageSize + backdropPath
-        }
-        return Constants.noImageName
     }
     
     func getMoviePoster() -> String {

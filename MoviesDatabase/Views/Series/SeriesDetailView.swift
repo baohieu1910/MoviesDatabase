@@ -19,105 +19,104 @@ struct SeriesDetailView: View {
         ScrollView {
             VStack {
                 VStack {
-                    VStack {
-                        // MARK: Movie Poster
-                        ZStack(alignment: .leading) {
-                            let backgroundUrl = URL(string: seriesVM.series?.getMovieBackground() ?? "")
-                            AsyncImage(url: backgroundUrl) { image in
-                                ZStack(alignment: .leading) {
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                        .cornerRadius(5)
-                                        .onAppear {
-                                            averageColor = Color( image.averageColor ?? UIColor.black)
-                                        }
-                                    
-                                    LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
-                                        .opacity(1)
-                                    
-                                    let posterUrl = URL(string: seriesVM.series?.getMoviePoster() ?? "")
-                                    AsyncImage(url: posterUrl) { image in
-                                        ZStack {
-                                            image
-                                                .resizable()
-                                                .frame(width: 100, height: 150)
-                                                .cornerRadius(10)
-                                                .padding(.horizontal)
-                                        }
-                                        
-                                    } placeholder: {
-                                        ProgressView()
+                    // MARK: Movie Poster
+                    ZStack(alignment: .leading) {
+                        let backgroundUrl = URL(string: seriesVM.series?.getMovieBackground() ?? "")
+                        AsyncImage(url: backgroundUrl) { image in
+                            ZStack(alignment: .leading) {
+                                image
+                                    .resizable()
+                                    .scaledToFit()
+                                    .cornerRadius(5)
+                                    .onAppear {
+                                        averageColor = Color( image.averageColor ?? UIColor.black)
                                     }
-                                }
-                            } placeholder: {
-                                ProgressView()
-                            }
-                        }
-                        //                        .padding(.horizontal)
-                        
-                        // MARK: Movie title
-                        VStack {
-                            VStack {
-                                Text("\(seriesVM.series?.name ?? "N/A")")
-                                    .font(.title2)
-                                    .fontWeight(.bold)
                                 
-                            }
-                            
-                            HStack {
-                                Spacer()
-                                HStack {
-                                    CircularProcessBarView(progress: (series.voteAverage ?? 0) / 10)
+                                LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
+                                    .opacity(1)
+                                
+                                let posterUrl = URL(string: seriesVM.series?.getMoviePoster() ?? "")
+                                AsyncImage(url: posterUrl) { image in
+                                    ZStack {
+                                        image
+                                            .resizable()
+                                            .frame(width: 100, height: 150)
+                                            .cornerRadius(10)
+                                            .padding(.horizontal)
+                                    }
                                     
-                                    Text("User Score")
-                                        .fontWeight(.bold)
+                                } placeholder: {
+                                    ProgressView()
                                 }
-                                Spacer()
-                                Text("|")
-                                Spacer()
-                                HStack {
-                                    Image(systemName: "play.fill")
-                                    
-                                    Text("Play Trailer")
-                                }
-                                Spacer()
                             }
-                            
-                            VStack {
-                                HStack {
-                                    Text("\(seriesVM.series?.getReleaseDate() ?? "N/A")")
-                                }
-                                .frame(width: UIScreen.screenWidth)
-                                .padding(.vertical, 10)
-                                .background(averageColor.speechAdjustedPitch(30))
-                                
-                            }
-                            .font(.subheadline)
-                            
-                            VStack(alignment: .leading) {
-                                Text("\(seriesVM.series?.tagline ?? "")")
-                                    .italic()
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding()
-                            }
-                            
-                            VStack(alignment: .leading) {
-                                Text("Overview")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                
-                                Text("\(seriesVM.series?.overview ?? "-")")
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                            
+                        } placeholder: {
+                            ProgressView()
                         }
                     }
-                    .padding([.bottom, .horizontal])
-                    .background(averageColor)
-                    .foregroundColor(.white)
+                    //                        .padding(.horizontal)
+                    
+                    // MARK: Movie title
+                    VStack {
+                        VStack {
+                            Text("\(seriesVM.series?.name ?? "N/A")")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                            
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            HStack {
+                                CircularProcessBarView(progress: (series.voteAverage ?? 0) / 10)
+                                
+                                Text("User Score")
+                                    .fontWeight(.bold)
+                            }
+                            Spacer()
+                            Text("|")
+                            Spacer()
+                            HStack {
+                                Image(systemName: "play.fill")
+                                
+                                Text("Play Trailer")
+                            }
+                            Spacer()
+                        }
+                        
+                        VStack {
+                            HStack {
+                                Text("\(seriesVM.series?.getReleaseDate() ?? "N/A")")
+                            }
+                            .frame(width: UIScreen.screenWidth)
+                            .padding(.vertical, 10)
+                            .background(averageColor.speechAdjustedPitch(30))
+                            
+                        }
+                        .font(.subheadline)
+                        
+                        VStack(alignment: .leading) {
+                            Text("\(seriesVM.series?.tagline ?? "")")
+                                .italic()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                        }
+                        
+                        VStack(alignment: .leading) {
+                            Text("Overview")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                            
+                            Text("\(seriesVM.series?.overview ?? "-")")
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
+                        
+                    }
                 }
+                .padding([.bottom, .horizontal])
+                .background(averageColor)
+                .foregroundColor(.white)
+                
                 
                 // MARK: Cast
                 VStack(alignment: .leading) {
