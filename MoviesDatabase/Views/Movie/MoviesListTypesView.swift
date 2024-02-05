@@ -56,7 +56,7 @@ struct MoviesListTypesView: View {
                 } else {
                     ForEach(viewModel.movies) { movie in
                         NavigationLink {
-                            MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
+                            MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), imageVM: ImagesViewModel(), movie: movie)
                         } label: {
                             HStack {
                                 VStack(alignment: .leading) {

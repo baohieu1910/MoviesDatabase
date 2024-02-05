@@ -11,6 +11,7 @@ import UIKit
 struct MovieDetailView: View {
     @ObservedObject var castVM: CastMovieListViewModel
     @ObservedObject var movieVM: MovieDetailViewModel
+    @ObservedObject var imageVM: ImagesViewModel
     
     @State var averageColor: Color = .black
     var movie: Movie
@@ -161,6 +162,27 @@ struct MovieDetailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 
+                // MARK: Images
+                VStack(alignment: .leading) {
+                    VStack {
+                        Text("Media")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .padding(.horizontal)
+                    }
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(imageVM.images) { image in
+                                ImageView(url: image.getImage())
+                                
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                
                 // MARK: Other Infomation
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
@@ -180,10 +202,6 @@ struct MovieDetailView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
-                    
-                    //                VStack {
-                    //                    Text("Original Language")
-                    //                }
                     
                     VStack(alignment: .leading) {
                         Text("Budget")
@@ -210,6 +228,7 @@ struct MovieDetailView: View {
             .onAppear {
                 castVM.getCastList(id: movie.id)
                 movieVM.getMovieDetail(id: movie.id)
+                imageVM.getMovieImages(id: movie.id)
             }
             .foregroundColor(.black)
         }
@@ -220,6 +239,6 @@ struct MovieDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), movie: ExampleData.movie)
+        MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), imageVM: ImagesViewModel(), movie: ExampleData.movie)
     }
 }

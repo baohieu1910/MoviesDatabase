@@ -15,7 +15,7 @@ struct NowPlayingMoviesListView: View {
             HStack(spacing: 10) {
                 ForEach(viewModel.movies) { movie in
                     NavigationLink {
-                        MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), movie: movie)
+                        MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), imageVM: ImagesViewModel(), movie: movie)
                     } label: {
                         MovieCardView(movie: movie)
                     }

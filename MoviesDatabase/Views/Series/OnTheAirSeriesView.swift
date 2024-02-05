@@ -15,7 +15,7 @@ struct OnTheAirSeriesView: View {
             HStack(spacing: 10) {
                 ForEach(viewModel.series) { series in
                     NavigationLink {
-                        SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), series: series)
+                        SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), imageVM: ImagesViewModel(), series: series)
                     } label: {
                         SeriesCardView(series: series)
                     }

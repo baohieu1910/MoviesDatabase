@@ -25,12 +25,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("TV Series", systemImage: "play.tv")
                 }
-            
-            
-//            SearchView(viewModel: SearchMovieViewModel())
-//                .tabItem {
-//                    Label("Search", systemImage: "magnifyingglass")
-//                }
         }
     }
 }

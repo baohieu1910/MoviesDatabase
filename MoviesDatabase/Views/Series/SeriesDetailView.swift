@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SeriesDetailView: View {
-    //        @ObservedObject var castVM: CastListViewModel
     @ObservedObject var seriesVM: SeriesDetailViewModel
     @ObservedObject var castVM: CastSeriesListViewModel
+    @ObservedObject var imageVM: ImagesViewModel
     
     @State var averageColor: Color = .black
     var series: Series
@@ -139,9 +139,9 @@ struct SeriesDetailView: View {
                     }
                     .padding()
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 
-                //            .frame(maxWidth: .infinity, alignment: .leading)
                 
                 // MARK: Recommendations
                 VStack(alignment: .leading) {
@@ -152,6 +152,27 @@ struct SeriesDetailView: View {
                     
                     Text("We don't have enough data to suggest any movies based on \(seriesVM.series?.name  ?? "N/A"). You can help by rating movies you've seen.")
                         .padding(.horizontal)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                
+                // MARK: Images
+                VStack(alignment: .leading) {
+                    VStack {
+                        Text("Media")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .padding(.horizontal)
+                    }
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(imageVM.images) { image in
+                                ImageView(url: image.getImage())
+                                
+                            }
+                        }
+                    }
+                    .padding()
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -196,6 +217,7 @@ struct SeriesDetailView: View {
             .onAppear {
                 seriesVM.getSeriesDetail(id: series.id)
                 castVM.getCastList(id: series.id)
+                imageVM.getSeriesImages(id: series.id)
             }
             .foregroundColor(.black)
         }
@@ -205,6 +227,6 @@ struct SeriesDetailView: View {
 
 struct SeriesDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), series: ExampleData.series)
+        SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), imageVM: ImagesViewModel(), series: ExampleData.series)
     }
 }

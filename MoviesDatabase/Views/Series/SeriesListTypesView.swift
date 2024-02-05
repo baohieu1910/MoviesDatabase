@@ -54,7 +54,7 @@ struct SeriesListTypesView: View {
                 } else {
                     ForEach(viewModel.series) { series in
                         NavigationLink {
-                            SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), series: series)
+                            SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), imageVM: ImagesViewModel(), series: series)
                         } label: {
                             HStack {
                                 VStack(alignment: .leading) {
