@@ -10,11 +10,18 @@ import Foundation
 class SearchMovieViewModel: ObservableObject {
     @Published var movies: [Movie] = [Movie]()
     @Published var searchText: String = ""
-    private var apiService: APIService = APIService()
     
+    private lazy var apiService: APIService = APIService()
+}
+
+extension SearchMovieViewModel {
     func getSearchMovies(name: String) {
-        apiService.getSearchMoviesList(name: name) { movies in
-            self.movies = movies
+        apiService.getSearchMoviesList(name: name) { [weak self] movies in
+            self?.movies = movies
         }
     }
+}
+
+private extension SearchMovieViewModel {
+    
 }

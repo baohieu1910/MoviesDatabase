@@ -9,15 +9,15 @@ import Foundation
 
 class CastMovieListViewModel: ObservableObject {
     @Published var casts: [Cast] = [Cast]()
-    var apiService: APIService = APIService()
+    private lazy var apiService: APIService = APIService()
     
 }
 
 // MARK: Public functions
 extension CastMovieListViewModel {
     func getCastList(id: Int) {
-        apiService.getCastMovieList(id: id) { casts in
-            self.casts = casts
+        apiService.getCastMovieList(id: id) { [weak self] casts in
+            self?.casts = casts
         }
     }
 }

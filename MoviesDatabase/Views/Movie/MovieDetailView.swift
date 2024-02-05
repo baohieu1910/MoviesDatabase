@@ -9,13 +9,12 @@ import SwiftUI
 import UIKit
 
 struct MovieDetailView: View {
-    @ObservedObject var castVM: CastMovieListViewModel
-    @ObservedObject var movieVM: MovieDetailViewModel
-    @ObservedObject var imageVM: ImagesViewModel
+    @ObservedObject var viewModel: MovieDetailViewModel
+    @ObservedObject var castVM = CastMovieListViewModel()
+    @ObservedObject var imagesVM = ImagesViewModel()
     
     @State var averageColor: Color = .black
     var movie: Movie
-    
     
     var body: some View {
         ScrollView {
@@ -23,7 +22,7 @@ struct MovieDetailView: View {
                 VStack {
                     // MARK: Movie Poster
                     ZStack(alignment: .leading) {
-                        let backgroundUrl = URL(string: movieVM.movie?.getMovieBackground() ?? "")
+                        let backgroundUrl = URL(string: Utils.getMovieBackground(backdropPath: viewModel.movie?.backdropPath))
                         AsyncImage(url: backgroundUrl) { image in
                             ZStack(alignment: .leading) {
                                 image
@@ -31,13 +30,13 @@ struct MovieDetailView: View {
                                     .scaledToFit()
                                     .cornerRadius(5)
                                     .onAppear {
-                                        averageColor = Color( image.averageColor ?? UIColor.black)
+                                        averageColor = Color(image.averageColor ?? UIColor.black)
                                     }
                                 
                                 LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
                                     .opacity(1)
                                 
-                                let posterUrl = URL(string: movieVM.movie?.getMoviePoster() ?? "")
+                                let posterUrl = URL(string: Utils.getMoviePoster(posterPath: viewModel.movie?.posterPath))
                                 AsyncImage(url: posterUrl) { image in
                                     ZStack {
                                         image
@@ -55,12 +54,11 @@ struct MovieDetailView: View {
                             ProgressView()
                         }
                     }
-//                        .padding(.horizontal)
                     
                     // MARK: Movie title
                     VStack {
                         VStack {
-                            Text("\(movieVM.movie?.title ?? "N/A")")
+                            Text("\(viewModel.movie?.title ?? "N/A")")
                                 .font(.title2)
                                 .fontWeight(.bold)
                             
@@ -87,11 +85,11 @@ struct MovieDetailView: View {
                         
                         VStack {
                             HStack {
-                                Text("\(movieVM.movie?.getReleaseDate() ?? "N/A")")
+                                Text("\(Utils.getReleaseDate(releaseDate: viewModel.movie?.releaseDate))")
                                 
                                 Text(" - ")
                                 
-                                Text("\(movieVM.movie?.runtime ?? 0)m")
+                                Text("\(viewModel.movie?.runtime ?? 0)m")
                             }
                             .frame(width: UIScreen.screenWidth)
                             .padding(.vertical, 10)
@@ -102,7 +100,7 @@ struct MovieDetailView: View {
                         .font(.subheadline)
                         
                         VStack(alignment: .leading) {
-                            Text("\(movieVM.movie?.tagline ?? "")")
+                            Text("\(viewModel.movie?.tagline ?? "")")
                                 .italic()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
@@ -113,7 +111,7 @@ struct MovieDetailView: View {
                                 .font(.title3)
                                 .fontWeight(.bold)
                             
-                            Text("\(movieVM.movie?.overview ?? "-")")
+                            Text("\(viewModel.movie?.overview ?? "-")")
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
@@ -126,28 +124,9 @@ struct MovieDetailView: View {
                 
                 
                 // MARK: Cast
-                VStack(alignment: .leading) {
-                    Text("Top Billed Cast")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(castVM.casts) { cast in
-                                NavigationLink {
-                                    CastDetailView(viewModel: PeopleViewModel(), cast: cast)
-                                } label: {
-                                    CastCardView(cast: cast)
-                                }
-                                
-                            }
-                        }
-                    }
+                MovieCastListView(viewModel: castVM, id: movie.id)
                     .padding()
-                }
-                .padding()
-                //            .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 
                 // MARK: Recommendations
                 VStack(alignment: .leading) {
@@ -156,40 +135,24 @@ struct MovieDetailView: View {
                         .fontWeight(.bold)
                         .padding(.horizontal)
                     
-                    Text("We don't have enough data to suggest any movies based on \(movieVM.movie?.title  ?? "N/A"). You can help by rating movies you've seen.")
+                    Text("We don't have enough data to suggest any movies based on \(viewModel.movie?.title  ?? "N/A"). You can help by rating movies you've seen.")
                         .padding(.horizontal)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 
                 // MARK: Images
-                VStack(alignment: .leading) {
-                    VStack {
-                        Text("Media")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
-                    }
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(imageVM.images) { image in
-                                ImageView(url: image.getImage())
-                                
-                            }
-                        }
-                    }
+                MovieImagesView(viewModel: imagesVM, id: movie.id)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
                 
-                // MARK: Other Infomation
+                // MARK: Other Information
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         Text("Original Title")
                             .fontWeight(.bold)
                         
-                        Text("\(movieVM.movie?.originalTitle ?? "N/A")")
+                        Text("\(viewModel.movie?.originalTitle ?? "N/A")")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
@@ -198,7 +161,7 @@ struct MovieDetailView: View {
                         Text("Status")
                             .fontWeight(.bold)
                         
-                        Text("\(movieVM.movie?.status ?? "-")")
+                        Text("\(viewModel.movie?.status ?? "-")")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
@@ -207,7 +170,7 @@ struct MovieDetailView: View {
                         Text("Budget")
                             .fontWeight(.bold)
                         
-                        movieVM.movie?.getBudget()
+                        Utils.getBudget(budget: viewModel.movie?.budget)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
@@ -216,7 +179,7 @@ struct MovieDetailView: View {
                         Text("Revenue")
                             .fontWeight(.bold)
                         
-                        movieVM.movie?.getRevenue()
+                        Utils.getRevenue(revenue: viewModel.movie?.revenue)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
@@ -226,9 +189,9 @@ struct MovieDetailView: View {
                 .padding()
             }
             .onAppear {
+                viewModel.getMovieDetail(id: movie.id)
                 castVM.getCastList(id: movie.id)
-                movieVM.getMovieDetail(id: movie.id)
-                imageVM.getMovieImages(id: movie.id)
+                imagesVM.getMovieImages(id: movie.id)
             }
             .foregroundColor(.black)
         }
@@ -239,6 +202,6 @@ struct MovieDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), imageVM: ImagesViewModel(), movie: ExampleData.movie)
+        MovieDetailView(viewModel: MovieDetailViewModel(), movie: ExampleData.movie)
     }
 }

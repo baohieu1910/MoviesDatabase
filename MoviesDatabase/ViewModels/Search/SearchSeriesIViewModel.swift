@@ -10,11 +10,18 @@ import Foundation
 class SearchSeriesViewModel: ObservableObject {
     @Published var series: [Series] = [Series]()
     @Published var searchText: String = ""
-    private var apiService: APIService = APIService()
     
+    private lazy var apiService: APIService = APIService()
+}
+
+extension SearchSeriesViewModel {
     func getSearchSeries(name: String) {
-        apiService.getSearchSeriesList(name: name) { series in
-            self.series = series
+        apiService.getSearchSeriesList(name: name) { [weak self] series in
+            self?.series = series
         }
     }
+}
+
+private extension SearchSeriesViewModel {
+    
 }

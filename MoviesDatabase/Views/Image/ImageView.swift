@@ -16,10 +16,22 @@ struct ImageView: View {
             image
                 .resizable()
                 .scaledToFit()
-                .frame(maxHeight: 150)
+                .frame(height: 150)
+            
+//            Button {
+//                let uiImage = image.asUIImage()
+//                UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+//
+//            } label: {
+//                image
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(maxHeight: 150)
+//            }
             
         } placeholder: {
              ProgressView()
+                .frame(width: UIScreen.screenWidth ,height: 150)
         }
     }
 }

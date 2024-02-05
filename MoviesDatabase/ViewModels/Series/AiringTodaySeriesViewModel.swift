@@ -8,13 +8,20 @@
 import Foundation
 
 class AiringTodaySeriesViewModel: ObservableObject {
-    @Published var series: [Series] = [Series]()
-    @Published var page: Int = 1
-    private var apiService: APIService = APIService()
+    @Published var series = [Series]()
+    private var page: Int = 1
     
+    private lazy var apiService: APIService = APIService()
+}
+
+extension AiringTodaySeriesViewModel {
     func getAiringTodaySeries() {
-        apiService.getAiringTodaySeries(page: page) { series in
-            self.series = series
+        apiService.getAiringTodaySeries(page: page) { [weak self] series in
+            self?.series = series
         }
     }
+}
+
+private extension AiringTodaySeriesViewModel {
+    
 }

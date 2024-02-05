@@ -15,7 +15,7 @@ struct CastDetailView: View {
         ScrollView {
             // MARK: Image and name
             VStack {
-                let url = URL(string: viewModel.people?.getPeopleImage() ?? "")
+                let url = URL(string: Utils.getCastImage(profilePath: viewModel.people?.profilePath) ?? "")
                 AsyncImage(url: url) { image in
                     image
                         .resizable()

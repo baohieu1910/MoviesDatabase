@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExampleData {
+enum ExampleData {
     static let movie = Movie(posterPath: "/7lTnXOy0iNtBAdRP3TZvaKJ77F6.jpg",
                              id: 572802,
                              title: "Aquaman and the Lost Kingdom",

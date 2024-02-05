@@ -9,6 +9,10 @@ import SwiftUI
 
 struct SeriesListTypesView: View {
     @ObservedObject var viewModel: SearchSeriesViewModel
+    @ObservedObject var popularVM = PopularSeriesViewModel()
+    @ObservedObject var topRatedVM = TopRatedSeriesViewModel()
+    @ObservedObject var airingTodayVM = AiringTodaySeriesViewModel()
+    @ObservedObject var onTheAirVM = OnTheAirSeriesViewModel()
     
     var body: some View {
         NavigationView {
@@ -20,7 +24,7 @@ struct SeriesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            PopularSeriesView(viewModel: PopularSeriesViewModel())
+                            PopularSeriesView(viewModel: popularVM)
                         }
                         .padding()
                         
@@ -29,7 +33,7 @@ struct SeriesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            TopRatedSeriesView(viewModel: TopRatedSeriesViewModel())
+                            TopRatedSeriesView(viewModel: topRatedVM)
                         }
                         .padding()
                         
@@ -38,7 +42,7 @@ struct SeriesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            AiringTodaySeriesView(viewModel: AiringTodaySeriesViewModel())
+                            AiringTodaySeriesView(viewModel: airingTodayVM)
                         }
                         .padding()
                         
@@ -47,14 +51,14 @@ struct SeriesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            OnTheAirSeriesView(viewModel: OnTheAirSeriesViewModel())
+                            OnTheAirSeriesView(viewModel: onTheAirVM)
                         }
                         .padding()
                     }
                 } else {
                     ForEach(viewModel.series) { series in
                         NavigationLink {
-                            SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), imageVM: ImagesViewModel(), series: series)
+                            SeriesDetailView(viewModel: SeriesDetailViewModel(), series: series)
                         } label: {
                             HStack {
                                 VStack(alignment: .leading) {
@@ -78,6 +82,12 @@ struct SeriesListTypesView: View {
             .navigationTitle("Series")
         }
         .searchable(text: $viewModel.searchText)
+        .onAppear {
+            popularVM.getPopularSeries()
+            topRatedVM.getTopRatedSeries()
+            airingTodayVM.getAiringTodaySeries()
+            onTheAirVM.getOnTheAirSeries()
+        }
         .onChange(of: viewModel.searchText, perform: { newValue in
             viewModel.getSearchSeries(name: viewModel.searchText)
         })

@@ -9,6 +9,10 @@ import SwiftUI
 
 struct MoviesListTypesView: View {
     @ObservedObject var viewModel: SearchMovieViewModel
+    @ObservedObject var popularVM = PopularMoviesViewModel()
+    @ObservedObject var topRatedVM = TopRatedMoviesViewModel()
+    @ObservedObject var nowPlayingVM = NowPlayingMoviesViewModel()
+    @ObservedObject var upcomingVM = UpcomingMoviesViewModel()
     
     var body: some View {
         NavigationView {
@@ -20,7 +24,7 @@ struct MoviesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            PopularMoviesListView(viewModel: PopularMoviesViewModel())
+                            PopularMoviesListView(viewModel: popularVM)
                         }
                         .padding()
                         
@@ -29,7 +33,7 @@ struct MoviesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            TopRatedMoviesListView(viewModel: TopRatedMoviesViewModel())
+                            TopRatedMoviesListView(viewModel: topRatedVM)
                         }
                         .padding()
                         
@@ -38,7 +42,7 @@ struct MoviesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            NowPlayingMoviesListView(viewModel: NowPlayingMoviesViewModel())
+                            NowPlayingMoviesListView(viewModel: nowPlayingVM)
                         }
                         .padding()
                         
@@ -49,14 +53,14 @@ struct MoviesListTypesView: View {
                                 .font(.title)
                                 .bold()
                             
-                            UpcomingMoviesListView(viewModel: UpcomingMoviesViewModel())
+                            UpcomingMoviesListView(viewModel: upcomingVM)
                         }
                         .padding()
                     }
                 } else {
                     ForEach(viewModel.movies) { movie in
                         NavigationLink {
-                            MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), imageVM: ImagesViewModel(), movie: movie)
+                            MovieDetailView(viewModel: MovieDetailViewModel(), movie: movie)
                         } label: {
                             HStack {
                                 VStack(alignment: .leading) {
@@ -80,6 +84,12 @@ struct MoviesListTypesView: View {
             .navigationTitle("Movies")
         }
         .searchable(text: $viewModel.searchText)
+        .onAppear {
+            popularVM.getPopularMovie()
+            topRatedVM.getTopSeries()
+            nowPlayingVM.getNowPlayingMovies()
+            upcomingVM.getUpcomingMovies()
+        }
         .onChange(of: viewModel.searchText, perform: { newValue in
             viewModel.getSearchMovies(name: viewModel.searchText)
         })

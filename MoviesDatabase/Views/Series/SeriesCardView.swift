@@ -11,7 +11,7 @@ struct SeriesCardView: View {
     var series: Series
     
     var body: some View {
-        let url = URL(string: series.getMoviePoster())
+        let url = URL(string: Utils.getMoviePoster(posterPath: series.posterPath))
         AsyncImage(url: url) { image in
             VStack {
                 ZStack {
@@ -33,7 +33,7 @@ struct SeriesCardView: View {
                         .foregroundColor(.black)
                     
                     
-                    Text("\(series.getReleaseDate())")
+                    Text("\(Utils.getReleaseDate(releaseDate: series.releaseDate))")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .lineLimit(1)
@@ -44,6 +44,7 @@ struct SeriesCardView: View {
             .padding([.trailing])
         } placeholder: {
             ProgressView()
+                .frame(width: 140, height: 260)
         }
             
     }

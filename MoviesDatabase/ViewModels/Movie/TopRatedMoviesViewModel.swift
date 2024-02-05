@@ -9,19 +9,16 @@ import Foundation
 
 class TopRatedMoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = [Movie]()
-    @Published var page: Int = 1
-    var apiService: APIService = APIService()
+    private var page: Int = 1
     
-    
+    private lazy var apiService: APIService = APIService()
 }
 
 // MARK: Public functions
 extension TopRatedMoviesViewModel {
     func getTopSeries() {
-        apiService.getTopRatedMovie(page: page) { movies in
-//            self.movies += movies
-//            self.page += 1
-            self.movies = movies
+        apiService.getTopRatedMovie(page: page) { [weak self] movies in
+            self?.movies = movies
         }
     }
 }

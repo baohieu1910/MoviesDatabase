@@ -9,19 +9,16 @@ import Foundation
 
 class NowPlayingMoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = [Movie]()
-    @Published var page: Int = 1
-    var apiService: APIService = APIService()
+    private var page: Int = 1
     
-    
+    private lazy var apiService: APIService = APIService()
 }
 
 // MARK: Public functions
 extension NowPlayingMoviesViewModel {
     func getNowPlayingMovies() {
-        apiService.getNowPlayingMovies(page: page) { movies in
-//            self.movies += movies
-//            self.page += 1
-            self.movies = movies
+        apiService.getNowPlayingMovies(page: page) { [weak self] movies in
+            self?.movies = movies
         }
     }
 }

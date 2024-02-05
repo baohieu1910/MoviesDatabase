@@ -11,22 +11,20 @@ class TrendingMovieViewModel: ObservableObject {
     @Published var moviesToday: [Movie] = [Movie]()
     @Published var moviesThisWeek: [Movie] = [Movie]()
     
-    private var apiService: APIService = APIService()
-    
-    
+    private lazy var apiService: APIService = APIService()
 }
 
 // MARK: Public functions
 extension TrendingMovieViewModel {
     func getMoviesToday() {
-        apiService.getTrendingToday { movies in
-            self.moviesToday = movies
+        apiService.getTrendingToday { [weak self] movies in
+            self?.moviesToday = movies
         }
     }
     
     func getMoviesThisWeek() {
-        apiService.getTrendingThisWeek { movies in
-            self.moviesThisWeek = movies
+        apiService.getTrendingThisWeek { [weak self] movies in
+            self?.moviesThisWeek = movies
         }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 class PeopleViewModel: ObservableObject {
     @Published var people: People?
-    var apiService: APIService = APIService()
+    private lazy var apiService: APIService = APIService()
     
     init() {
         
@@ -19,8 +19,8 @@ class PeopleViewModel: ObservableObject {
 // MARK: Public functions
 extension PeopleViewModel {
     func getPeopleDetail(id: Int) {
-        apiService.getCastDetail(id: id) { people in
-            self.people = people
+        apiService.getCastDetail(id: id) { [weak self] people in
+            self?.people = people
         }
     }
 }

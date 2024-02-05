@@ -20,7 +20,6 @@ struct ContentView: View {
                     Label("Movies", systemImage: "film")
                 }
             
-            
             SeriesListTypesView(viewModel: SearchSeriesViewModel())
                 .tabItem {
                     Label("TV Series", systemImage: "play.tv")

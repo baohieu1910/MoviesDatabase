@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SeriesDetailView: View {
-    @ObservedObject var seriesVM: SeriesDetailViewModel
-    @ObservedObject var castVM: CastSeriesListViewModel
-    @ObservedObject var imageVM: ImagesViewModel
+    @ObservedObject var viewModel: SeriesDetailViewModel
+    @ObservedObject var castVM = CastSeriesListViewModel()
+    @ObservedObject var imagesVM = ImagesViewModel()
     
     @State var averageColor: Color = .black
     var series: Series
@@ -21,7 +21,7 @@ struct SeriesDetailView: View {
                 VStack {
                     // MARK: Movie Poster
                     ZStack(alignment: .leading) {
-                        let backgroundUrl = URL(string: seriesVM.series?.getMovieBackground() ?? "")
+                        let backgroundUrl = URL(string: Utils.getMovieBackground(backdropPath: viewModel.series?.backdropPath))
                         AsyncImage(url: backgroundUrl) { image in
                             ZStack(alignment: .leading) {
                                 image
@@ -35,7 +35,7 @@ struct SeriesDetailView: View {
                                 LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
                                     .opacity(1)
                                 
-                                let posterUrl = URL(string: seriesVM.series?.getMoviePoster() ?? "")
+                                let posterUrl = URL(string: Utils.getMoviePoster(posterPath: viewModel.series?.posterPath))
                                 AsyncImage(url: posterUrl) { image in
                                     ZStack {
                                         image
@@ -58,7 +58,7 @@ struct SeriesDetailView: View {
                     // MARK: Movie title
                     VStack {
                         VStack {
-                            Text("\(seriesVM.series?.name ?? "N/A")")
+                            Text("\(viewModel.series?.name ?? "N/A")")
                                 .font(.title2)
                                 .fontWeight(.bold)
                             
@@ -85,7 +85,7 @@ struct SeriesDetailView: View {
                         
                         VStack {
                             HStack {
-                                Text("\(seriesVM.series?.getReleaseDate() ?? "N/A")")
+                                Text("\(Utils.getReleaseDate(releaseDate: viewModel.series?.releaseDate))")
                             }
                             .frame(width: UIScreen.screenWidth)
                             .padding(.vertical, 10)
@@ -95,7 +95,7 @@ struct SeriesDetailView: View {
                         .font(.subheadline)
                         
                         VStack(alignment: .leading) {
-                            Text("\(seriesVM.series?.tagline ?? "")")
+                            Text("\(viewModel.series?.tagline ?? "")")
                                 .italic()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
@@ -106,7 +106,7 @@ struct SeriesDetailView: View {
                                 .font(.title3)
                                 .fontWeight(.bold)
                             
-                            Text("\(seriesVM.series?.overview ?? "-")")
+                            Text("\(viewModel.series?.overview ?? "-")")
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
@@ -119,28 +119,9 @@ struct SeriesDetailView: View {
                 
                 
                 // MARK: Cast
-                VStack(alignment: .leading) {
-                    Text("Series Cast")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(castVM.casts) { cast in
-                                NavigationLink {
-                                    CastDetailView(viewModel: PeopleViewModel(), cast: cast)
-                                } label: {
-                                    CastCardView(cast: cast)
-                                }
-
-                            }
-                        }
-                    }
+                SeriesCastListView(viewModel: castVM, id: series.id)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
                 
                 
                 // MARK: Recommendations
@@ -150,40 +131,24 @@ struct SeriesDetailView: View {
                         .fontWeight(.bold)
                         .padding(.horizontal)
                     
-                    Text("We don't have enough data to suggest any movies based on \(seriesVM.series?.name  ?? "N/A"). You can help by rating movies you've seen.")
+                    Text("We don't have enough data to suggest any movies based on \(viewModel.series?.name  ?? "N/A"). You can help by rating movies you've seen.")
                         .padding(.horizontal)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
                 
                 // MARK: Images
-                VStack(alignment: .leading) {
-                    VStack {
-                        Text("Media")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
-                    }
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(imageVM.images) { image in
-                                ImageView(url: image.getImage())
-                                
-                            }
-                        }
-                    }
+                SeriesImagesView(viewModel: imagesVM, id: series.id)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding()
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
                 
-                // MARK: Other Infomation
+                // MARK: Other Information
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         Text("Original Title")
                             .fontWeight(.bold)
                         
-                        Text("\(seriesVM.series?.originalName ?? "N/A")")
+                        Text("\(viewModel.series?.originalName ?? "N/A")")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
@@ -192,20 +157,16 @@ struct SeriesDetailView: View {
                         Text("Status")
                             .fontWeight(.bold)
                         
-                        Text("\(seriesVM.series?.status ?? "-")")
+                        Text("\(viewModel.series?.status ?? "-")")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
-                    
-                    //                VStack {
-                    //                    Text("Original Language")
-                    //                }
                     
                     VStack(alignment: .leading) {
                         Text("Type")
                             .fontWeight(.bold)
                         
-                        Text("\(seriesVM.series?.type ?? "-")")
+                        Text("\(viewModel.series?.type ?? "-")")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
@@ -215,9 +176,9 @@ struct SeriesDetailView: View {
                 .padding()
             }
             .onAppear {
-                seriesVM.getSeriesDetail(id: series.id)
+                viewModel.getSeriesDetail(id: series.id)
                 castVM.getCastList(id: series.id)
-                imageVM.getSeriesImages(id: series.id)
+                imagesVM.getSeriesImages(id: series.id)
             }
             .foregroundColor(.black)
         }
@@ -227,6 +188,6 @@ struct SeriesDetailView: View {
 
 struct SeriesDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesDetailView(seriesVM: SeriesDetailViewModel(), castVM: CastSeriesListViewModel(), imageVM: ImagesViewModel(), series: ExampleData.series)
+        SeriesDetailView(viewModel: SeriesDetailViewModel(), series: ExampleData.series)
     }
 }

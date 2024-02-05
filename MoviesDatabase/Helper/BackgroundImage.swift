@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct BackgroundImage {
+enum BackgroundImage {
     static let firstHomeImage: [String] = ["bg1_1", "bg1_2", "bg1_3", "bg1_4", "bg1_5", "bg1_6"]
     static let secondHomeImage: String = "bg2"
     

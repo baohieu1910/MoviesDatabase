@@ -118,7 +118,7 @@ struct HomeView: View {
                             HStack(spacing: 10) {
                                 ForEach(type == "Today" ? viewModel.moviesToday : viewModel.moviesThisWeek) { movie in
                                     NavigationLink {
-                                        MovieDetailView(castVM: CastMovieListViewModel(), movieVM: MovieDetailViewModel(), imageVM: ImagesViewModel(), movie: movie)
+                                        MovieDetailView(viewModel: MovieDetailViewModel(), movie: movie)
                                     } label: {
                                         MovieCardView(movie: movie)
                                     }

@@ -12,7 +12,7 @@ struct MovieRowView: View {
     var movie: Movie
     
     var body: some View {
-        let url = URL(string: movie.getMoviePoster())
+        let url = URL(string: Utils.getMoviePoster(posterPath: movie.posterPath))
         AsyncImage(url: url) { image in
             HStack {
             ZStack(alignment: .bottomTrailing) {
@@ -29,7 +29,7 @@ struct MovieRowView: View {
                         .font(.title3)
                         .fontWeight(.bold)
                     
-                    Text("\(movie.getReleaseDate())")
+                    Text("\(Utils.getReleaseDate(releaseDate: movie.releaseDate))")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .padding(.bottom)

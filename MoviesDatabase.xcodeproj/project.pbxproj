@@ -65,6 +65,12 @@
 		A4C006F72B70BD5700628EDF /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C006F62B70BD5700628EDF /* Images.swift */; };
 		A4C006F92B70BE8000628EDF /* ImagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C006F82B70BE8000628EDF /* ImagesViewModel.swift */; };
 		A4C006FB2B70BFF100628EDF /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C006FA2B70BFF100628EDF /* ImageView.swift */; };
+		A4C006FE2B70FA7300628EDF /* MovieCastListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C006FD2B70FA7300628EDF /* MovieCastListView.swift */; };
+		A4C007002B710CB300628EDF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C006FF2B710CB300628EDF /* Constants.swift */; };
+		A4C007022B710E9600628EDF /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C007012B710E9600628EDF /* Utils.swift */; };
+		A4C007042B71256F00628EDF /* SeriesCastListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C007032B71256F00628EDF /* SeriesCastListView.swift */; };
+		A4C007062B71272900628EDF /* MovieImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C007052B71272900628EDF /* MovieImagesView.swift */; };
+		A4C007092B7127B300628EDF /* SeriesImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C007082B7127B300628EDF /* SeriesImagesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,6 +133,13 @@
 		A4C006F62B70BD5700628EDF /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		A4C006F82B70BE8000628EDF /* ImagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewModel.swift; sourceTree = "<group>"; };
 		A4C006FA2B70BFF100628EDF /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		A4C006FC2B70CAF500628EDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A4C006FD2B70FA7300628EDF /* MovieCastListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastListView.swift; sourceTree = "<group>"; };
+		A4C006FF2B710CB300628EDF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A4C007012B710E9600628EDF /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A4C007032B71256F00628EDF /* SeriesCastListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesCastListView.swift; sourceTree = "<group>"; };
+		A4C007052B71272900628EDF /* MovieImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieImagesView.swift; sourceTree = "<group>"; };
+		A4C007082B7127B300628EDF /* SeriesImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesImagesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +158,8 @@
 			children = (
 				A40156C92B6A201B0013FEC1 /* ExempleData.swift */,
 				A40156CB2B6A840E0013FEC1 /* BackgroundImage.swift */,
+				A4C006FF2B710CB300628EDF /* Constants.swift */,
+				A4C007012B710E9600628EDF /* Utils.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -168,7 +183,9 @@
 			isa = PBXGroup;
 			children = (
 				A44B1FAF2B67D5AE00478B79 /* CastCardView.swift */,
+				A4C006FD2B70FA7300628EDF /* MovieCastListView.swift */,
 				A40901A82B68C919007318AF /* CastDetailView.swift */,
+				A4C007032B71256F00628EDF /* SeriesCastListView.swift */,
 			);
 			path = Cast;
 			sourceTree = "<group>";
@@ -192,6 +209,7 @@
 		A42880192B61823D00E13CD7 /* MoviesDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				A4C006FC2B70CAF500628EDF /* Info.plist */,
 				A428801A2B61823D00E13CD7 /* MoviesDatabaseApp.swift */,
 				A40156C82B6A20030013FEC1 /* Helper */,
 				A43B67392B6652A200BD5058 /* Extension */,
@@ -236,7 +254,7 @@
 				A44B1FA92B6788B600478B79 /* CircularProcessBarView.swift */,
 				A428801C2B61823D00E13CD7 /* ContentView.swift */,
 				A42575AE2B67FAA600550999 /* HomeView.swift */,
-				A4C006FA2B70BFF100628EDF /* ImageView.swift */,
+				A4C007072B71272E00628EDF /* Image */,
 				A42575B12B67FD9D00550999 /* Cast */,
 				A42575B02B67FD9400550999 /* Movie */,
 				A48CAA952B6E35E6005F1E67 /* Series */,
@@ -341,6 +359,16 @@
 			path = Series;
 			sourceTree = "<group>";
 		};
+		A4C007072B71272E00628EDF /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				A4C006FA2B70BFF100628EDF /* ImageView.swift */,
+				A4C007052B71272900628EDF /* MovieImagesView.swift */,
+				A4C007082B7127B300628EDF /* SeriesImagesView.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -415,8 +443,11 @@
 				A44B1FAC2B67CDFB00478B79 /* Cast.swift in Sources */,
 				A47FD6BD2B68DDF500EEC4C6 /* Image.swift in Sources */,
 				A40156CA2B6A201B0013FEC1 /* ExempleData.swift in Sources */,
+				A4C007062B71272900628EDF /* MovieImagesView.swift in Sources */,
 				A43B67332B664AF500BD5058 /* MovieDetailView.swift in Sources */,
 				A48CAA9A2B6E3667005F1E67 /* AiringTodaySeriesViewModel.swift in Sources */,
+				A4C007002B710CB300628EDF /* Constants.swift in Sources */,
+				A4C007092B7127B300628EDF /* SeriesImagesView.swift in Sources */,
 				A43B672F2B66483A00BD5058 /* Movie.swift in Sources */,
 				A428801D2B61823D00E13CD7 /* ContentView.swift in Sources */,
 				A43403DE2B6FDA1A00218760 /* SeriesCardView.swift in Sources */,
@@ -441,6 +472,7 @@
 				A40156CC2B6A840E0013FEC1 /* BackgroundImage.swift in Sources */,
 				A41E96DA2B6E4E4B0088C846 /* SeriesRowView.swift in Sources */,
 				A43403DC2B6FD93800218760 /* SearchSeriesIViewModel.swift in Sources */,
+				A4C007022B710E9600628EDF /* Utils.swift in Sources */,
 				A48CAA9C2B6E3675005F1E67 /* OnTheAirSeriesViewModel.swift in Sources */,
 				A4B315022B674E2700D0B796 /* SideMenuView.swift in Sources */,
 				A41E96D82B6E4E3B0088C846 /* SeriesDetailView.swift in Sources */,
@@ -450,6 +482,7 @@
 				A41E96DE2B6E5B000088C846 /* PopularSeriesView.swift in Sources */,
 				A43B67312B66484A00BD5058 /* TopRatedMoviesViewModel.swift in Sources */,
 				A40901A72B68B1C5007318AF /* TrendingMovieViewModel.swift in Sources */,
+				A4C006FE2B70FA7300628EDF /* MovieCastListView.swift in Sources */,
 				A48CAAA62B6E37C3005F1E67 /* MoviesListTypesView.swift in Sources */,
 				A41E96E42B6E957C0088C846 /* SeriesDetail.swift in Sources */,
 				A4C006FB2B70BFF100628EDF /* ImageView.swift in Sources */,
@@ -461,6 +494,7 @@
 				A43B67352B66515200BD5058 /* TopRatedMoviesListView.swift in Sources */,
 				A428801B2B61823D00E13CD7 /* MoviesDatabaseApp.swift in Sources */,
 				A47FD6BF2B68DE3100EEC4C6 /* UIView.swift in Sources */,
+				A4C007042B71256F00628EDF /* SeriesCastListView.swift in Sources */,
 				A4B315062B67563000D0B796 /* PopularMoviesListView.swift in Sources */,
 				A4B3150A2B6757C700D0B796 /* NowPlayingMoviesViewModel.swift in Sources */,
 				A45452AC2B6B6FEF008D2438 /* MovieDetail.swift in Sources */,
@@ -599,7 +633,9 @@
 				DEVELOPMENT_TEAM = W7C6394PMD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoviesDatabase/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TMDB;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -630,7 +666,9 @@
 				DEVELOPMENT_TEAM = W7C6394PMD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MoviesDatabase/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TMDB;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -14,7 +14,7 @@ struct CastCardView: View {
     let height = UIScreen.screenHeight / 5
     
     var body: some View {
-        let url = URL(string: cast.getCastImage())
+        let url = URL(string: Utils.getCastImage(profilePath: cast.profilePath))
         AsyncImage(url: url) { image in
             
             VStack {
@@ -46,6 +46,7 @@ struct CastCardView: View {
             
         } placeholder: {
             ProgressView()
+                .frame(width: 135, height: 60)
         }
             
     }

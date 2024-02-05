@@ -9,19 +9,15 @@ import Foundation
 
 class PopularMoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = [Movie]()
-    @Published var page: Int = 1
+    private var page: Int = 1
     var apiService: APIService = APIService()
-    
-    
 }
 
 // MARK: Public functions
 extension PopularMoviesViewModel {
     func getPopularMovie() {
-        apiService.getPopularMovie(page: page) { movies in
-//            self.movies += movies
-//            self.page += 1
-            self.movies = movies
+        apiService.getPopularMovie(page: page) { [weak self] movies in
+            self?.movies = movies
         }
     }
 }

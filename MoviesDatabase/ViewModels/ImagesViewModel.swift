@@ -10,7 +10,9 @@ import Foundation
 class ImagesViewModel: ObservableObject {
     @Published var images: [Images] = [Images]()
     private var apiService: APIService = APIService()
-    
+}
+
+extension ImagesViewModel {
     func getMovieImages(id: Int) {
         apiService.getMovieImages(id: id) { images in
             self.images = images
@@ -24,3 +26,6 @@ class ImagesViewModel: ObservableObject {
     }
 }
 
+private extension ImagesViewModel {
+    
+}
