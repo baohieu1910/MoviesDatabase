@@ -9,6 +9,7 @@ import Foundation
 
 struct Movie: Codable, Identifiable, Hashable {
     var posterPath: String?
+    var backdropPath: String?
     var id: Int
     var title: String?
     var releaseDate: String?
@@ -18,6 +19,7 @@ struct Movie: Codable, Identifiable, Hashable {
     
     enum CodingKeys: String, CodingKey {
         case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
         case id
         case releaseDate = "release_date"
         case title

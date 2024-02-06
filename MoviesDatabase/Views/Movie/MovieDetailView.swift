@@ -13,7 +13,7 @@ struct MovieDetailView: View {
     @ObservedObject var castVM = CastMovieListViewModel()
     @ObservedObject var imagesVM = ImagesViewModel()
     @ObservedObject var keywordsVM = KeywordViewModel()
-    
+    @ObservedObject var recommendVM = MovieRecommendationViewModel()
     @State var averageColor: Color = .black
     var movie: Movie
     
@@ -146,8 +146,7 @@ struct MovieDetailView: View {
                         .fontWeight(.bold)
                         .padding(.horizontal)
                     
-                    Text("We don't have enough data to suggest any movies based on \(viewModel.movie?.title  ?? "N/A"). You can help by rating movies you've seen.")
-                        .padding(.horizontal)
+                    MovieRecommendationView(viewModel: recommendVM, movie: movie)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -210,6 +209,7 @@ struct MovieDetailView: View {
                 castVM.getCastList(id: movie.id)
                 imagesVM.getMovieImages(id: movie.id)
                 keywordsVM.getMovieKeyword(id: movie.id)
+                recommendVM.getMovieList(id: movie.id)
             }
             .foregroundColor(.black)
         }
