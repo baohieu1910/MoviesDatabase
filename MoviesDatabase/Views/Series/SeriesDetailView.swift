@@ -11,6 +11,7 @@ struct SeriesDetailView: View {
     @ObservedObject var viewModel: SeriesDetailViewModel
     @ObservedObject var castVM = CastSeriesListViewModel()
     @ObservedObject var imagesVM = ImagesViewModel()
+    @ObservedObject var keywordsVM = KeywordViewModel()
     
     @State var averageColor: Color = .black
     var series: Series
@@ -47,10 +48,12 @@ struct SeriesDetailView: View {
                                     
                                 } placeholder: {
                                     ProgressView()
+                                        .frame(height: 150)
                                 }
                             }
                         } placeholder: {
                             ProgressView()
+                                .frame(height: 150)
                         }
                     }
                     //                        .padding(.horizontal)
@@ -92,7 +95,7 @@ struct SeriesDetailView: View {
                             HStack {
                                 ForEach(viewModel.series?.genres ?? []) { genres in
                                     NavigationLink {
-                                        MoviesGenresView(viewModel: MovieGenresViewModel(), genres: genres)
+                                        SeriesGenresView(viewModel: SeriesGenresViewModel(), genres: genres)
                                     } label: {
                                         Text("\(genres.name)")
                                     }
@@ -180,6 +183,11 @@ struct SeriesDetailView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
                     
+                    // MARK: Keywords
+                    KeywordSeriesListView(viewModel: keywordsVM, id: series.id)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding([.bottom, .horizontal])
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -188,6 +196,7 @@ struct SeriesDetailView: View {
                 viewModel.getSeriesDetail(id: series.id)
                 castVM.getCastList(id: series.id)
                 imagesVM.getSeriesImages(id: series.id)
+                keywordsVM.getSeriesKeyword(id: series.id)
             }
             .foregroundColor(.black)
         }

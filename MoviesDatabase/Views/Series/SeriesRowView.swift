@@ -48,6 +48,7 @@ struct SeriesRowView: View {
             
         } placeholder: {
             ProgressView()
+                .frame(height: 150)
         }
     }
 }

@@ -49,10 +49,12 @@ struct MovieDetailView: View {
                                     
                                 } placeholder: {
                                     ProgressView()
+                                        .frame(height: 150)
                                 }
                             }
                         } placeholder: {
                             ProgressView()
+                                .frame(height: 150)
                         }
                     }
                     
@@ -194,7 +196,7 @@ struct MovieDetailView: View {
                     .padding([.bottom, .horizontal])
                     
                     // MARK: Keywords
-                    MovieKeywordsList(viewModel: keywordsVM, id: movie.id)
+                    KeywordMovieListView(viewModel: keywordsVM, id: movie.id)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding([.bottom, .horizontal])
                 }
@@ -207,7 +209,7 @@ struct MovieDetailView: View {
                 viewModel.getMovieDetail(id: movie.id)
                 castVM.getCastList(id: movie.id)
                 imagesVM.getMovieImages(id: movie.id)
-                keywordsVM.getMovieKeyWord(id: movie.id)
+                keywordsVM.getMovieKeyword(id: movie.id)
             }
             .foregroundColor(.black)
         }

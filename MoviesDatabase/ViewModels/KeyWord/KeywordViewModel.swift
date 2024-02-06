@@ -11,8 +11,14 @@ class KeywordViewModel: ObservableObject {
     @Published var keywords: [Keyword] = []
     private lazy var apiService = APIService()
     
-    func getMovieKeyWord(id: Int) {
+    func getMovieKeyword(id: Int) {
         apiService.getMovieKeyword(id: id) { [weak self] keywords in
+            self?.keywords = keywords
+        }
+    }
+    
+    func getSeriesKeyword(id: Int) {
+        apiService.getSeriesKeyword(id: id) { [weak self] keywords in
             self?.keywords = keywords
         }
     }

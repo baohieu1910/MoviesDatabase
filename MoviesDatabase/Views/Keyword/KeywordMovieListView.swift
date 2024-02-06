@@ -1,5 +1,5 @@
 //
-//  MovieKeywordsList.swift
+//  KeywordMovieListView.swift
 //  MoviesDatabase
 //
 //  Created by Hieu Le on 2/6/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MovieKeywordsList: View {
+struct KeywordMovieListView: View {
     @ObservedObject var viewModel: KeywordViewModel
     var id: Int
     
@@ -36,6 +36,6 @@ struct MovieKeywordsList: View {
 
 struct MovieKeywordsList_Previews: PreviewProvider {
     static var previews: some View {
-        MovieKeywordsList(viewModel: KeywordViewModel(), id: 572802)
+        KeywordMovieListView(viewModel: KeywordViewModel(), id: 572802)
     }
 }
