@@ -1,5 +1,5 @@
 //
-//  MoviesGenresView.swift
+//  MovieKeywordListView.swift
 //  MoviesDatabase
 //
 //  Created by Hieu Le on 2/6/24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MoviesGenresView: View {
-    @ObservedObject var viewModel: MovieGenresViewModel
-    var genres: Genres
+struct MovieKeywordListView: View {
+    @ObservedObject var viewModel: KeywordMovieListViewModel
+    var keyword: Keyword
     
     var body: some View {
         ScrollView {
@@ -23,15 +23,15 @@ struct MoviesGenresView: View {
             }
         }
         .padding(.horizontal)
-        .navigationTitle("\(genres.name)")
+        .navigationTitle("\(keyword.name)")
         .onAppear {
-            viewModel.getMovieList(id: genres.id)
+            viewModel.getMovieList(id: keyword.id)
         }
     }
 }
 
-struct MoviesGenresView_Previews: PreviewProvider {
+struct MovieKeywordListView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesGenresView(viewModel: MovieGenresViewModel(), genres: Genres(id: 18, name: "Drama"))
+        MovieKeywordListView(viewModel: KeywordMovieListViewModel(), keyword: Keyword(id: 9715, name: "superhero"))
     }
 }

@@ -12,6 +12,7 @@ struct MovieDetailView: View {
     @ObservedObject var viewModel: MovieDetailViewModel
     @ObservedObject var castVM = CastMovieListViewModel()
     @ObservedObject var imagesVM = ImagesViewModel()
+    @ObservedObject var keywordsVM = KeywordViewModel()
     
     @State var averageColor: Color = .black
     var movie: Movie
@@ -192,14 +193,21 @@ struct MovieDetailView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.bottom, .horizontal])
                     
+                    // MARK: Keywords
+                    MovieKeywordsList(viewModel: keywordsVM, id: movie.id)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding([.bottom, .horizontal])
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
+                
+                
             }
             .onAppear {
                 viewModel.getMovieDetail(id: movie.id)
                 castVM.getCastList(id: movie.id)
                 imagesVM.getMovieImages(id: movie.id)
+                keywordsVM.getMovieKeyWord(id: movie.id)
             }
             .foregroundColor(.black)
         }
