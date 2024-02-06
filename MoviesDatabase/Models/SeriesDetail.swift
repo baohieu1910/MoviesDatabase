@@ -10,6 +10,7 @@ import Foundation
 struct SeriesDetail: Codable, Identifiable, Hashable {
     var backdropPath: String?
     var id: Int
+    var genres: [Genres]
     var originalLanguage: String?
     var originalName: String?
     var overview: String?
@@ -25,6 +26,7 @@ struct SeriesDetail: Codable, Identifiable, Hashable {
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case id
+        case genres
         case originalLanguage = "original_language"
         case originalName = "original_name"
         case overview

@@ -88,10 +88,19 @@ struct SeriesDetailView: View {
                                 Text("\(Utils.getReleaseDate(releaseDate: viewModel.series?.releaseDate))")
                             }
                             .frame(width: UIScreen.screenWidth)
-                            .padding(.vertical, 10)
-                            .background(averageColor.speechAdjustedPitch(30))
                             
+                            HStack {
+                                ForEach(viewModel.series?.genres ?? []) { genres in
+                                    NavigationLink {
+                                        MoviesGenresView(viewModel: MovieGenresViewModel(), genres: genres)
+                                    } label: {
+                                        Text("\(genres.name)")
+                                    }
+                                }
+                            }
                         }
+                        .padding(.vertical, 10)
+                        .background(averageColor.speechAdjustedPitch(30))
                         .font(.subheadline)
                         
                         VStack(alignment: .leading) {

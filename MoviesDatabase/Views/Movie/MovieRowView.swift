@@ -49,6 +49,7 @@ struct MovieRowView: View {
             
         } placeholder: {
             ProgressView()
+                .frame(height: 150)
         }
             
     }

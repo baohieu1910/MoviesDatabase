@@ -34,6 +34,7 @@ enum ExampleData {
     
     static let movieDetail = MovieDetail(backdropPath: "/jXJxMcVoEuXzym3vFnjqDW4ifo6.jpg",
                                          budget: 205000000,
+                                         genres: [],
                                          id: 572802,
                                          originalLanguage: "en",
                                          originalTitle: "Aquaman and the Lost Kingdom",

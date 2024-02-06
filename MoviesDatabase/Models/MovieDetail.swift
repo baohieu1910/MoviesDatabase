@@ -8,10 +8,15 @@
 import Foundation
 import SwiftUI
 
+struct Genres: Codable, Identifiable, Hashable {
+    var id: Int
+    var name: String
+}
+
 struct MovieDetail: Codable, Identifiable, Hashable {
-    
     var backdropPath: String?
     var budget: Int?
+    var genres: [Genres]
     var id: Int
     var originalLanguage: String?
     var originalTitle: String?
@@ -29,6 +34,7 @@ struct MovieDetail: Codable, Identifiable, Hashable {
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case budget
+        case genres
         case id
         case originalLanguage = "original_language"
         case originalTitle = "original_title"
