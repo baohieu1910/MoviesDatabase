@@ -12,6 +12,7 @@ struct SeriesDetailView: View {
     @ObservedObject var castVM = CastSeriesListViewModel()
     @ObservedObject var imagesVM = ImagesViewModel()
     @ObservedObject var keywordsVM = KeywordViewModel()
+    @ObservedObject var recommendVM = SeriesRecommendationViewModel()
     
     @State var averageColor: Color = .black
     var series: Series
@@ -143,8 +144,7 @@ struct SeriesDetailView: View {
                         .fontWeight(.bold)
                         .padding(.horizontal)
                     
-                    Text("We don't have enough data to suggest any movies based on \(viewModel.series?.name  ?? "N/A"). You can help by rating movies you've seen.")
-                        .padding(.horizontal)
+                    SeriesRecommendationView(viewModel: recommendVM, series: series)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
@@ -197,6 +197,7 @@ struct SeriesDetailView: View {
                 castVM.getCastList(id: series.id)
                 imagesVM.getSeriesImages(id: series.id)
                 keywordsVM.getSeriesKeyword(id: series.id)
+                recommendVM.getSeriesList(id: series.id)
             }
             .foregroundColor(.black)
         }

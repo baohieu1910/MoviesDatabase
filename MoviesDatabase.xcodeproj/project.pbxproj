@@ -84,6 +84,8 @@
 		A4CA956E2B722C0400BB4028 /* KeywordSeriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CA956D2B722C0400BB4028 /* KeywordSeriesListView.swift */; };
 		A4CA95712B729C0300BB4028 /* MovieRecommendationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CA95702B729C0100BB4028 /* MovieRecommendationViewModel.swift */; };
 		A4CA95742B729E3400BB4028 /* MovieRecommendationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CA95732B729E3400BB4028 /* MovieRecommendationView.swift */; };
+		A4D89F582B74E870008C2677 /* SeriesRecommendationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D89F572B74E870008C2677 /* SeriesRecommendationView.swift */; };
+		A4D89F5A2B74E88B008C2677 /* SeriesRecommendationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D89F592B74E88B008C2677 /* SeriesRecommendationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -166,6 +168,8 @@
 		A4CA956D2B722C0400BB4028 /* KeywordSeriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSeriesListView.swift; sourceTree = "<group>"; };
 		A4CA95702B729C0100BB4028 /* MovieRecommendationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationViewModel.swift; sourceTree = "<group>"; };
 		A4CA95732B729E3400BB4028 /* MovieRecommendationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationView.swift; sourceTree = "<group>"; };
+		A4D89F572B74E870008C2677 /* SeriesRecommendationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesRecommendationView.swift; sourceTree = "<group>"; };
+		A4D89F592B74E88B008C2677 /* SeriesRecommendationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeriesRecommendationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -452,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				A4CA95702B729C0100BB4028 /* MovieRecommendationViewModel.swift */,
+				A4D89F592B74E88B008C2677 /* SeriesRecommendationViewModel.swift */,
 			);
 			path = Recommendation;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 			isa = PBXGroup;
 			children = (
 				A4CA95732B729E3400BB4028 /* MovieRecommendationView.swift */,
+				A4D89F572B74E870008C2677 /* SeriesRecommendationView.swift */,
 			);
 			path = Recommendation;
 			sourceTree = "<group>";
@@ -535,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4D89F582B74E870008C2677 /* SeriesRecommendationView.swift in Sources */,
 				A44B1FAC2B67CDFB00478B79 /* Cast.swift in Sources */,
 				A47FD6BD2B68DDF500EEC4C6 /* Image.swift in Sources */,
 				A40156CA2B6A201B0013FEC1 /* ExempleData.swift in Sources */,
@@ -543,6 +550,7 @@
 				A43B67332B664AF500BD5058 /* MovieDetailView.swift in Sources */,
 				A48CAA9A2B6E3667005F1E67 /* AiringTodaySeriesViewModel.swift in Sources */,
 				A4C007002B710CB300628EDF /* Constants.swift in Sources */,
+				A4D89F5A2B74E88B008C2677 /* SeriesRecommendationViewModel.swift in Sources */,
 				A4C007092B7127B300628EDF /* SeriesImagesView.swift in Sources */,
 				A4CA95562B71F22400BB4028 /* SeriesGenresViewModel.swift in Sources */,
 				A4CA95712B729C0300BB4028 /* MovieRecommendationViewModel.swift in Sources */,
