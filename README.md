@@ -22,9 +22,8 @@ IOS 15.0
 ```
 
 4. Run the app:
-```bash
-Run in your Xcode
-```
+- Connect to your IOS device or Simulator.
+- Run in your Xcode.
 
 ## Technologies Used
 
