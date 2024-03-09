@@ -42,11 +42,10 @@ struct CastCardView: View {
             .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .shadow(radius: 2)
-            .padding(.vertical)
             
         } placeholder: {
             ProgressView()
-                .frame(width: 135, height: 60)
+                .frame(width: 135, height: 220)
         }
             
     }

@@ -3,4 +3,54 @@
    uuid = "EBBC4F83-4613-40B0-A312-E5B669252B18"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "901A5F8C-5F00-4320-93ED-F0573E0DE64D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoviesDatabase/Views/Image/SeriesImagesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "901A5F8C-5F00-4320-93ED-F0573E0DE64D - 3124d5441c32615b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoviesDatabase.SeriesImagesView.body.getter : some"
+                  moduleName = "MoviesDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hieule/Desktop/BaoHieu/Swift/Code/MoviesDatabase/MoviesDatabase/Views/Image/SeriesImagesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "392">
+               </Location>
+               <Location
+                  uuid = "901A5F8C-5F00-4320-93ED-F0573E0DE64D - d5ca842ca8889742"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.VStack&lt;SwiftUI.Text&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in MoviesDatabase.SeriesImagesView.body.getter : some"
+                  moduleName = "MoviesDatabase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/hieule/Desktop/BaoHieu/Swift/Code/MoviesDatabase/MoviesDatabase/Views/Image/SeriesImagesView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "548">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

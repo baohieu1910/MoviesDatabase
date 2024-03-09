@@ -105,12 +105,17 @@ struct MovieDetailView: View {
                                         MoviesGenresView(viewModel: MovieGenresViewModel(), genres: genres)
                                     } label: {
                                         Text("\(genres.name)")
+                                            .padding(10)
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 90)
+                                                    .stroke(.white)
+                                            }
                                     }
                                 }
                             }
                         }
                         .padding(.vertical, 10)
-                        .background(averageColor.speechAdjustedPitch(30))
+                        .background(averageColor.speechAdjustedPitch(1))
                         .font(.subheadline)
                         
                         VStack(alignment: .leading) {

@@ -16,7 +16,6 @@ struct MovieCastListView: View {
             Text("Top Billed Cast")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding()
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
@@ -26,12 +25,13 @@ struct MovieCastListView: View {
                         } label: {
                             CastCardView(cast: cast)
                         }
-                        
                     }
                 }
+                .frame(height: 220)
+                .padding(.bottom, 10)
             }
-            .padding()
         }
+        .padding(.horizontal)
         .onAppear {
             viewModel.getCastList(id: id)
         }

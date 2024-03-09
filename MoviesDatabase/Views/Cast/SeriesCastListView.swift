@@ -16,8 +16,6 @@ struct SeriesCastListView: View {
             Text("Series Cast")
                 .font(.title)
                 .fontWeight(.bold)
-                .padding()
-            
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
@@ -27,11 +25,15 @@ struct SeriesCastListView: View {
                         } label: {
                             CastCardView(cast: cast)
                         }
-                        
                     }
                 }
+                .frame(height: 220)
+                .padding(.bottom, 10)
             }
-            .padding()
+        }
+        .padding(.horizontal)
+        .onAppear {
+            viewModel.getCastList(id: id)
         }
     }
 }

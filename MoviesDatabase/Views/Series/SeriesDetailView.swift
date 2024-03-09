@@ -60,7 +60,6 @@ struct SeriesDetailView: View {
                                 .frame(height: 150)
                         }
                     }
-                    //                        .padding(.horizontal)
                     
                     // MARK: Movie title
                     VStack {
@@ -68,7 +67,6 @@ struct SeriesDetailView: View {
                             Text("\(viewModel.series?.name ?? "N/A")")
                                 .font(.title2)
                                 .fontWeight(.bold)
-                            
                         }
                         
                         HStack {
@@ -102,6 +100,11 @@ struct SeriesDetailView: View {
                                         SeriesGenresView(viewModel: SeriesGenresViewModel(), genres: genres)
                                     } label: {
                                         Text("\(genres.name)")
+                                            .padding(10)
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 90)
+                                                    .stroke(.white)
+                                            }
                                     }
                                 }
                             }

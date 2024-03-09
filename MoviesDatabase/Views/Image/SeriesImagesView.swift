@@ -17,7 +17,6 @@ struct SeriesImagesView: View {
                 Text("Media")
                     .font(.title3)
                     .fontWeight(.bold)
-                    .padding(.horizontal)
             }
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -27,8 +26,9 @@ struct SeriesImagesView: View {
                     }
                 }
             }
-            .padding()
+            .padding(.bottom, 10)
         }
+        .padding(.horizontal)
     }
 }
 
