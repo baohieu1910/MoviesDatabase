@@ -18,7 +18,7 @@ struct MovieDetailView: View {
     var movie: Movie
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 VStack {
                     // MARK: Movie Poster
@@ -29,32 +29,35 @@ struct MovieDetailView: View {
                                 image
                                     .resizable()
                                     .scaledToFit()
+                                    .scaledToFill()
+                                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
+                                    .clipped()
                                     .cornerRadius(5)
                                     .onAppear {
                                         averageColor = Color(image.averageColor ?? UIColor.black)
                                     }
                                 
-                                LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
+                                LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .top, endPoint: .bottom)
                                     .opacity(1)
-                                
-                                let posterUrl = URL(string: Utils.getMoviePoster(posterPath: viewModel.movie?.posterPath))
-                                AsyncImage(url: posterUrl) { image in
-                                    ZStack {
-                                        image
-                                            .resizable()
-                                            .frame(width: 100, height: 150)
-                                            .cornerRadius(10)
-                                            .padding(.horizontal)
-                                    }
-                                    
-                                } placeholder: {
-                                    ProgressView()
-                                        .frame(height: 150)
-                                }
+//
+//                                let posterUrl = URL(string: Utils.getMoviePoster(posterPath: viewModel.movie?.posterPath))
+//                                AsyncImage(url: posterUrl) { image in
+//                                    ZStack {
+//                                        image
+//                                            .resizable()
+//                                            .frame(width: 100, height: 150)
+//                                            .cornerRadius(10)
+//                                            .padding(.horizontal)
+//                                    }
+//
+//                                } placeholder: {
+//                                    ProgressView()
+//                                        .frame(height: 150)
+//                                }
                             }
                         } placeholder: {
                             ProgressView()
-                                .frame(height: 150)
+                                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
                         }
                     }
                     
@@ -126,13 +129,11 @@ struct MovieDetailView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
-                        
                     }
                 }
                 .padding([.bottom, .horizontal])
                 .background(averageColor)
                 .foregroundColor(.white)
-                
                 
                 // MARK: Cast
                 MovieCastListView(viewModel: castVM, id: movie.id)
@@ -201,8 +202,6 @@ struct MovieDetailView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                
-                
             }
             .onAppear {
                 viewModel.getMovieDetail(id: movie.id)
@@ -213,6 +212,7 @@ struct MovieDetailView: View {
             }
             .foregroundColor(.black)
         }
+        .edgesIgnoringSafeArea(.top)
     }
     
     

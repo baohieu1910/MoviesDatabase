@@ -12,7 +12,7 @@ struct MovieKeywordListView: View {
     var keyword: Keyword
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             ForEach(viewModel.movies) { movie in
                 NavigationLink {
                     MovieDetailView(viewModel: MovieDetailViewModel(), movie: movie)

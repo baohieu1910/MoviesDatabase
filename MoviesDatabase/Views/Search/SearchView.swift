@@ -12,7 +12,7 @@ import SwiftUI
 //
 //    var body: some View {
 //        NavigationView {
-//            ScrollView {
+//            ScrollView(showsIndicators: false) {
 //                ForEach(viewModel.movies) { movie in
 //                    NavigationLink {
 //                        MovieDetailView(viewModel: MovieDetailViewModel(), movie: movie)

@@ -11,7 +11,7 @@ struct SeriesGenresView: View {
     @ObservedObject var viewModel: SeriesGenresViewModel
     var genres: Genres
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             ForEach(viewModel.series) { series in
                 NavigationLink {
                     SeriesDetailView(viewModel: SeriesDetailViewModel(), series: series)

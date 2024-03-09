@@ -17,7 +17,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack {
                     // MARK: Background Image
                     VStack(spacing: 0) {
@@ -40,6 +40,7 @@ struct HomeView: View {
                                 
                                 Text("Millions of movies, TV shows and people to discover. Explore now.")
                                     .font(.system(size: 30))
+//                                    .font(.custom("PlayfairDisplay-Bold", size: 30))
                                     .foregroundColor(.white)
                                 
                                 ZStack(alignment: .trailing) {

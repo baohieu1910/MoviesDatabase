@@ -16,7 +16,7 @@ struct MoviesListTypesView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 if viewModel.searchText == "" {
                     VStack {
                         VStack(alignment: .leading) {
@@ -25,6 +25,7 @@ struct MoviesListTypesView: View {
                                 .bold()
                             
                             PopularMoviesListView(viewModel: popularVM)
+                                .frame(height: 300)
                         }
                         .padding()
                         
@@ -34,6 +35,7 @@ struct MoviesListTypesView: View {
                                 .bold()
                             
                             TopRatedMoviesListView(viewModel: topRatedVM)
+                                .frame(height: 300)
                         }
                         .padding()
                         
@@ -43,6 +45,7 @@ struct MoviesListTypesView: View {
                                 .bold()
                             
                             NowPlayingMoviesListView(viewModel: nowPlayingVM)
+                                .frame(height: 300)
                         }
                         .padding()
                         
@@ -54,6 +57,7 @@ struct MoviesListTypesView: View {
                                 .bold()
                             
                             UpcomingMoviesListView(viewModel: upcomingVM)
+                                .frame(height: 300)
                         }
                         .padding()
                     }

@@ -18,7 +18,7 @@ struct SeriesDetailView: View {
     var series: Series
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 VStack {
                     // MARK: Movie Poster
@@ -29,28 +29,31 @@ struct SeriesDetailView: View {
                                 image
                                     .resizable()
                                     .scaledToFit()
+                                    .scaledToFill()
+                                    .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
+                                    .clipped()
                                     .cornerRadius(5)
                                     .onAppear {
-                                        averageColor = Color( image.averageColor ?? UIColor.black)
+                                        averageColor = Color(image.averageColor ?? UIColor.black)
                                     }
                                 
-                                LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .trailing, endPoint: .leading)
+                                LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .top, endPoint: .bottom)
                                     .opacity(1)
                                 
-                                let posterUrl = URL(string: Utils.getMoviePoster(posterPath: viewModel.series?.posterPath))
-                                AsyncImage(url: posterUrl) { image in
-                                    ZStack {
-                                        image
-                                            .resizable()
-                                            .frame(width: 100, height: 150)
-                                            .cornerRadius(10)
-                                            .padding(.horizontal)
-                                    }
-                                    
-                                } placeholder: {
-                                    ProgressView()
-                                        .frame(height: 150)
-                                }
+//                                let posterUrl = URL(string: Utils.getMoviePoster(posterPath: viewModel.series?.posterPath))
+//                                AsyncImage(url: posterUrl) { image in
+//                                    ZStack {
+//                                        image
+//                                            .resizable()
+//                                            .frame(width: 100, height: 150)
+//                                            .cornerRadius(10)
+//                                            .padding(.horizontal)
+//                                    }
+//
+//                                } placeholder: {
+//                                    ProgressView()
+//                                        .frame(height: 150)
+//                                }
                             }
                         } placeholder: {
                             ProgressView()
@@ -201,6 +204,7 @@ struct SeriesDetailView: View {
             }
             .foregroundColor(.black)
         }
+        .edgesIgnoringSafeArea(.top)
     }
 
 }

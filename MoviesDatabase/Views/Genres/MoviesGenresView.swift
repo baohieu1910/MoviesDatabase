@@ -12,7 +12,7 @@ struct MoviesGenresView: View {
     var genres: Genres
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             ForEach(viewModel.movies) { movie in
                 NavigationLink {
                     MovieDetailView(viewModel: MovieDetailViewModel(), movie: movie)

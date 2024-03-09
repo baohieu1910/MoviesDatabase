@@ -12,7 +12,7 @@ struct CastDetailView: View {
     var cast: Cast
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             // MARK: Image and name
             VStack {
                 let url = URL(string: Utils.getCastImage(profilePath: viewModel.people?.profilePath) ?? "")

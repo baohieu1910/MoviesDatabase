@@ -16,7 +16,7 @@ struct SeriesListTypesView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 if viewModel.searchText == "" {
                     VStack {
                         VStack(alignment: .leading) {
@@ -25,6 +25,7 @@ struct SeriesListTypesView: View {
                                 .bold()
                             
                             PopularSeriesView(viewModel: popularVM)
+                                .frame(height: 300)
                         }
                         .padding()
                         
@@ -34,6 +35,7 @@ struct SeriesListTypesView: View {
                                 .bold()
                             
                             TopRatedSeriesView(viewModel: topRatedVM)
+                                .frame(height: 300)
                         }
                         .padding()
                         
@@ -43,6 +45,7 @@ struct SeriesListTypesView: View {
                                 .bold()
                             
                             AiringTodaySeriesView(viewModel: airingTodayVM)
+                                .frame(height: 300)
                         }
                         .padding()
                         
@@ -52,6 +55,7 @@ struct SeriesListTypesView: View {
                                 .bold()
                             
                             OnTheAirSeriesView(viewModel: onTheAirVM)
+                                .frame(height: 300)
                         }
                         .padding()
                     }
