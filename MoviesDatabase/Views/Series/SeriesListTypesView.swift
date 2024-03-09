@@ -21,41 +21,37 @@ struct SeriesListTypesView: View {
                     VStack {
                         VStack(alignment: .leading) {
                             Text("Popular")
-                                .font(.title)
-                                .bold()
-                            
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
+
                             PopularSeriesView(viewModel: popularVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                         
                         VStack(alignment: .leading) {
                             Text("Top Rated")
-                                .font(.title)
-                                .bold()
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             TopRatedSeriesView(viewModel: topRatedVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                         
                         VStack(alignment: .leading) {
                             Text("Airing Today")
-                                .font(.title)
-                                .bold()
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             AiringTodaySeriesView(viewModel: airingTodayVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                         
                         VStack(alignment: .leading) {
                             Text("On The Air")
-                                .font(.title)
-                                .bold()
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             OnTheAirSeriesView(viewModel: onTheAirVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                     }

@@ -21,8 +21,7 @@ struct MoviesListTypesView: View {
                     VStack {
                         VStack(alignment: .leading) {
                             Text("Popular")
-                                .font(.title)
-                                .bold()
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             PopularMoviesListView(viewModel: popularVM)
                                 .frame(height: 300)
@@ -31,8 +30,7 @@ struct MoviesListTypesView: View {
                         
                         VStack(alignment: .leading) {
                             Text("Top Rated")
-                                .font(.title)
-                                .bold()
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             TopRatedMoviesListView(viewModel: topRatedVM)
                                 .frame(height: 300)
@@ -41,8 +39,7 @@ struct MoviesListTypesView: View {
                         
                         VStack(alignment: .leading) {
                             Text("Now Playing")
-                                .font(.title)
-                                .bold()
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             NowPlayingMoviesListView(viewModel: nowPlayingVM)
                                 .frame(height: 300)
@@ -53,8 +50,7 @@ struct MoviesListTypesView: View {
                         
                         VStack(alignment: .leading) {
                             Text("Upcoming")
-                                .font(.title)
-                                .bold()
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             UpcomingMoviesListView(viewModel: upcomingVM)
                                 .frame(height: 300)
