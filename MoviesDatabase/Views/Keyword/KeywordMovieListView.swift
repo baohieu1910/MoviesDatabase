@@ -25,7 +25,7 @@ struct KeywordMovieListView: View {
                             Text("\(keyword.name)")
                                 .padding(10)
                                 .background(Color("LightGray"))
-                                .cornerRadius(10)
+                                .cornerRadius(90)
                         }
                     }
                 }

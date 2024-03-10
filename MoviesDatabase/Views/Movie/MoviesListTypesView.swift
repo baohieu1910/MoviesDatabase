@@ -17,6 +17,46 @@ struct MoviesListTypesView: View {
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
+                ZStack {
+                    Image("Movie")
+                        .resizable()
+                        .scaledToFit()
+                        .scaledToFill()
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
+                    
+                    LinearGradient(colors: [.clear, .clear, .white], startPoint: .top, endPoint: .bottom)
+                    
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                            
+                            TextField("Search your movie", text: $viewModel.searchText)
+                                .padding(10)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 90)
+                                        .stroke(.gray)
+                                }
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Welcome.")
+                            .font(.custom("PlayfairDisplay-Bold", size: 50))
+                        
+                        Text("Millions of movies to discover.")
+                            .font(.custom("PlayfairDisplay-Bold", size: 30))
+                        
+                        Text("Explore now.")
+                            .font(.custom("PlayfairDisplay-Bold", size: 30))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .foregroundColor(.black)
+                }
+                
                 if viewModel.searchText == "" {
                     VStack {
                         VStack(alignment: .leading) {
@@ -24,7 +64,7 @@ struct MoviesListTypesView: View {
                                 .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             PopularMoviesListView(viewModel: popularVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                         
@@ -33,7 +73,7 @@ struct MoviesListTypesView: View {
                                 .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             TopRatedMoviesListView(viewModel: topRatedVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                         
@@ -42,7 +82,7 @@ struct MoviesListTypesView: View {
                                 .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             NowPlayingMoviesListView(viewModel: nowPlayingVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                         
@@ -53,7 +93,7 @@ struct MoviesListTypesView: View {
                                 .font(.custom("PlayfairDisplay-Bold", size: 30))
                             
                             UpcomingMoviesListView(viewModel: upcomingVM)
-                                .frame(height: 300)
+                                .frame(height: 250)
                         }
                         .padding()
                     }
@@ -62,28 +102,31 @@ struct MoviesListTypesView: View {
                         NavigationLink {
                             MovieDetailView(viewModel: MovieDetailViewModel(), movie: movie)
                         } label: {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text("\(movie.title ?? "N/A")")
-                                        .lineLimit(1)
-                                    Divider()
+                            VStack {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\(movie.title ?? "N/A")")
+                                            .lineLimit(1)
+                                        
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                
+                                .foregroundColor(.black)
+                                .padding(.horizontal)
+                                Divider()
                             }
-                            .foregroundColor(.black)
-                            .padding(.horizontal)
                         }
                     }
                 }
             }
-            .navigationTitle("Movies")
+            .edgesIgnoringSafeArea(.top)
+            .navigationBarHidden(true)
+            
         }
-        .searchable(text: $viewModel.searchText)
         .onAppear {
             popularVM.getPopularMovie()
             topRatedVM.getTopSeries()

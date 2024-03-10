@@ -80,7 +80,12 @@ struct SeriesDetailView: View {
                                     Text("\(Utils.getReleaseDate(releaseDate: viewModel.series?.releaseDate))")
                                 }
                                 .frame(width: UIScreen.screenWidth)
-                                
+                            }
+                            .padding(.vertical, 10)
+                            .background(averageColor.speechAdjustedPitch(30))
+                            .font(.subheadline)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
                                     ForEach(viewModel.series?.genres ?? []) { genres in
                                         NavigationLink {
@@ -95,10 +100,9 @@ struct SeriesDetailView: View {
                                         }
                                     }
                                 }
+                                .padding(.vertical)
                             }
-                            .padding(.vertical, 10)
-                            .background(averageColor.speechAdjustedPitch(30))
-                            .font(.subheadline)
+                            .padding(.horizontal)
                             
                             VStack(alignment: .leading) {
                                 Text("\(viewModel.series?.tagline ?? "")")

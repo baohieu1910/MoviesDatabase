@@ -86,7 +86,12 @@ struct MovieDetailView: View {
                                     Text("\(viewModel.movie?.runtime ?? 0)m")
                                 }
                                 .frame(width: UIScreen.screenWidth)
-                                
+                            }
+                            .padding(.vertical, 10)
+                            .background(averageColor.speechAdjustedPitch(1))
+                            .font(.subheadline)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
                                     ForEach(viewModel.movie?.genres ?? []) { genres in
                                         NavigationLink {
@@ -101,10 +106,9 @@ struct MovieDetailView: View {
                                         }
                                     }
                                 }
+                                .padding(.vertical)
                             }
-                            .padding(.vertical, 10)
-                            .background(averageColor.speechAdjustedPitch(1))
-                            .font(.subheadline)
+                            .padding(.horizontal)
                             
                             VStack(alignment: .leading) {
                                 Text("\(viewModel.movie?.tagline ?? "")")

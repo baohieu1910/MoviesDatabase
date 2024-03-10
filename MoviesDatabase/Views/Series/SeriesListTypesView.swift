@@ -17,6 +17,46 @@ struct SeriesListTypesView: View {
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
+                ZStack {
+                    Image("Series")
+                        .resizable()
+                        .scaledToFit()
+                        .scaledToFill()
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
+                    
+                    LinearGradient(colors: [.clear, .clear, .white], startPoint: .top, endPoint: .bottom)
+                    
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                            
+                            TextField("Search your TV series", text: $viewModel.searchText)
+                                .padding(10)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 90)
+                                        .stroke(.gray)
+                                }
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Welcome.")
+                            .font(.custom("PlayfairDisplay-Bold", size: 50))
+                        
+                        Text("Millions of TV series to discover.")
+                            .font(.custom("PlayfairDisplay-Bold", size: 30))
+                        
+                        Text("Explore now.")
+                            .font(.custom("PlayfairDisplay-Bold", size: 30))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                    .foregroundColor(.black)
+                }
+                
                 if viewModel.searchText == "" {
                     VStack {
                         VStack(alignment: .leading) {
@@ -60,28 +100,30 @@ struct SeriesListTypesView: View {
                         NavigationLink {
                             SeriesDetailView(viewModel: SeriesDetailViewModel(), series: series)
                         } label: {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text("\(series.name ?? "N/A")")
-                                        .lineLimit(1)
-                                    Divider()
+                            VStack {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\(series.name ?? "N/A")")
+                                            .lineLimit(1)
+                                        
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "chevron.right")
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "chevron.right")
-                                
+                                .foregroundColor(.black)
+                                .padding(.horizontal)
+                                Divider()
                             }
-                            .foregroundColor(.black)
-                            .padding(.horizontal)
                         }
                     }
                 }
             }
-            .navigationTitle("Series")
+            .edgesIgnoringSafeArea(.top)
+            .navigationBarHidden(true)
         }
-        .searchable(text: $viewModel.searchText)
         .onAppear {
             popularVM.getPopularSeries()
             topRatedVM.getTopRatedSeries()
