@@ -37,14 +37,17 @@ struct MovieRowView: View {
                         .lineLimit(2)
                         .truncationMode(.tail)
                 }
-                .foregroundColor(.black)
+                .foregroundColor(.white)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Spacer()
             }
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(radius: 2)
+            .cornerRadius(20)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.white)
+            }
+            .padding(.horizontal, 5)
             
         } placeholder: {
             ProgressView()

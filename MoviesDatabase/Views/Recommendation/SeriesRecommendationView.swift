@@ -19,13 +19,12 @@ struct SeriesRecommendationView: View {
             
             if viewModel.series == [] {
                 Text("We don't have enough data to suggest any movies based on \(series.name  ?? "N/A"). You can help by rating movies you've seen.")
-                    .padding(.horizontal)
-                    .foregroundColor(.black)
+                    
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(viewModel.series) { series in
-                            let url = URL(string: Utils.getMovieBackground(backdropPath: series.backdropPath))
+                            let url = URL(string: Utils.getRecommendPoster(backdropPath: series.backdropPath))
                             AsyncImage(url: url) { image in
                                 NavigationLink {
                                     SeriesDetailView(viewModel: SeriesDetailViewModel(), series: series)
@@ -37,7 +36,7 @@ struct SeriesRecommendationView: View {
                                             .frame(width: 250, height: 150, alignment: .center)
                                             .clipped()
                                             .cornerRadius(10)
-                                        
+                                            
                                         HStack {
                                             Text("\(series.name ?? "N/A")")
                                                 .lineLimit(1)

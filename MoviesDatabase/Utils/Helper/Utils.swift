@@ -16,6 +16,13 @@ enum Utils {
         return Constants.baseImageUrl + Constants.largeImageSize + profilePath
     }
 
+    static func getRecommendPoster(backdropPath: String?) -> String {
+        guard let backdropPath else {
+            return Constants.noImageName
+        }
+        return Constants.baseImageUrl + Constants.largeImageSize + backdropPath
+    }
+    
     static func getReleaseDate(releaseDate: String?) -> String {
         var dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

@@ -19,12 +19,12 @@ struct MovieRecommendationView: View {
             
             if viewModel.movies == [] {
                 Text("We don't have enough data to suggest any movies based on \(movie.title  ?? "N/A"). You can help by rating movies you've seen.")
-                    .padding(.horizontal)
+                    
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         ForEach(viewModel.movies) { movie in
-                            let url = URL(string: Utils.getMovieBackground(backdropPath: movie.backdropPath))
+                            let url = URL(string: Utils.getRecommendPoster(backdropPath: movie.backdropPath))
                             AsyncImage(url: url) { image in
                                 NavigationLink {
                                     MovieDetailView(viewModel: MovieDetailViewModel(), movie: movie)

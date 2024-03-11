@@ -24,6 +24,7 @@ struct MovieKeywordListView: View {
         }
         .padding(.horizontal)
         .navigationTitle("\(keyword.name)")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.getMovieList(id: keyword.id)
         }

@@ -15,24 +15,28 @@ struct CastDetailView: View {
         ScrollView(showsIndicators: false) {
             // MARK: Image and name
             VStack {
-                let url = URL(string: Utils.getCastImage(profilePath: viewModel.people?.profilePath) ?? "")
+                let url = URL(string: Utils.getCastImage(profilePath: viewModel.people?.profilePath))
                 AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 200, alignment: .center)
-                        .clipped()
-                        .cornerRadius(10)
+                    ZStack {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: UIScreen.screenWidth, height: UIScreen.screenWidth, alignment: .center)
+                            .clipped()
+                            .cornerRadius(10)
+                        
+                        LinearGradient(colors: [.clear, .clear, .black], startPoint: .top, endPoint: .bottom)
+                    }
                     
                 } placeholder: {
                     ProgressView()
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenWidth, alignment: .center)
                 }
                 
                 Text("\(viewModel.people?.name ?? "N/A")")
                     .font(.largeTitle)
                     .fontWeight(.bold)
             }
-            .padding()
             
             Divider()
                 .frame(height: 3)
@@ -78,11 +82,12 @@ struct CastDetailView: View {
                     
                 }
             }
-            .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
         }
-        .background(.white)
-        .foregroundColor(.black)
+        .padding(.horizontal)
+        .navigationTitle("Actor")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.getPeopleDetail(id: cast.id)
         }
@@ -95,5 +100,6 @@ struct CastDetailView: View {
 struct CastDetailView_Previews: PreviewProvider {
     static var previews: some View {
         CastDetailView(viewModel: PeopleViewModel(), cast: ExampleData.cast)
+            .environment(\.colorScheme, .dark)
     }
 }

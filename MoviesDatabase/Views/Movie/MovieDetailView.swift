@@ -16,7 +16,7 @@ struct MovieDetailView: View {
     @ObservedObject var keywordsVM = KeywordViewModel()
     @ObservedObject var recommendVM = MovieRecommendationViewModel()
     @State var averageColor: Color = .black
-    var movie: Movie
+    var movie: Movie 
     
     var body: some View {
         ZStack {
@@ -25,7 +25,7 @@ struct MovieDetailView: View {
                     VStack {
                         // MARK: Movie Poster
                         ZStack {
-                            let backgroundUrl = URL(string: Utils.getMovieBackground(backdropPath: viewModel.movie?.backdropPath))
+                            let backgroundUrl = URL(string: Utils.getMovieBackground(backdropPath: movie.backdropPath))
                             AsyncImage(url: backgroundUrl) { image in
                                 ZStack(alignment: .leading) {
                                     image
@@ -51,10 +51,9 @@ struct MovieDetailView: View {
                         // MARK: Movie title
                         VStack {
                             VStack {
-                                Text("\(viewModel.movie?.title ?? "N/A")")
+                                Text("\(movie.title ?? "N/A")")
                                     .font(.title2)
                                     .fontWeight(.bold)
-                                
                             }
                             
                             HStack {
@@ -78,7 +77,7 @@ struct MovieDetailView: View {
                             
                             VStack {
                                 HStack {
-                                    Text("\(Utils.getReleaseDate(releaseDate: viewModel.movie?.releaseDate))")
+                                    Text("\(Utils.getReleaseDate(releaseDate: movie.releaseDate))")
                                     
                                     Text(" - ")
                                     
@@ -120,7 +119,7 @@ struct MovieDetailView: View {
                                     .font(.title3)
                                     .fontWeight(.bold)
                                 
-                                Text("\(viewModel.movie?.overview ?? "-")")
+                                Text("\(movie.overview ?? "-")")
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
@@ -231,5 +230,6 @@ struct MovieDetailView: View {
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MovieDetailView(viewModel: MovieDetailViewModel(), movie: ExampleData.movie)
+            .environment(\.colorScheme, .dark)
     }
 }

@@ -24,6 +24,7 @@ struct SeriesKeywordListView: View {
         }
         .padding(.horizontal)
         .navigationTitle("\(keyword.name)")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.getSeriesList(id: keyword.id)
         }
@@ -33,5 +34,7 @@ struct SeriesKeywordListView: View {
 struct SeriesKeywordListView_Previews: PreviewProvider {
     static var previews: some View {
         SeriesKeywordListView(viewModel: KeywordSeriesListViewModel(), keyword: Keyword(id: 1508, name: "new mexico"))
+//            .environment(\.colorScheme, .dark)
+            .preferredColorScheme(.dark)
     }
 }

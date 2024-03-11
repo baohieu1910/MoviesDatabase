@@ -48,10 +48,10 @@ struct SeriesDetailView: View {
                             }
                         }
                         
-                        // MARK: Movie title
+                        // MARK: Series title
                         VStack {
                             VStack {
-                                Text("\(viewModel.series?.name ?? "N/A")")
+                                Text("\(series.name ?? "N/A")")
                                     .font(.title2)
                                     .fontWeight(.bold)
                             }
@@ -77,7 +77,7 @@ struct SeriesDetailView: View {
                             
                             VStack {
                                 HStack {
-                                    Text("\(Utils.getReleaseDate(releaseDate: viewModel.series?.releaseDate))")
+                                    Text("\(Utils.getReleaseDate(releaseDate: series.releaseDate))")
                                 }
                                 .frame(width: UIScreen.screenWidth)
                             }
@@ -116,7 +116,7 @@ struct SeriesDetailView: View {
                                     .font(.title3)
                                     .fontWeight(.bold)
                                 
-                                Text("\(viewModel.series?.overview ?? "-")")
+                                Text("\(series.overview ?? "-")")
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
