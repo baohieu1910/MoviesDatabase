@@ -10,7 +10,6 @@ import UIKit
 
 struct MovieDetailView: View {
     @Environment(\.dismiss) var dismiss
-    
     @ObservedObject var viewModel: MovieDetailViewModel
     @ObservedObject var castVM = CastMovieListViewModel()
     @ObservedObject var imagesVM = ImagesViewModel()

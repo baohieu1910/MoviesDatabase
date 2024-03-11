@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MoviesListTypesView: View {
-    @ObservedObject var viewModel: SearchMovieViewModel
+    @ObservedObject var viewModel = SearchMovieViewModel()
     @ObservedObject var popularVM = PopularMoviesViewModel()
     @ObservedObject var topRatedVM = TopRatedMoviesViewModel()
     @ObservedObject var nowPlayingVM = NowPlayingMoviesViewModel()
@@ -141,7 +141,7 @@ struct MoviesListTypesView: View {
 
 struct MoviesListTypesView_Previews: PreviewProvider {
     static var previews: some View {
-        MoviesListTypesView(viewModel: SearchMovieViewModel())
+        MoviesListTypesView()
     }
 }
 

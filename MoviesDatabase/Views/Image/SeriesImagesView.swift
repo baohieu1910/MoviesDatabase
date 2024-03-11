@@ -26,6 +26,7 @@ struct SeriesImagesView: View {
                     }
                 }
             }
+            .frame(height: 150)
             .padding(.bottom, 10)
         }
         .padding(.horizontal)

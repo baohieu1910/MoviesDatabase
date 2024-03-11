@@ -10,17 +10,17 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            HomeView(viewModel: TrendingMovieViewModel())
+            HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
             
-            MoviesListTypesView(viewModel: SearchMovieViewModel())
+            MoviesListTypesView()
                 .tabItem {
                     Label("Movies", systemImage: "film")
                 }
             
-            SeriesListTypesView(viewModel: SearchSeriesViewModel())
+            SeriesListTypesView()
                 .tabItem {
                     Label("TV Series", systemImage: "play.tv")
                 }

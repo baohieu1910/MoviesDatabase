@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel: TrendingMovieViewModel
+    @ObservedObject var viewModel = TrendingMovieViewModel()
     @State private var searchKey: String = ""
     
     private let types = ["Today", "This Week"]
@@ -145,6 +145,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: TrendingMovieViewModel())
+        HomeView()
     }
 }

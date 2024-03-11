@@ -48,10 +48,11 @@ struct MovieRecommendationView: View {
                                 }
                             } placeholder: {
                                 ProgressView()
-                                    .frame(width: 250, height: 150)
+                                    .frame(width: 250, height: 170)
                             }
                         }
                     }
+                    .frame(height: 170)
                 }
                 .padding(.horizontal)
             }

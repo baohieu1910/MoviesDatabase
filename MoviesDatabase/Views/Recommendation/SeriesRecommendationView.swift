@@ -52,6 +52,7 @@ struct SeriesRecommendationView: View {
                             }
                         }
                     }
+                    .frame(height: 170)
                 }
                 .padding(.horizontal)
             }

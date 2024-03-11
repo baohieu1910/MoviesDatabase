@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SeriesListTypesView: View {
-    @ObservedObject var viewModel: SearchSeriesViewModel
+    @ObservedObject var viewModel = SearchSeriesViewModel()
     @ObservedObject var popularVM = PopularSeriesViewModel()
     @ObservedObject var topRatedVM = TopRatedSeriesViewModel()
     @ObservedObject var airingTodayVM = AiringTodaySeriesViewModel()
@@ -138,6 +138,6 @@ struct SeriesListTypesView: View {
 
 struct SeriesListTypesView_Previews: PreviewProvider {
     static var previews: some View {
-        SeriesListTypesView(viewModel: SearchSeriesViewModel())
+        SeriesListTypesView()
     }
 }
