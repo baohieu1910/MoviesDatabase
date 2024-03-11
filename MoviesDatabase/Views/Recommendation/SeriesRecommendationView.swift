@@ -12,7 +12,11 @@ struct SeriesRecommendationView: View {
     var series: Series
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Text("Recommendations")
+                .font(.title3)
+                .fontWeight(.bold)
+            
             if viewModel.series == [] {
                 Text("We don't have enough data to suggest any movies based on \(series.name  ?? "N/A"). You can help by rating movies you've seen.")
                     .padding(.horizontal)
@@ -42,7 +46,6 @@ struct SeriesRecommendationView: View {
                                             
                                             Text("\(Int((series.voteAverage ?? 0) * 10))%")
                                         }
-                                        .foregroundColor(.black)
                                     }
                                     .frame(width: 250)
                                 }
@@ -54,9 +57,9 @@ struct SeriesRecommendationView: View {
                     }
                     .frame(height: 170)
                 }
-                .padding(.horizontal)
             }
         }
+        .padding(.horizontal)
         .onAppear {
             viewModel.getSeriesList(id: series.id)
         }

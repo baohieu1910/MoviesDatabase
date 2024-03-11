@@ -122,72 +122,65 @@ struct SeriesDetailView: View {
                             .padding(.horizontal)
                             
                         }
-                    }
-                    .padding([.bottom, .horizontal])
-                    .background(averageColor)
-                    .foregroundColor(.white)
-                    
-                    
-                    // MARK: Cast
-                    SeriesCastListView(viewModel: castVM, id: series.id)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    
-                    
-                    // MARK: Recommendations
-                    VStack(alignment: .leading) {
-                        Text("Recommendations")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
-                        
+                        // MARK: Cast
+                        SeriesCastListView(viewModel: castVM, id: series.id)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical)
+
+                        // MARK: Recommendations
                         SeriesRecommendationView(viewModel: recommendVM, series: series)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    
-                    // MARK: Images
-                    SeriesImagesView(viewModel: imagesVM, id: series.id)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    
-                    // MARK: Other Information
-                    VStack(alignment: .leading) {
-                        VStack(alignment: .leading) {
-                            Text("Original Title")
-                                .fontWeight(.bold)
-                            
-                            Text("\(viewModel.series?.originalName ?? "N/A")")
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.bottom, .horizontal])
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical)
                         
-                        VStack(alignment: .leading) {
-                            Text("Status")
-                                .fontWeight(.bold)
-                            
-                            Text("\(viewModel.series?.status ?? "-")")
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.bottom, .horizontal])
+                        // MARK: Images
+                        SeriesImagesView(viewModel: imagesVM, id: series.id)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical)
                         
+                        // MARK: Other Information
                         VStack(alignment: .leading) {
-                            Text("Type")
-                                .fontWeight(.bold)
-                            
-                            Text("\(viewModel.series?.type ?? "-")")
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.bottom, .horizontal])
-                        
-                        // MARK: Keywords
-                        KeywordSeriesListView(viewModel: keywordsVM, id: series.id)
+                            VStack(alignment: .leading) {
+                                Text("Original Title")
+                                    .fontWeight(.bold)
+                                
+                                Text("\(viewModel.series?.originalName ?? "N/A")")
+                            }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding([.bottom, .horizontal])
+                            
+                            VStack(alignment: .leading) {
+                                Text("Status")
+                                    .fontWeight(.bold)
+                                
+                                Text("\(viewModel.series?.status ?? "-")")
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding([.bottom, .horizontal])
+                            
+                            VStack(alignment: .leading) {
+                                Text("Type")
+                                    .fontWeight(.bold)
+                                
+                                Text("\(viewModel.series?.type ?? "-")")
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding([.bottom, .horizontal])
+                            
+                            // MARK: Keywords
+                            KeywordSeriesListView(viewModel: keywordsVM, id: series.id)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.bottom, .horizontal])
+                            
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
+                        VStack {
+                            Text("")
+                                .padding(.vertical, 30)
+                        }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
+                    .background(averageColor)
+                    .foregroundColor(.white)
                 }
                 .onAppear {
                     viewModel.getSeriesDetail(id: series.id)
@@ -196,9 +189,8 @@ struct SeriesDetailView: View {
                     keywordsVM.getSeriesKeyword(id: series.id)
                     recommendVM.getSeriesList(id: series.id)
                 }
-                .foregroundColor(.black)
             }
-            .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.all)
             
             VStack {
                 HStack {

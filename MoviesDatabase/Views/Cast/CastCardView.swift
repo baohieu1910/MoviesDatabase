@@ -16,14 +16,13 @@ struct CastCardView: View {
     var body: some View {
         let url = URL(string: Utils.getCastImage(profilePath: cast.profilePath))
         AsyncImage(url: url) { image in
-            
-            VStack {
+            VStack(spacing: 0) {
                 image
                     .resizable()
+                    .scaledToFit()
                     .scaledToFill()
-                    .frame(width: 135, height: 160, alignment: .center)
+                    .frame(width: 160, height: 160, alignment: .center)
                     .clipped()
-                
                 
                 VStack(alignment: .leading) {
                     Text("\(cast.name ?? "N/A")")
@@ -36,16 +35,18 @@ struct CastCardView: View {
                         .lineLimit(1)
                         .padding(.horizontal)
                 }
-                .foregroundColor(.black)
-                .frame(width: 135, height: 60)
+                .foregroundColor(.white)
+                .frame(width: 160, height: 50)
             }
-            .background(.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .shadow(radius: 2)
+            .cornerRadius(20)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(.white)
+            }
             
         } placeholder: {
             ProgressView()
-                .frame(width: 135, height: 220)
+                .frame(width: 160, height: 210)
         }
             
     }

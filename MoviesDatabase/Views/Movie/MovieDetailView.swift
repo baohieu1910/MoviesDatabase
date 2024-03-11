@@ -24,7 +24,7 @@ struct MovieDetailView: View {
                 VStack {
                     VStack {
                         // MARK: Movie Poster
-                        ZStack(alignment: .leading) {
+                        ZStack {
                             let backgroundUrl = URL(string: Utils.getMovieBackground(backdropPath: viewModel.movie?.backdropPath))
                             AsyncImage(url: backgroundUrl) { image in
                                 ZStack(alignment: .leading) {
@@ -39,14 +39,14 @@ struct MovieDetailView: View {
                                             averageColor = Color(image.averageColor ?? UIColor.black)
                                         }
                                     
-                                    LinearGradient(gradient: Gradient(colors: [.clear, averageColor]), startPoint: .top, endPoint: .bottom)
-                                        .opacity(1)
+                                    LinearGradient(colors: [.clear, averageColor], startPoint: .top, endPoint: .bottom)
                                 }
                             } placeholder: {
                                 ProgressView()
                                     .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
                             }
                         }
+                        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
                         
                         // MARK: Movie title
                         VStack {
@@ -87,7 +87,6 @@ struct MovieDetailView: View {
                                 .frame(width: UIScreen.screenWidth)
                             }
                             .padding(.vertical, 10)
-                            .background(averageColor.speechAdjustedPitch(1))
                             .font(.subheadline)
                             
                             ScrollView(.horizontal, showsIndicators: false) {
@@ -126,78 +125,75 @@ struct MovieDetailView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
                         }
-                    }
-                    .padding([.bottom, .horizontal])
-                    .background(averageColor)
-                    .foregroundColor(.white)
-                    
-                    // MARK: Cast
-                    MovieCastListView(viewModel: castVM, id: movie.id)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    // MARK: Recommendations
-                    VStack(alignment: .leading) {
-                        Text("Recommendations")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .padding(.horizontal)
                         
+                        // MARK: Cast
+                        MovieCastListView(viewModel: castVM, id: movie.id)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical)
+                        
+                        // MARK: Recommendations
                         MovieRecommendationView(viewModel: recommendVM, movie: movie)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    
-                    // MARK: Images
-                    MovieImagesView(viewModel: imagesVM, id: movie.id)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
-                    
-                    // MARK: Other Information
-                    VStack(alignment: .leading) {
-                        VStack(alignment: .leading) {
-                            Text("Original Title")
-                                .fontWeight(.bold)
-                            
-                            Text("\(viewModel.movie?.originalTitle ?? "N/A")")
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.bottom, .horizontal])
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical)
                         
-                        VStack(alignment: .leading) {
-                            Text("Status")
-                                .fontWeight(.bold)
-                            
-                            Text("\(viewModel.movie?.status ?? "-")")
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.bottom, .horizontal])
                         
-                        VStack(alignment: .leading) {
-                            Text("Budget")
-                                .fontWeight(.bold)
-                            
-                            Utils.getBudget(budget: viewModel.movie?.budget)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.bottom, .horizontal])
+                        // MARK: Images
+                        MovieImagesView(viewModel: imagesVM, id: movie.id)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical)
                         
+                        // MARK: Other Information
                         VStack(alignment: .leading) {
-                            Text("Revenue")
-                                .fontWeight(.bold)
-                            
-                            Utils.getRevenue(revenue: viewModel.movie?.revenue)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding([.bottom, .horizontal])
-                        
-                        // MARK: Keywords
-                        KeywordMovieListView(viewModel: keywordsVM, id: movie.id)
+                            VStack(alignment: .leading) {
+                                Text("Original Title")
+                                    .fontWeight(.bold)
+                                
+                                Text("\(viewModel.movie?.originalTitle ?? "N/A")")
+                            }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding([.bottom, .horizontal])
+                            
+                            VStack(alignment: .leading) {
+                                Text("Status")
+                                    .fontWeight(.bold)
+                                
+                                Text("\(viewModel.movie?.status ?? "-")")
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding([.bottom, .horizontal])
+                            
+                            VStack(alignment: .leading) {
+                                Text("Budget")
+                                    .fontWeight(.bold)
+                                
+                                Utils.getBudget(budget: viewModel.movie?.budget)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding([.bottom, .horizontal])
+                            
+                            VStack(alignment: .leading) {
+                                Text("Revenue")
+                                    .fontWeight(.bold)
+                                
+                                Utils.getRevenue(revenue: viewModel.movie?.revenue)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding([.bottom, .horizontal])
+                            
+                            // MARK: Keywords
+                            KeywordMovieListView(viewModel: keywordsVM, id: movie.id)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.bottom, .horizontal])
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        VStack {
+                            Text("")
+                                .padding(.vertical, 30)
+                        }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
+                    .background(averageColor.speechAdjustedPitch(1))
+                    .foregroundColor(.white)
                 }
                 .onAppear {
                     viewModel.getMovieDetail(id: movie.id)
@@ -206,9 +202,8 @@ struct MovieDetailView: View {
                     keywordsVM.getMovieKeyword(id: movie.id)
                     recommendVM.getMovieList(id: movie.id)
                 }
-                .foregroundColor(.black)
             }
-            .edgesIgnoringSafeArea(.top)
+            .edgesIgnoringSafeArea(.all)
             
             VStack {
                 HStack {

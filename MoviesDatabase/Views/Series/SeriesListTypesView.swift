@@ -24,7 +24,10 @@ struct SeriesListTypesView: View {
                         .scaledToFill()
                         .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight / 3)
                     
-                    LinearGradient(colors: [.clear, .clear, .white], startPoint: .top, endPoint: .bottom)
+                    Color.black
+                        .opacity(0.5)
+                    
+                    LinearGradient(colors: [.clear, .clear, .black], startPoint: .top, endPoint: .bottom)
                     
                     VStack {
                         Spacer()
@@ -54,7 +57,7 @@ struct SeriesListTypesView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                 }
                 
                 if viewModel.searchText == "" {

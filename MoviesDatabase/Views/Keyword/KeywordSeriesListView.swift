@@ -24,11 +24,15 @@ struct KeywordSeriesListView: View {
                         } label: {
                             Text("\(keyword.name)")
                                 .padding(10)
-                                .background(Color("LightGray"))
-                                .cornerRadius(90)
+                                .foregroundColor(.white)
+                                .overlay(content: {
+                                    RoundedRectangle(cornerRadius: 90)
+                                        .stroke(.white)
+                                })
                         }
                     }
                 }
+                .padding(.vertical, 5)
             }
         }
     }

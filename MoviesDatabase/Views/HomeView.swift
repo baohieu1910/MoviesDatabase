@@ -29,71 +29,25 @@ struct HomeView: View {
                                 .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
                                 .clipped()
                             
-                            Color("DarkBlue")
-                                .opacity(0.8)
+                            Color(.black)
+                                .opacity(0.6)
+                            
+                            LinearGradient(colors: [.clear, .clear, .black], startPoint: .top, endPoint: .bottom)
                             
                             VStack(alignment: .leading) {
                                 Text("Welcome.")
-                                    .font(.system(size: 40))
+                                    .font(.custom("PlayfairDisplay-Bold", size: 40))
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                 
-                                Text("Millions of movies, TV shows and people to discover. Explore now.")
-                                    .font(.system(size: 30))
-//                                    .font(.custom("PlayfairDisplay-Bold", size: 30))
+                                Text("Millions of movies, TV shows and people to discover.")
+                                    .font(.custom("PlayfairDisplay-Bold", size: 30))
                                     .foregroundColor(.white)
                                 
-                                ZStack(alignment: .trailing) {
-                                    TextField("    Search...", text: $searchKey)
-                                        .frame(height: 50)
-                                        .background(.white)
-                                        .cornerRadius(90)
-                                }
-                                
-                                
+                                Text("Explore now.")
+                                    .font(.custom("PlayfairDisplay-Bold", size: 30))
+                                    .foregroundColor(.white)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                        }
-                        
-                        ZStack {
-                            BackgroundImage.getSecondHomeImage()
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight * 2 / 5, alignment: .center)
-                                .clipped()
-                            
-                            Color.black
-                                .opacity(0.7)
-                            
-                            VStack(alignment: .leading) {
-                                LinearGradient(colors: [.mint, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
-                                    .mask {
-                                        Text("That's a Wrap 2023")
-                                            .font(.system(size: 50))
-                                            .fontWeight(.bold)
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                    }
-                                
-                                Text("The best (and worst) of the year from TMDB.")
-                                    .font(.system(size: 20))
-                                
-                                Button {
-                                    
-                                } label : {
-                                    ZStack {
-                                        HStack {
-                                            Text("Check it out")
-                                                .font(.system(size: 15))
-                                            Image(systemName: "arrow.right")
-                                        }
-                                        
-                                        RoundedRectangle(cornerRadius: 90).stroke(lineWidth: 2)
-                                            .frame(width: 160, height: 40)
-                                    }
-                                }
-                            }
-                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
                         }
@@ -103,7 +57,7 @@ struct HomeView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text("Trending")
-                                .font(.title2)
+                                .font(.custom("PlayfairDisplay-Bold", size: 30))
                                 .fontWeight(.bold)
                             
                             Picker("Type", selection: $type) {
@@ -112,7 +66,6 @@ struct HomeView: View {
                                 }
                             }
                             .pickerStyle(.segmented)
-                            
                         }
                         
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -128,23 +81,23 @@ struct HomeView: View {
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(.black)
                     .padding()
                 }
             }
-            .navigationBarTitle("Home")
+            .edgesIgnoringSafeArea(.top)
+            .navigationBarHidden(true)
         }
         .onAppear {
             viewModel.getMoviesToday()
             viewModel.getMoviesThisWeek()
         }
-        
-        
+           
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environment(\.colorScheme, .dark)
     }
 }

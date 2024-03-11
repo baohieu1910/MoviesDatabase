@@ -30,7 +30,7 @@ struct SeriesCardView: View {
                     Text("\(series.name ?? "N/A")")
                         .fontWeight(.bold)
                         .lineLimit(1)
-                        .foregroundColor(.black)
+                        .foregroundColor(.white)
                     
                     
                     Text("\(Utils.getReleaseDate(releaseDate: series.releaseDate))")

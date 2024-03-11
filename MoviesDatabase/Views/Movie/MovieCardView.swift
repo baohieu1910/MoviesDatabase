@@ -30,9 +30,8 @@ struct MovieCardView: View {
                 VStack {
                     Text("\(movie.title ?? "N/A")")
                         .fontWeight(.bold)
+                        .foregroundColor(.white)
                         .lineLimit(1)
-                        .foregroundColor(.black)
-                    
                     
                     Text("\(Utils.getReleaseDate(releaseDate: movie.releaseDate))")
                         .font(.subheadline)

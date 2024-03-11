@@ -12,11 +12,14 @@ struct MovieRecommendationView: View {
     var movie: Movie
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            Text("Recommendations")
+                .font(.title3)
+                .fontWeight(.bold)
+            
             if viewModel.movies == [] {
                 Text("We don't have enough data to suggest any movies based on \(movie.title  ?? "N/A"). You can help by rating movies you've seen.")
                     .padding(.horizontal)
-                    .foregroundColor(.black)
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
@@ -42,7 +45,6 @@ struct MovieRecommendationView: View {
                                             
                                             Text("\(Int((movie.voteAverage ?? 0) * 10))%")
                                         }
-                                        .foregroundColor(.black)
                                     }
                                     .frame(width: 250)
                                 }
@@ -54,14 +56,14 @@ struct MovieRecommendationView: View {
                     }
                     .frame(height: 170)
                 }
-                .padding(.horizontal)
             }
         }
+        .padding(.horizontal)
         .onAppear {
             viewModel.getMovieList(id: movie.id)
         }
-        
     }
+    
 }
 
 struct MovieRecommendationView_Previews: PreviewProvider {
