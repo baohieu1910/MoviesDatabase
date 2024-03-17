@@ -1,7 +1,7 @@
 
 ## Installation
 
-To run MovieBooking locally, follow these steps:
+To run MoviesDatabase locally, follow these steps:
 
 1. Clone the repository:
 ```bash
